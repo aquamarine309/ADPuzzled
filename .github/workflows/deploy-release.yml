@@ -1,34 +1,39 @@
 name: Deploy release
 
-env:
-  FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
-
 on:
   push:
-    branches:
-      - release
+    branches: [ "release" ]
   workflow_dispatch:
-    branches:
-      - release
 
 jobs:
   build:
     name: Deploy 🚀
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4 
         with:
           lfs: true
-      - uses: actions/setup-node@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 
         with:
-          node-version: '14'
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build:release
-      - uses: JamesIves/github-pages-deploy-action@v4
+          node-version: 18          
+          cache: npm               
+
+      - name: Install dependencies
+        run: npm ci               
+
+      - name: Build project
+        run: npm run build:release 
+        env:
+          NODE_ENV: production
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3 
         with:
-          token: ${{ secrets.GH_PUBLISH_TOKEN }}
-          repository-name: aquamarine309/ADPuzzled
-          branch: master
-          folder: dist
-          single-commit: true
+          github_token: ${{ secrets.GH_PUBLISH_TOKEN }} 
+          publish_dir: ./dist
+          destination_dir: ./      
+          keep_files: false        
+          force_orphan: true       

@@ -1,32 +1,38 @@
 name: Deploy master
 
-env:
-  FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
-
 on:
   push:
-    branches:
-      - master
+    branches: [ "master" ]
   workflow_dispatch:
-    branches:
-      - master
 
 jobs:
   build:
     name: Deploy 🚀
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           lfs: true
-      - uses: actions/setup-node@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '14'
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build:master
-      - uses: JamesIves/github-pages-deploy-action@v4
+          node-version: 18 
+          cache: npm      
+
+      - name: Install dependencies
+        run: npm ci      
+
+      - name: Build project
+        run: npm run build:master 
+        env:
+          NODE_ENV: production
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages
-          folder: dist
-          single-commit: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          keep_files: true 
