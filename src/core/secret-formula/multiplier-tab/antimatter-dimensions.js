@@ -357,7 +357,7 @@ export const AD = {
   },
   iap: {
     name: "Shop Tab Purchases",
-    multValue: dim => Decimal.pow(63.65, dim ? 1 : MultiplierTabHelper.activeDimCount("AD")),
+    multValue: dim => Decimal.pow(19.728, dim ? 1 : MultiplierTabHelper.activeDimCount("AD")),
     isActive: () => player.hasDLC && !EternityChallenge(11).isRunning,
     icon: MultiplierTabIcons.IAP,
   },

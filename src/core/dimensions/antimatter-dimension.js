@@ -536,7 +536,7 @@ class AntimatterDimensionState extends DimensionState {
   }
 
   get isUnlocked() {
-    return PlayerProgress.infinityUnlocked() && this.tier <= Puzzles.maxTier;
+    return !PlayerProgress.infinityUnlocked() || this.tier <= Puzzles.maxTier;
   }
 
   get isAvailableForPurchase() {

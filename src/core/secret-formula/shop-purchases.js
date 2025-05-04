@@ -12,9 +12,9 @@ export const shopPurchases = {
   unlockDLC: {
     key: "unlockDLC",
     cost: 1,
-    description: () => `Unlock DLC and multply all your Antimatter Dimension multipliers by ${formatX(63.65, 0, 2)}. Forever.`,
-    multiplier: purchases => (purchases <= 0 && !player.hasDLC ? 1 : 63.65),
-    formatEffect: x => `×${x.toFixed(2)}`,
+    description: () => `Unlock DLC and multply all your Antimatter Dimension multipliers by ${formatX(19.728, 0, 3)}. Forever.`,
+    multiplier: purchases => (purchases <= 0 && !player.hasDLC ? 1 : 19.728),
+    formatEffect: x => `×${x.toFixed(3)}`,
   },
   IPPurchases: {
     key: "IPPurchases",
