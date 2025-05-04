@@ -33,6 +33,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_PUBLISH_TOKEN }}
+          repository_name: aquamarine309/ADPuzzled
           publish_dir: ./dist
           keep_files: true 
