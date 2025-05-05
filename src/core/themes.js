@@ -1,5 +1,4 @@
 import { sha512_256 } from "js-sha512";
-
 export const Theme = function Theme(name, config) {
   this.name = name;
 
@@ -89,6 +88,8 @@ Theme.secretThemeIndex = function(name) {
     "73de8a7f9efa1cbffc80a8effc9891a799127cd204b3a8b023bea8f513ed4753",
     "f3a71114261b4af6517a53f89bf0c6b56bb81b6f0e931d0e0d71249eb196628c",
     "1248689171faaa0abb68279199a8d2eb232dba10d2dacb79a705f680b6862c0e",
+    "7d09a76a3364a6090a3634db31277f2fe8f7b11a378ff1d2212234f4d208c441",
+    "a756755f0918ff45a8b258d7d2185b860253c7cfad8551c2de45ee019d3a472a"
   ];
   const sha = sha512_256(name.toUpperCase());
   return secretThemes.indexOf(sha);
@@ -157,6 +158,8 @@ export const Themes = {
     Theme.create("S10",             { dark: true,  metro: true, animated: true, secret: true, }),
     Theme.create("S11",             { dark: true,               animated: true, secret: true, }),
     Theme.create("S12",             {                                           secret: true, }),
+    Theme.create("S13",             {                                           secret: true, }),
+    Theme.create("S14",             { dark: true,               animated: true, secret: true, })
     /* eslint-enable no-multi-spaces */
   ],
 

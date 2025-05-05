@@ -11,7 +11,7 @@ export function antimatterDimensionCommonMultiplier() {
   multiplier = multiplier.times(ShopPurchase.dimPurchases.currentMult);
 
   if (player.hasDLC) {
-    multiplier = multiplier.times(63.65);
+    multiplier = multiplier.times(19.728);
   }
 
   if (!EternityChallenge(9).isRunning) {
