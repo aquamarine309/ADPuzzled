@@ -281,6 +281,49 @@ html {
   --var-border-radius: 0;
 }
 
+:root .t-s13 {
+  --color-good: #95E48B;
+  --color-good-dark: #3EBA01;
+  --color-bad: #e98d7e;
+  --color-infinity: #f7a95f;
+  --color-eternity: #CD6EF1;
+  --color-reality: #14C127;
+  --color-celestials: #8586FF;
+  --color-reality-dark: #51A64D;
+  --color-reality-light: #8CD988;
+  --color-prestige--accent: white;
+  --color-accent: #9bbeda;
+  
+  --color-base: #f3f3f3;
+  --color-teresa--base: #8596ea;
+  --color-effarig--base: #ea8585;
+  --color-pelle--base: #FF527A;
+  
+  --color-laitela--base: #F3F0F2;
+  --color-laitela--accent: #100708;
+  
+  --color-logic: #78ced7;
+  --color-notification: #fcc296;
+  --color-text: #2b4563;
+}
+
+:root .t-s14 {
+  --color-text: #e0e0e0;
+  --color-text-inverted: black;
+  --color-base: black;
+  --color-accent: #fbc21b;
+  --color-notification: yellow;
+  --color-overlay: rgba(60, 60, 100, 50%);
+
+  --color-prestige--accent: black;
+
+  --color-teresa--accent: black;
+
+  --color-laitela--base: black;
+  --color-laitela--accent: white;
+}
+
+
 /* end css vars */
 
 body {
@@ -1939,6 +1982,10 @@ br {
   background: var(--color-bad);
 }
 
+.t-s13 .o-primary-btn--disabled {
+  background-color: #e3e0e2;
+}
+
 .t-s6 .o-primary-btn--respec-active,
 .t-s10 .o-primary-btn--respec-active {
   background-color: #1b5e20;
@@ -2058,6 +2105,10 @@ br {
   cursor: default;
 }
 
+.t-s13 .o-infinity-button {
+  background-color: rgba(255, 255, 255, 20%);
+}
+
 /* #region Eternity */
 
 .o-eternity-button {
@@ -2092,6 +2143,10 @@ br {
 
 .t-metro .o-eternity-button {
   box-shadow: 0.1rem 0.1rem 0.1rem 0 #9e9e9e;
+}
+
+.t-s13 .o-eternity-button {
+  background-color: rgba(255, 255, 255, 20%);
 }
 
 .o-eternity-button--dilation {
@@ -3679,6 +3734,11 @@ br {
 
 /* #endregion t-s6 t-s10 */
 
+.t-s13 .o-challenge-btn--locked {
+  background-color: #c8c8c8;
+  border-color: var(--color-bad);
+}
+
 /* #endregion themes */
 
 /* #endregion o-challenge-btn */
@@ -3977,6 +4037,23 @@ br {
 
 .o-infinity-upgrade-btn--bought:hover {
   color: black;
+}
+
+.t-s14 .o-infinity-upgrade-btn--bought {
+  position: relative;
+}
+
+.t-s14 .o-infinity-upgrade-btn--bought::after {
+  content: "卖掉了";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  color: white;
+  font-size: 2rem;
+  background-image: url("../images/baixie.png");
+  background-repeat: no-repeat;
 }
 
 .o-infinity-upgrade-btn--useless {
@@ -4851,6 +4928,11 @@ properly on certain themes. */
   background: #636363;
 }
 
+.t-s13 .o-eternity-upgrade--unavailable {
+  background-color: #c8c8c8;
+  border-color: #691fa5;
+}
+
 /* #endregion Eternity Upgrades */
 
 /* #region Eternity Milestones */
@@ -4894,6 +4976,17 @@ properly on certain themes. */
 .o-eternity-milestone__reward--reached {
   background-color: var(--color-eternity);
   border-color: black;
+}
+
+.t-s13 .o-eternity-milestone__reward--locked {
+  color: #c2adff;
+  background-color: #272727;
+  border-color: #c2adff;
+  animation: a-time-study 7s infinite;
+}
+
+.t-s13 .o-eternity-milestone__reward--reached {
+  background-color: #c2adff;
 }
 
 .o-eternity-milestone__reward--small-font {
@@ -7637,6 +7730,14 @@ kbd {
   user-select: none;
 }
 
+.t-s13 .o-alchemy-node--base {
+  background-color: #C3EAFB;
+}
+
+.t-s13 .o-alchemy-node--active {
+  background-color: #C5F291;
+}
+
 .o-alchemy-node-mask {
   width: 2.4rem;
   height: 2.4rem;
@@ -8639,6 +8740,11 @@ kbd {
 .t-s10.c-reality-upgrade-btn--bought:hover {
   color: var(--color-reality-light);
   background-color: var(--color-reality);
+}
+
+.t-s13 .c-reality-upgrade-btn--bought {
+  color: var(--color-text);
+  background-color: var(--color-reality-light);
 }
 
 .l-black-hole-tab {
