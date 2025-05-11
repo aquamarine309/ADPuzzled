@@ -10,7 +10,7 @@ export function antimatterDimensionCommonMultiplier() {
   multiplier = multiplier.times(Achievements.power);
   multiplier = multiplier.times(ShopPurchase.dimPurchases.currentMult);
 
-  if (player.hasDLC) {
+  if (player.hasDLC && player.IAP.enabled) {
     multiplier = multiplier.times(19.728);
   }
 

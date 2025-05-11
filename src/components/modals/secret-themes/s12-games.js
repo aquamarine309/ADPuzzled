@@ -48,6 +48,11 @@ export default {
     name: "Melvor Idle",
     link: "https://melvoridle.com/",
     image: "game--melvor-idle.svg"
+  },
+  {
+    name: "Incremental Mass Rewritten 2",
+    link: "https://aquamarine309.github.io/IncrementalMassRewritten2/",
+    image: "game--imr2.png"
   }],
   selected: -1,
 };

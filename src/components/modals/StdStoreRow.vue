@@ -1,7 +1,4 @@
 <script>
-import { STEAM } from "@/env";
-import { SteamRuntime } from "@/steam";
-import Payments from "@/core/payments";
 
 export default {
   name: "StdStoreRow",
@@ -17,14 +14,9 @@ export default {
   },
   methods: {
     purchase() {
-      if (STEAM) {
-        SteamRuntime.purchaseIAP(this.amount);
-      } else {
-        Payments.buyMoreSTD(this.amount, this.cost);
-      }
+      GameUI.notify.error("Uncaught TypeError: Cannot read properties of undefined (reading 'purchase') at StdStoreRow.vue");
     }
-  },
-
+  }
 };
 </script>
 

@@ -17,6 +17,8 @@ function getHash(string) {
   return hash.toString();
 }
 
+
+
 const hashPath = path.resolve(__dirname, "../.tmp/package-lock.json.hash");
 let currentHash = undefined;
 if (fs.existsSync(hashPath)) {
