@@ -4044,7 +4044,6 @@ br {
 }
 
 .t-s14 .o-infinity-upgrade-btn--bought::after {
-  content: "卖掉了";
   position: absolute;
   width: 100%;
   height: 100%;
@@ -4052,7 +4051,7 @@ br {
   top: 0;
   color: white;
   font-size: 2rem;
-  background-image: url("../images/baixie.png");
+  background-image: url("../images/sold-out.png");
   background-repeat: no-repeat;
 }
 

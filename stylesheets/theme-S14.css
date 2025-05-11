@@ -4,5 +4,9 @@ body {
   background-position: center;
   background-size: 100%;
   background-image: url("../images/baixie.png");
-  cursor: url("./baixie.cur"), auto;
+  background-blend-mode: multiply;
+}
+
+* {
+  cursor: url("./baixie.cur"), auto !important;
 }
