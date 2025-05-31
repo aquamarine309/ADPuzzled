@@ -3506,6 +3506,13 @@ br {
   border-radius: var(--var-border-radius, 1rem);
 }
 
+.c-challenge-box--logic {
+  height: 18rem;
+  color: var(--color-text);
+  background-color: var(--color-prestige--accent);
+  border-color: var(--color-logic);
+}
+
 .c-challenge-box__reward-description--small-text {
   font-size: 0.95rem;
 }
