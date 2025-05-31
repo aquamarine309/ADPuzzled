@@ -5,19 +5,36 @@ export function bigCrunchAnimation() {
   FullScreenAnimationHandler.display("a-implode", 2);
 }
 
-function handleChallengeCompletion() {
+function handleChallengeCompletion(enteringAntimatterChallenge) {
   const challenge = Player.antimatterChallenge;
   if (!challenge && !NormalChallenge(1).isCompleted) {
     NormalChallenge(1).complete();
   }
-  if (!challenge) return;
+  const currentLC = LogicChallenge.current;
+  if (!challenge && !currentLC) return;
 
   // Clear the IC notification after the first completion (only) so that it can show it again for the next one
   const inIC = InfinityChallenge.isRunning;
   if (inIC && !InfinityChallenge.current.isCompleted) TabNotification.ICUnlock.clearTrigger();
 
-  challenge.complete();
-  challenge.updateChallengeTime();
+  if (currentLC !== undefined && !enteringAntimatterChallenge) {
+    if (currentLC.canBeCompleted) {
+      if (currentLC.isCompleted) {
+        EventHub.dispatch(GAME_EVENT.LOGIC_CHALLENGE_COMPLETED, currentLC.id);
+      } else {
+        currentLC.complete();
+      }
+      if (!player.options.retryChallenge) {
+        player.challenge.logic.current = 0;
+      }
+    }
+  }
+
+  if (challenge) {
+    challenge.complete();
+    challenge.updateChallengeTime();
+  }
+
   if (!player.options.retryChallenge) {
     player.challenge.normal.current = 0;
     player.challenge.infinity.current = 0;
@@ -54,7 +71,7 @@ export function bigCrunchReset(
 
   if (Player.canCrunch) {
     EventHub.dispatch(GAME_EVENT.BIG_CRUNCH_BEFORE);
-    bigCrunchGiveRewards();
+    bigCrunchGiveRewards(enteringAntimatterChallenge);
     if (Pelle.isDoomed) PelleStrikes.infinity.trigger();
   }
 
@@ -62,14 +79,14 @@ export function bigCrunchReset(
   EventHub.dispatch(GAME_EVENT.BIG_CRUNCH_AFTER);
 }
 
-function bigCrunchGiveRewards() {
+function bigCrunchGiveRewards(enteringAntimatterChallenge) {
   bigCrunchUpdateStatistics();
 
   const infinityPoints = gainedInfinityPoints();
   Currency.infinityPoints.add(infinityPoints);
   Currency.infinities.add(gainedInfinities().round());
 
-  bigCrunchTabChange(!PlayerProgress.infinityUnlocked());
+  bigCrunchTabChange(!PlayerProgress.infinityUnlocked(), enteringAntimatterChallenge);
   bigCrunchCheckUnlocks();
 }
 
@@ -105,10 +122,10 @@ function bigCrunchUpdateStatistics() {
   }
 }
 
-function bigCrunchTabChange(firstInfinity) {
+function bigCrunchTabChange(firstInfinity, enteringAntimatterChallenge) {
   const earlyGame = player.records.bestInfinity.time > 60000 && !player.break;
   const inAntimatterChallenge = Player.isInAntimatterChallenge;
-  handleChallengeCompletion();
+  handleChallengeCompletion(enteringAntimatterChallenge);
 
   if (firstInfinity) {
     Tab.infinity.upgrades.show();

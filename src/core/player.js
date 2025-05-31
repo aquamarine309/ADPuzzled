@@ -65,6 +65,10 @@ window.player = {
       current: 0,
       unlocked: 0,
       requirementBits: 0,
+    },
+    logic: {
+      current: 0,
+      completedBits: 0
     }
   },
   infinity: {
@@ -948,15 +952,15 @@ export const Player = {
   },
 
   get isInAnyChallenge() {
-    return this.isInAntimatterChallenge || EternityChallenge.isRunning;
+    return this.isInAntimatterChallenge || EternityChallenge.isRunning || LogicChallenge.isRunning;
   },
 
   get anyChallenge() {
-    return this.antimatterChallenge || EternityChallenge.current;
+    return this.antimatterChallenge || EternityChallenge.current || LogicChallenge.current;
   },
 
   get canCrunch() {
-    if (Enslaved.isRunning && Enslaved.BROKEN_CHALLENGES.includes(NormalChallenge.current?.id)) return false;
+    if (NormalChallenge.current?.isBroken) return false;
     const challenge = NormalChallenge.current || InfinityChallenge.current;
     const goal = challenge === undefined ? Decimal.NUMBER_MAX_VALUE : challenge.goal;
     return player.records.thisInfinity.maxAM.gte(goal);
@@ -988,8 +992,11 @@ export const Player = {
   },
 
   get infinityLimit() {
-    const challenge = NormalChallenge.current || InfinityChallenge.current;
-    return challenge === undefined ? Decimal.MAX_VALUE : challenge.goal;
+    const antimatterChallenge = NormalChallenge.current || InfinityChallenge.current;
+    if (antimatterChallenge) return antimatterChallenge.goal;
+    const logicChallenge = LogicChallenge.current;
+    if (logicChallenge) return logicChallenge.goal;
+    return Decimal.MAX_VALUE;
   },
 
   get eternityGoal() {

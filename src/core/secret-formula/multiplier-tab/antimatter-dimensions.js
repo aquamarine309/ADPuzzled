@@ -478,5 +478,11 @@ export const AD = {
     multValue: dim => ResourceExchangeUpgrade.effectValue.pow(dim ? 1 : MultiplierTabHelper.activeDimCount("AD")),
     isActive: () => PlayerProgress.infinityUnlocked(),
     icon: MultiplierTabIcons.EXCHANGE,
+  },
+  logicChallenges: {
+    name: dim => (dim ? `Logic Challenges (AD ${dim})` : "Logic Challenges"),
+    powValue: () => LogicChallenge(1).effectOrDefault(DC.D1),
+    isActive: () => LogicChallenge.isRunning,
+    icon: MultiplierTabIcons.CHALLENGE("logic")
   }
 };

@@ -71,7 +71,11 @@ export class Galaxy {
   }
 
   static get costMult() {
-    return Effects.min(NormalChallenge(10).isRunning ? 90 : 60, TimeStudy(42));
+    const mult = Effects.min(NormalChallenge(10).isRunning ? 90 : 60, TimeStudy(42));
+    if (PlayerProgress.infinityUnlocked() && !LogicChallenge(2).isCompleted) {
+      return mult * 2.5;
+    }
+    return mult;
   }
 
   static get baseCost() {
@@ -79,10 +83,15 @@ export class Galaxy {
   }
 
   static get requiredTier() {
-    return NormalChallenge(10).isRunning ? 6 : 8;
+    const tier = NormalChallenge(10).isRunning ? 6 : 8;
+    if (LogicChallenge(1).isCompleted) {
+      return Math.clampMax(Puzzles.maxTier, tier);
+    }
+    return tier;
   }
 
   static get canBeBought() {
+    if (LogicChallenge(2).isRunning) return false;
     if (EternityChallenge(6).isRunning && !Enslaved.isRunning) return false;
     if (NormalChallenge(8).isRunning || InfinityChallenge(7).isRunning) return false;
     if (player.records.thisInfinity.maxAM.gt(Player.infinityGoal) &&
@@ -92,6 +101,7 @@ export class Galaxy {
 
   static get lockText() {
     if (this.canBeBought) return null;
+    if (LogicChallenge(2).isRunning) return "Locked (Logic Challenge 2)";
     if (EternityChallenge(6).isRunning) return "Locked (Eternity Challenge 6)";
     if (InfinityChallenge(7).isRunning) return "Locked (Infinity Challenge 7)";
     if (InfinityChallenge(1).isRunning) return "Locked (Infinity Challenge 1)";

@@ -4,13 +4,10 @@ export const logicChallenges = [
   {
     id: 1,
     description: () => `All Antimatter Dimensions produce less (${formatPow(0.4, 1, 1)}).
-      Dimensions multiplier will multiply the amount instead of the production, except for the highest dimension.
+      Dimension multiplier will effective dimension amount instead of dimension production, except for the highest dimension.
       Buy ten multiplier is reduced to ${formatX(0.2, 0, 1)}.`,
     goal: Decimal.NUMBER_MAX_VALUE,
-    effects: {
-      dimensionPow: 0.4,
-      buyTenMultiplier: DC.D0_2
-    },
+    effect: 0.4,
     reward: {
       description: `Galaxies can automatically adjust the required dimensions`
     },
@@ -25,7 +22,7 @@ export const logicChallenges = [
   },
   {
     id: 3,
-    description: () => `Antimatter Dimension multiplier is always ${formatX(1)}, but ...`,
+    description: () => `This challenge is being rewritten...`,
     goal: DC.E4000,
     reward: {
       description: "Unlock Replicanti"
@@ -35,7 +32,7 @@ export const logicChallenges = [
     id: 4,
     description: "Infinity Power provide a multiplier to game speed instead of Antimatter Dimensions.",
     goal: DC.E10000,
-    effect: () => Currency.infinityPower.value.plus(1).log10().pow(InfinityDimensions.powerConversionRate).clamp(1, 1e30),
+    effect: () => Math.clamp(Math.pow(Currency.infinityPower.value.plus(1).log10(), InfinityDimensions.powerConversionRate), 1, 1e30),
     formatEffect: value => format(value, 3, 3),
     reward: {
       description: "Decrease the cost of Replicanti Upgrade based on current Infinity Points",
@@ -96,11 +93,11 @@ export const logicChallenges = [
     effect: 0.5,
     effectCondition: () => !Number.isInteger(
       DimBoost.totalBoosts /
-      player.galaxies.clampMin(1)
+      Math.max(1, player.galaxies)
     ),
     goal: DC.E32000,
     reward: {
       description: `Dimensional Sacrifice can automatically adjust the required dimensions`
     }
   }
-]
+];

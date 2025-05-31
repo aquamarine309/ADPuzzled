@@ -14,7 +14,7 @@ class DimBoostRequirement {
 
 export class DimBoost {
   static get power() {
-    if (NormalChallenge(8).isRunning) {
+    if (NormalChallenge(8).isRunning || LogicChallenge(2).isRunning) {
       return DC.D1;
     }
 

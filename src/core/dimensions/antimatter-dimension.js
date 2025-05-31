@@ -167,7 +167,8 @@ function applyNDPowers(mult, tier) {
       InfinityUpgrade.thisInfinityTimeMult.chargedEffect,
       AlchemyResource.power,
       Achievement(183),
-      PelleRifts.paradox
+      PelleRifts.paradox,
+      LogicChallenge(1)
     );
 
   multiplier = multiplier.pow(getAdjustedGlyphEffect("curseddimensions"));
@@ -403,6 +404,10 @@ class AntimatterDimensionState extends DimensionState {
     return this.tier === 1 || player.hasDLC;
   }
 
+  get isHighest() {
+    return DimBoost.maxDimensionsUnlockable === this.tier;
+  }
+
   /**
    * @returns {InfinityUpgrade}
    */
@@ -514,7 +519,11 @@ class AntimatterDimensionState extends DimensionState {
    * @param {Decimal} value
    */
   get totalAmount() {
-    return this.amount.max(this.continuumAmount);
+    const amount = this.amount.max(this.continuumAmount);
+    if (LogicChallenge(1).isRunning && !this.isHighest) {
+      return amount.times(this.multiplier);
+    }
+    return amount;
   }
 
   /**
@@ -588,7 +597,7 @@ class AntimatterDimensionState extends DimensionState {
   get cappedProductionInNormalChallenges() {
     const postBreak = (player.break && !NormalChallenge.isRunning) ||
       InfinityChallenge.isRunning ||
-      Enslaved.isRunning;
+      NormalChallenge.current.isBroken;
     return postBreak ? Decimal.MAX_VALUE : DC.E315;
   }
 
@@ -598,11 +607,17 @@ class AntimatterDimensionState extends DimensionState {
     if (Laitela.isRunning && tier > Laitela.maxAllowedDimension) return DC.D0;
     let amount = this.totalAmount;
     if (NormalChallenge(12).isRunning) {
-      if (tier === 2) amount = amount.pow(1.6);
-      if (tier === 4) amount = amount.pow(1.4);
-      if (tier === 6) amount = amount.pow(1.2);
+      if (tier === 2) amount = amount.pow(7.5);
+      if (tier === 4) amount = amount.pow(5);
+      if (tier === 6) amount = amount.pow(2.5);
     }
-    let production = amount.times(this.multiplier).times(Tickspeed.perSecond);
+    let production = amount;
+
+    if (!LogicChallenge(1).isRunning || this.isHighest) {
+      production = production.times(this.multiplier);
+    }
+
+    production = production.times(Tickspeed.perSecond);
     if (NormalChallenge(2).isRunning) {
       production = production.times(player.chall2Pow);
     }
@@ -648,6 +663,10 @@ export const AntimatterDimensions = {
 
   get buyTenMultiplier() {
     if (NormalChallenge(7).isRunning) return DC.D7.min(1 + DimBoost.totalBoosts * 0.3);
+
+    if (LogicChallenge(1).isRunning) {
+      return DC.D0_2;
+    }
 
     let mult = DC.D2.plusEffectsOf(
       Achievement(141).effects.buyTenMult,

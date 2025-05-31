@@ -94,3 +94,4 @@ export * from "./automator/script-templates";
 export * from "./puzzle";
 export * from "./resource-exchange";
 export * from "./logic-upgrades";
+export * from "./logic-challenges";

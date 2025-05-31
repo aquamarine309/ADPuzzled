@@ -207,7 +207,7 @@ export const MultiplierTabHelper = {
   // which set of Dimensions are actually producing within NC12 - in nearly every case, one of the odd/even sets will
   // produce significantly more than the other, so we simply assume the larger one is active and the other isn't
   evenDimNC12Production() {
-    const nc12Pow = tier => ([2, 4, 6].includes(tier) ? 0.1 * (8 - tier) : 0);
+    const nc12Pow = tier => ([2, 4, 6].includes(tier) ? 1.25 * (8 - tier) - 1 : 0);
     const maxTier = Math.clampMin(2 * Math.floor(MultiplierTabHelper.activeDimCount("AD") / 2), 2);
     return AntimatterDimensions.all
       .filter(ad => ad.isProducing && ad.tier % 2 === 0)
@@ -230,7 +230,7 @@ export const MultiplierTabHelper = {
   },
 
   multInNC12(dim) {
-    const nc12Pow = tier => ([2, 4, 6].includes(tier) ? 0.1 * (8 - tier) : 0);
+    const nc12Pow = tier => ([2, 4, 6].includes(tier) ? 1.25 * (8 - tier) - 1 : 0);
     const ad = AntimatterDimension(dim);
     return ad.isProducing ? ad.multiplier.times(ad.totalAmount.pow(nc12Pow(dim))) : DC.D1;
   },

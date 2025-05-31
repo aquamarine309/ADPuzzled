@@ -87,6 +87,7 @@ export function breakInfinity() {
 }
 
 export function gainedInfinityPoints() {
+  if (LogicChallenge.isRunning) return DC.D0;
   const div = Effects.min(
     308,
     Achievement(103),

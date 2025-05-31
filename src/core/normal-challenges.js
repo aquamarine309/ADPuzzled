@@ -16,7 +16,7 @@ export function updateNormalAndInfinityChallenges(diff) {
       }
       Currency.matter.multiply(Decimal.pow(cappedBase, diff / 20));
     }
-    if (Currency.matter.gte(Currency.antimatter.value) && NormalChallenge(11).isRunning && !Player.canCrunch) {
+    if (Currency.matter.gte(Currency.antimatter.value) && NormalChallenge(11).isRunning && !Player.canCrunch && !NormalChallenge(11).isBroken) {
       const values = [Currency.antimatter.value, Currency.matter.value];
       softReset(0, true, true);
       Modal.message.show(`Your ${format(values[0], 2, 2)} antimatter was annihilated
@@ -125,8 +125,8 @@ class NormalChallengeState extends GameMechanicState {
   }
 
   get goal() {
-    if (Enslaved.isRunning && Enslaved.BROKEN_CHALLENGES.includes(this.id)) {
-      return DC.E1E15;
+    if (this.isBroken) {
+      return Decimal.MAX_VALUE;
     }
     return Decimal.NUMBER_MAX_VALUE;
   }
@@ -145,6 +145,12 @@ class NormalChallengeState extends GameMechanicState {
     player.challenge.normal.current = 0;
     bigCrunchReset(true, false);
     if (!Enslaved.isRunning) Tab.dimensions.antimatter.show();
+  }
+
+  get isBroken() {
+    if (Enslaved.isRunning && Enslaved.BROKEN_CHALLENGES.includes(this.id)) return true;
+    if (LogicChallenge(2).isRunning && player.break) return true;
+    return false;
   }
 }
 

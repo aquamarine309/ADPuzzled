@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     parts() {
-      // We need activityToken for NC/IC/EC because plain check of WhateverChallenge.isRunning
+      // We need activityToken for NC/IC/EC/LC because plain check of WhateverChallenge.isRunning
       // won't trigger display update if we, say, switch from one challenge to another
       function celestialReality(celestial, name, tab) {
         return {
@@ -46,6 +46,11 @@ export default {
           name: token => `Eternity Challenge ${token}`,
           isActive: token => token > 0,
           activityToken: () => player.challenge.eternity.current
+        },
+        {
+          name: token => `Logic Challenge ${token}`,
+          isActive: token => token > 0,
+          activityToken: () => player.challenge.logic.current
         },
         {
           name: token => `Infinity Challenge ${token}`,
