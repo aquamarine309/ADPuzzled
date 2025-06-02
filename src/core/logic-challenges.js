@@ -18,7 +18,6 @@ class LogicChallengeState extends GameMechanicState {
   }
 
   get isUnlocked() {
-    if (this.id >= 3) return false;
     if (this.id === 1) return LogicUpgrade(10).isBought;
     return LogicChallenge(this.id - 1).isCompleted;
   }

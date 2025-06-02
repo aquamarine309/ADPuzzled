@@ -8,10 +8,6 @@ import "codemirror/addon/lint/lint";
 import "codemirror/addon/selection/active-line";
 import "codemirror/addon/edit/closebrackets";
 
-import eruda from "eruda";
-
 window.CodeMirror = CodeMirror;
 window.Decimal = Decimal;
 window.Vue = Vue;
-
-eruda.init();

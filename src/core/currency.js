@@ -200,27 +200,29 @@ Currency.antimatter = new class extends DecimalCurrency {
   get value() { return player.antimatter; }
 
   set value(value) {
-    if (InfinityChallenges.nextIC) InfinityChallenges.notifyICUnlock(value);
-    if (GameCache.cheapestAntimatterAutobuyer.value && value.gte(GameCache.cheapestAntimatterAutobuyer.value)) {
+    const gainedAM = value.clampMax(Player.infinityLimit);
+    if (InfinityChallenges.nextIC) InfinityChallenges.notifyICUnlock(gainedAM);
+    if (GameCache.cheapestAntimatterAutobuyer.value && gainedAM.gte(GameCache.cheapestAntimatterAutobuyer.value)) {
       // Clicking into the automation tab clears the trigger and prevents it from retriggering as long as the player
       // stays on the tab; leaving the tab with an available autobuyer will immediately force it to trigger again
       TabNotification.newAutobuyer.clearTrigger();
       TabNotification.newAutobuyer.tryTrigger();
     }
-    player.antimatter = value;
-    player.records.thisInfinity.maxAM = player.records.thisInfinity.maxAM.max(value);
-    player.records.thisEternity.maxAM = player.records.thisEternity.maxAM.max(value);
-    player.records.thisReality.maxAM = player.records.thisReality.maxAM.max(value);
+    player.antimatter = gainedAM;
+    player.records.thisInfinity.maxAM = player.records.thisInfinity.maxAM.max(gainedAM);
+    player.records.thisEternity.maxAM = player.records.thisEternity.maxAM.max(gainedAM);
+    player.records.thisReality.maxAM = player.records.thisReality.maxAM.max(gainedAM);
 
     if (Pelle.isDoomed) {
-      player.celestials.pelle.records.totalAntimatter = player.celestials.pelle.records.totalAntimatter.max(value);
+      player.celestials.pelle.records.totalAntimatter = player.celestials.pelle.records.totalAntimatter.max(gainedAM);
     }
   }
 
   add(amount) {
-    super.add(amount);
-    if (amount.gt(0)) {
-      player.records.totalAntimatter = player.records.totalAntimatter.add(amount);
+    const gainedAM = amount.clampMax(Player.infinityLimit);
+    super.add(gainedAM);
+    if (gainedAM.gt(0)) {
+      player.records.totalAntimatter = player.records.totalAntimatter.add(gainedAM);
       player.requirementChecks.reality.noAM = false;
     }
   }

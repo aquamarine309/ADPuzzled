@@ -57,7 +57,8 @@ export class PlayerProgress {
   }
 
   static seenAlteredSpeed() {
-    return this.infinityUnlocked();
+    const lc4 = LogicChallenge(4);
+    return lc4.isRunning || lc4.isCompleted || this.eternityUnlocked();
   }
 
   static challengeCompleted() {

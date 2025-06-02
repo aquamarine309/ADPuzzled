@@ -39,7 +39,10 @@ export default {
   methods: {
     update() {
       this.hasDimensionBoosts = player.dimensionBoosts > 0;
-      this.isQuickResetAvailable = Player.isInAntimatterChallenge && Player.antimatterChallenge.isQuickResettable;
+      this.isQuickResetAvailable = (
+        Player.isInAntimatterChallenge && Player.antimatterChallenge.isQuickResettable ||
+        LogicChallenge.isRunning && LogicChallenge.current.isQuickResettable
+      );
       this.isSacrificeUnlocked = Sacrifice.isVisible;
       this.buy10Mult.copyFrom(AntimatterDimensions.buyTenMultiplier);
       this.currentSacrifice.copyFrom(Sacrifice.totalBoost);

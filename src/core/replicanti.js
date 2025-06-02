@@ -515,10 +515,10 @@ export const Replicanti = {
     };
   },
   unlock(freeUnlock = false) {
-    const cost = DC.E140.dividedByEffectOf(PelleRifts.vacuum.milestones[1]);
     if (player.replicanti.unl) return;
-    if (freeUnlock || Currency.infinityPoints.gte(cost)) {
-      if (!freeUnlock) Currency.infinityPoints.subtract(cost);
+    // TODO: Add " || LogicChallenge(3).isCompleted" to condition.
+    // Replicanti is not implemented yet, we don't want player to unlock it.
+    if (freeUnlock) {
       player.replicanti.unl = true;
       player.replicanti.timer = 0;
       Replicanti.amount = DC.D1;

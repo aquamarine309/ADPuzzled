@@ -14,6 +14,7 @@ export default {
       dimMultiplier: new Decimal(0),
       powerPerSecond: new Decimal(0),
       incomeType: "",
+      isLC4Running: false,
       isEC8Running: false,
       EC8PurchasesLeft: 0,
       isEC9Running: false,
@@ -32,16 +33,15 @@ export default {
     };
   },
   computed: {
-    sacrificeBoostDisplay() {
-      return formatX(this.sacrificeBoost, 2, 2);
-    },
-    sacrificeTooltip() {
-      return `Boosts 8th Antimatter Dimension by ${this.sacrificeBoostDisplay}`;
-    },
     tesseractCountString() {
       const extra = this.extraTesseracts > 0 ? ` + ${format(this.extraTesseracts, 2, 2)}` : "";
       return `${formatInt(this.boughtTesseracts)}${extra}`;
     },
+    formula() {
+      if (this.isEC9Running) return `log2(x)${formatPow(4)}`;
+      if (this.isLC4Running) return `lg(x)${formatPow(this.conversionRate, 1, 1)}`;
+      return `x${formatPow(this.conversionRate, 2, 3)}`;
+    }
   },
   methods: {
     update() {
@@ -51,11 +51,14 @@ export default {
       this.conversionRate = InfinityDimensions.powerConversionRate;
       if (this.isEC9Running) {
         this.dimMultiplier.copyFrom(Decimal.pow(Math.max(this.infinityPower.log2(), 1), 4).max(1));
+      } else if (this.isLC4Running) {
+        this.dimMultiplier = new Decimal(LogicChallenge(4).effectValue);
       } else {
         this.dimMultiplier.copyFrom(this.infinityPower.pow(this.conversionRate).max(1));
       }
       this.powerPerSecond.copyFrom(InfinityDimension(1).productionPerSecond);
       this.incomeType = EternityChallenge(7).isRunning ? "Seventh Dimensions" : "Infinity Power";
+      this.isLC4Running = LogicChallenge(4).isRunning;
       this.isEC8Running = EternityChallenge(8).isRunning;
       if (this.isEC8Running) {
         this.EC8PurchasesLeft = player.eterc8ids;
@@ -110,7 +113,7 @@ export default {
         <br>
         <span v-if="!isEC9Running">
           increased by
-          <span class="c-infinity-dim-description__accent">{{ formatPow(conversionRate, 2, 3) }}</span>
+          <span class="c-infinity-dim-description__accent">{{ formula }}</span>
         </span>
         <span v-else>
           translated
@@ -118,8 +121,9 @@ export default {
         to a
         <span class="c-infinity-dim-description__accent">{{ formatX(dimMultiplier, 2, 1) }}</span>
         multiplier on all
-        <span v-if="!isEC9Running">Antimatter Dimensions.</span>
-        <span v-else>Time Dimensions due to Eternity Challenge 9.</span>
+        <span v-if="isEC9Running">Time Dimensions due to Eternity Challenge 9.</span>
+        <span v-else-if="isLC4Running">game speed due to Logic Challenge 4.</span>
+        <span v-else>Antimatter Dimensions.</span>
       </p>
     </div>
     <div

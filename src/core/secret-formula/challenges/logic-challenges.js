@@ -17,16 +17,19 @@ export const logicChallenges = [
     description: () => `Normal Challenges are broken. Dimension Boost multiplier is reduced to ${formatX(1)} and Galaxies are disabled.`,
     goal: DC.E1650,
     reward: {
-      description: "Decrease the requirement of Galaxies. Unlock exchange rate"
+      description: "Decrease the requirement of Galaxies, and unlock exchange rate"
     },
   },
   {
     id: 3,
-    description: () => `This challenge is being rewritten...`,
+    description: () => `The multiplier from Logic Points is reduced or raised based on the difference between Dimension Boosts and Galaxies.`,
+    effect: () => Math.pow(Math.abs(player.galaxies - DimBoost.totalBoosts) + 1, -0.2) * 1.2,
+    formatEffect: value => formatPow(value, 3, 3),
     goal: DC.E4000,
     reward: {
       description: "Unlock Replicanti"
-    }
+    },
+    isQuickResettable: true
   },
   {
     id: 4,

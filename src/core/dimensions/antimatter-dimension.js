@@ -14,7 +14,7 @@ export function antimatterDimensionCommonMultiplier() {
     multiplier = multiplier.times(19.728);
   }
 
-  if (!EternityChallenge(9).isRunning) {
+  if (!EternityChallenge(9).isRunning && !LogicChallenge(4).isRunning) {
     multiplier = multiplier.times(Currency.infinityPower.value.pow(InfinityDimensions.powerConversionRate).max(1));
   }
   multiplier = multiplier.timesEffectsOf(

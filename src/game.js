@@ -5,11 +5,13 @@ import { ElectronRuntime, SteamRuntime } from "@/steam";
 import { DC } from "./core/constants";
 import { deepmergeAll } from "@/utility/deepmerge";
 import { DEV } from "@/env";
+import { isDevEnvironment } from "./core/devtools";
 import { SpeedrunMilestones } from "./core/speedrun";
 import { Cloud } from "./core/storage";
 import { supportedBrowsers } from "./supported-browsers";
 
 import Payments from "./core/payments";
+import eruda from "eruda";
 
 if (GlobalErrorHandler.handled) {
   throw new Error("Initialization failed");
@@ -299,7 +301,9 @@ export const GAME_SPEED_EFFECT = {
   BLACK_HOLE: 3,
   TIME_STORAGE: 4,
   SINGULARITY_MILESTONE: 5,
-  NERFS: 6
+  NERFS: 6,
+  LOGIC_CHALLENG: 7,
+  EXTRA_BONUS: 8
 };
 
 /**
@@ -312,7 +316,8 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   let effects;
   if (effectsToConsider === undefined) {
     effects = [GAME_SPEED_EFFECT.FIXED_SPEED, GAME_SPEED_EFFECT.TIME_GLYPH, GAME_SPEED_EFFECT.BLACK_HOLE,
-      GAME_SPEED_EFFECT.TIME_STORAGE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS];
+      GAME_SPEED_EFFECT.TIME_STORAGE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS,
+      GAME_SPEED_EFFECT.LOGIC_CHALLENGE, GAME_SPEED_EFFECT.EXTRA_BONUS];
   } else {
     effects = effectsToConsider;
   }
@@ -342,6 +347,10 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
 
   if (effects.includes(GAME_SPEED_EFFECT.SINGULARITY_MILESTONE)) {
     factor *= SingularityMilestone.gamespeedFromSingularities.effectOrDefault(1);
+  }
+  
+  if (effects.includes(GAME_SPEED_EFFECT.LOGIC_CHALLENGE)) {
+    factor *= LogicChallenge(4).effectOrDefault(1);
   }
 
   if (effects.includes(GAME_SPEED_EFFECT.TIME_GLYPH)) {
@@ -1089,6 +1098,9 @@ export function init() {
   if (DEV) {
     // eslint-disable-next-line no-console
     console.log("👨‍💻 Development Mode 👩‍💻");
+  }
+  if (isDevEnvironment()) {
+    eruda.init();
   }
   ElectronRuntime.initialize();
   SteamRuntime.initialize();

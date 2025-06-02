@@ -37,7 +37,6 @@ export default {
       isUncapped: false,
       nextEffarigRGThreshold: 0,
       canSeeGalaxyButton: false,
-      unlockCost: new Decimal(),
       scrambledText: "",
       maxReplicanti: new Decimal(),
       estimateToMax: 0,
@@ -127,10 +126,9 @@ export default {
   methods: {
     update() {
       this.isUnlocked = Replicanti.areUnlocked;
-      this.unlockCost = new Decimal(1e140).dividedByEffectOf(PelleRifts.vacuum.milestones[1]);
       if (this.isDoomed) this.scrambledText = this.vacuumText();
       if (!this.isUnlocked) {
-        this.isUnlockAffordable = Currency.infinityPoints.gte(this.unlockCost);
+        this.isUnlockAffordable = LogicChallenge(3).isCompleted;
         return;
       }
       this.isInEC8 = EternityChallenge(8).isRunning;
@@ -195,9 +193,7 @@ export default {
       class="o-primary-btn--replicanti-unlock"
       onclick="Replicanti.unlock();"
     >
-      Unlock Replicanti
-      <br>
-      Cost: {{ format(unlockCost) }} IP
+      {{ isUnlockAffordable ? "Unlock" : "Locked" }}
     </PrimaryButton>
     <template v-else>
       <div

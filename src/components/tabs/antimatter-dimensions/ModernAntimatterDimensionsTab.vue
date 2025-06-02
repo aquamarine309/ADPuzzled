@@ -79,7 +79,10 @@ export default {
       this.buyUntil10 = player.buyUntil10;
       this.hasContinuum = Laitela.continuumUnlocked;
       this.isContinuumActive = Laitela.continuumActive;
-      this.isQuickResetAvailable = Player.isInAntimatterChallenge && Player.antimatterChallenge.isQuickResettable;
+      this.isQuickResetAvailable = (
+        Player.isInAntimatterChallenge && Player.antimatterChallenge.isQuickResettable ||
+        LogicChallenge.isRunning && LogicChallenge.current.isQuickResettable
+      );
 
       const isSacrificeUnlocked = Sacrifice.isVisible;
       this.isSacrificeUnlocked = isSacrificeUnlocked;

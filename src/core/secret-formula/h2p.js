@@ -549,6 +549,20 @@ toggle the associated autobuyer.
       tags: ["infinity", "automation", "challenges", "rewards", "interval", "earlygame"],
       tab: "automation/autobuyers"
     }, {
+      name: "Logic",
+      info: () => `
+Now you have done your first Big Crunch. After that, you unlock the Logic Tab and Resource Exchange, a major feature in this mod. However, all Antimatter Dimensions except the 1st Antimatter Dimension are locked.
+<br>
+<br>
+You start with 1 Logic Point. To increase Logic Points, you may exchange at most ${formatInt(6)} types of resources (${makeEnumeration(ResourceExchange.all.map(r => r.isUnlocked ? r.name : "???"))}) for different multipliers to the total Logic Points. You can level up Exchange to unlock a new exchangeable resource. As long as you get enough Logic Points, just level up Exchange at once because it gives you a huge boost.
+<br>
+<br>
+The Logic Upgrades below, similar to the Reality Upgrades, requires you to reach certain condition to unlock. In addition, once unlocked, it will never be locked again (unless you reset the game). Then, you can use Logic Points to buy the unlocked upgrades. Currently, there are 10 Logic Upgrades, which are all shown as soon as you Big Crunch for the first time. The last Logic Upgrade unlocks Logic Challenges.
+`,
+      isUnlocked: () => PlayerProgress.infinityUnlocked(),
+      tags: ["earlygame","logic","mod","puzzle","new","ext","extra"],
+      tab: "logic/exchange"
+    }, {
       name: "Break Infinity",
       info: () => `
 Once you Break Infinity, you are no longer limited to ${formatPostBreak(Number.MAX_VALUE, 2)} antimatter and can start

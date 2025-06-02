@@ -87,6 +87,12 @@ export const shortcuts = [
     function: () => manualBigCrunchResetRequest(),
     visible: true
   }, {
+    name: "Exchange",
+    keys: ["x"],
+    type: "bindRepeatableHotkey",
+    function: () => ResourceExchange.selected.exchange(),
+    visible: true
+  }, {
     name: "Replicanti Galaxy",
     keys: ["r"],
     type: "bindHotkey",

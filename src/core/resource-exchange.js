@@ -96,10 +96,9 @@ export const ResourceExchange = mapGameDataToObject(
 );
 
 Object.defineProperty(ResourceExchange, "selected", {
-  value() {
+  get() {
     return this.all[player.logic.resourceExchange.lastSelected];
-  },
-  writable: false
+  }
 });
 
 export function getLogicPoints() {
@@ -159,7 +158,7 @@ class ResourceExchangeUpgradeState extends GameMechanicState {
       Decimal.pow(
         this.boughtAmount + 1,
         Math.log10(effectivePoints.add(1).log10() + 1) + 1
-      )
+      ).timesEffectOf(LogicChallenge(3))
     );
   }
 
