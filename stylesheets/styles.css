@@ -9582,6 +9582,50 @@ input.o-automator-block-input {
   font-size: 1.4rem;
 }
 
+.c-exchange-rate-conatiner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin: 1rem 0;
+}
+
+.c-exchange-rate-conatiner > *  {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.l-exchange__slider {
+  display: flex;
+  align-items: center;
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.c-exchange__slider-process {
+  background-color: var(--color-logic);
+}
+
+.c-exchange__slider-bg {
+  background-color: #3faf9b;
+}
+
+.c-exchange__slider-handle {
+  color: var(--color-logic);
+  background-color: var(--color-background);
+  border-radius: var(--var-border-radius, 0.8rem);
+  box-shadow: 0 0 0 0.1rem #25ebd8;
+  transition-duration: 0.2s;
+}
+
+.c-exchange__slider-handle:hover {
+  color: black;
+  background-color: #25ebd8;
+  border-color: #25ebd8;
+}
+
 .l-logic-upgrade-grid {
   display: flex;
   flex-direction: column;
