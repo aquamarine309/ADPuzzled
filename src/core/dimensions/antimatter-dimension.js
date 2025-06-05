@@ -595,9 +595,8 @@ class AntimatterDimensionState extends DimensionState {
   }
 
   get cappedProductionInNormalChallenges() {
-    const postBreak = (player.break && !NormalChallenge.isRunning) ||
-      InfinityChallenge.isRunning ||
-      NormalChallenge.current.isBroken;
+    const postBreak = (player.break && (!NormalChallenge.isRunning || NormalChallenge.current.isBroken)) ||
+      InfinityChallenge.isRunning;
     return postBreak ? Decimal.MAX_VALUE : DC.E315;
   }
 
