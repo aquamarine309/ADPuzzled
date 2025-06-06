@@ -13,8 +13,8 @@ export const tabNotifications = {
         tab: "normal"
       },
       {
-        parent: "puzzle",
-        tab: "puzzle"
+        parent: "logic",
+        tab: "resource-exchange"
       },
       {
         parent: "statistics",

@@ -572,5 +572,35 @@ export const Replicanti = {
   },
   get isUncapped() {
     return TimeStudy(192).isBought || PelleRifts.vacuum.milestones[1].canBeApplied;
+  },
+  get autoReplicateUnlocked() {
+    return false;
+  },
+  get cooldown() {
+    return player.replicanti.cooldown;
   }
 };
+
+export const ReplicantiBoost = {
+  get amount() {
+    return player.replicanti.boosts;
+  },
+  set amount(value) {
+    player.replicanti.boosts = value;
+  },
+  get boost() {
+    return Decimal.pow(this.amount + 1, 2).times(DC.D2.pow(this.amount));
+  },
+  get cost() {
+    const costs = [128, 1e10, 1e100, 1e308];
+    if (this.amount <= 3) {
+      return new Decimal(costs[this.amount]);
+    } else {
+      return DC.E308.pow(Decimal.pow(this.amount - 2, 2));
+    }
+  },
+  purchase() {
+    if (Replicanti.amount.lt(this.cost)) return;
+    ++this.amount;
+  }
+}
