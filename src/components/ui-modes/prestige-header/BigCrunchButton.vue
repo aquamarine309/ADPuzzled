@@ -17,6 +17,9 @@ export default {
       headerTextColored: true,
       creditsClosed: false,
       showIPRate: false,
+      inLogicChallenge: false,
+      lcGoal: new Decimal(),
+      canCompleteLC: false
     };
   },
   computed: {
@@ -88,6 +91,12 @@ export default {
       this.peakIPRate.copyFrom(player.records.thisInfinity.bestIPmin);
       this.peakIPRateVal.copyFrom(player.records.thisInfinity.bestIPminVal);
       this.showIPRate = this.peakIPRate.lte(this.rateThreshold);
+      const currentLC = LogicChallenge.current;
+      this.inLogicChallenge = currentLC !== undefined;
+      if (this.inLogicChallenge) {
+        this.lcGoal = currentLC.goal;
+      }
+      this.canCompleteLC = this.inLogicChallenge && currentLC.canBeCompleted;
     },
     switchToInfinity() {
       Tab.dimensions.infinity.show(true);
@@ -117,10 +126,18 @@ export default {
     </template>
 
     <!-- Can Crunch in challenge -->
-    <template v-else-if="inAntimatterChallenge">
+    <template v-else-if="inAntimatterChallenge || canCompleteLC">
       Big Crunch to
       <br>
       complete the challenge
+    </template>
+
+    <template v-else-if="inLogicChallenge">
+      Cannot gain IP
+      <br>
+      in Logic Challenge
+      <br>
+      Reach {{ format(lcGoal, 2, 2) }} antimatter
     </template>
 
     <!-- Can Crunch -->

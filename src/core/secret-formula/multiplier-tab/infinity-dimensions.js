@@ -294,5 +294,11 @@ export const ID = {
     powValue: 0.5,
     isActive: () => PelleStrikes.powerGalaxies.hasStrike,
     icon: MultiplierTabIcons.PELLE,
+  },
+  logicChallenge: {
+    name: "Logic Challenges",
+    multValue: () => DC.D1.timesEffectOf(LogicChallenge(5)),
+    isActive: () => LogicChallenge.isRunning,
+    icon: MultiplierTabIcons.CHALLENGE("logic")
   }
 };

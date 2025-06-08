@@ -22,7 +22,8 @@ export default {
       hasMaxedInterval: false,
       limitDimBoosts: false,
       limitUntilGalaxies: false,
-      isBuyMaxUnlocked: false
+      isBuyMaxUnlocked: false,
+      buyMax: false
     };
   },
   computed: {
@@ -34,6 +35,9 @@ export default {
     },
     limitUntilGalaxies(newValue) {
       this.autobuyer.limitUntilGalaxies = newValue;
+    },
+    buyMax(newValue) {
+      this.autobuyer.buyMax = newValue;
     }
   },
   methods: {
@@ -43,6 +47,7 @@ export default {
       this.isBuyMaxUnlocked = autobuyer.isBuyMaxUnlocked;
       this.limitDimBoosts = autobuyer.limitDimBoosts;
       this.limitUntilGalaxies = autobuyer.limitUntilGalaxies;
+      this.buyMax = autobuyer.buyMax;
     }
   }
 };
@@ -96,6 +101,22 @@ export default {
         type="int"
         property="maxDimBoosts"
       />
+    </template>
+    <template
+      v-else
+      #checkboxSlot
+    >
+      <label
+        class="o-autobuyer-toggle-checkbox o-clickable"
+        data-v-dimension-boost-autobuyer-box
+      >
+        <input
+          v-model="buyMax"
+          type="checkbox"
+          class="o-clickable"
+        >
+        Buy Max
+      </label>
     </template>
     <template #toggleSlot>
       <label

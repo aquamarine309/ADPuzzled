@@ -67,23 +67,32 @@ export default {
         effectiveCurrentRG = Replicanti.galaxies.bought;
       }
       const secondsPerGalaxy = galaxiesPerSecond.reciprocal();
-
+      const auto = Replicanti.autoReplicateUnlocked;
+      function formatTimeWithAutoState(time) {
+        if (auto) return TimeSpan.fromSeconds(time);
+        return `${quantifyInt("time", Math.ceil(
+          time / getReplicantiInterval().toNumber() *
+          getGameSpeedupForDisplay() * 1000 / ReplicantiBoost.boost
+        ))} of replication`;
+      }
+      const remainingText = formatTimeWithAutoState(remainingTime);
       if (this.remainingTimeText === "") {
         if (remainingTime === 0) {
           this.remainingTimeText = `At Infinite Replicanti (normally takes
             ${TimeSpan.fromSeconds(secondsPerGalaxy.toNumber())})`;
         } else if (replicantiAmount.lt(100)) {
           // Because of discrete replication, we add "Approximately" at very low amounts
-          this.remainingTimeText = `Approximately ${TimeSpan.fromSeconds(remainingTime)} remaining
+          this.remainingTimeText = `Approximately ${remainingText} remaining
             until Infinite Replicanti`;
         } else {
-          this.remainingTimeText = `${TimeSpan.fromSeconds(remainingTime)} remaining until Infinite Replicanti`;
+          this.remainingTimeText = `${remainingText} remaining until Infinite Replicanti`;
         }
       }
 
       // If the player can get RG, this text is redundant with text below. It denotes total time from 1 to e308
+      const totalText = formatTimeWithAutoState(totalTime);
       if (Replicanti.galaxies.max === 0 && !isAbove308) {
-        this.remainingTimeText += ` (${TimeSpan.fromSeconds(totalTime)} total)`;
+        this.remainingTimeText += ` (${totalText} total)`;
       }
 
 

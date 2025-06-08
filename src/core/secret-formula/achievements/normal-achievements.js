@@ -556,8 +556,8 @@ export const normalAchievements = [
   {
     id: 82,
     name: "Anti-antichallenged",
-    get description() { return `Complete all ${formatInt(8)} Infinity Challenges.`; },
-    checkRequirement: () => InfinityChallenges.completed.length === 8,
+    get description() { return `Complete all ${formatInt(11)} Infinity Challenges.`; },
+    checkRequirement: () => InfinityChallenges.completed.length === 11,
     checkEvent: [GAME_EVENT.INFINITY_CHALLENGE_COMPLETED, GAME_EVENT.REALITY_RESET_AFTER],
   },
   {

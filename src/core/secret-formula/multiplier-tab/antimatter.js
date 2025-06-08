@@ -18,5 +18,15 @@ export const AM = {
     },
     isActive: () => getAdjustedGlyphEffect("effarigantimatter") > 1 && AntimatterDimension(1).isProducing,
     icon: MultiplierTabIcons.SPECIFIC_GLYPH("effarig"),
+  },
+  lc7: {
+    name: "Logic Challenge 7",
+    powValue: () => {
+      const ad1 = AntimatterDimension(1);
+      const baseProd = ad1.totalAmount.times(ad1.multiplier).times(Tickspeed.perSecond);
+      return Math.pow(baseProd.log10(), LogicChallenge(7).effects.amPow.effectOrDefault(1) - 1);
+    },
+    isActive: () => LogicChallenge(7).isRunning && AntimatterDimension(1).isProducing,
+    icon: MultiplierTabIcons.CHALLENGE("logic"),
   }
 };

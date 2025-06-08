@@ -30,7 +30,9 @@ export const MultiplierTabHelper = {
       Achievement(178),
       InfinityChallenge(5).reward,
       PelleUpgrade.galaxyPower,
-      PelleRifts.decay.milestones[1]
+      PelleRifts.decay.milestones[1],
+      LogicChallenge(6),
+      LogicChallenge(7).effects.galMul
     ) * Pelle.specialGlyphEffect.power;
   },
 

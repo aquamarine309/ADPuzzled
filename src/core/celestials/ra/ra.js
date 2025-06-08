@@ -124,7 +124,11 @@ class RaPetState extends GameMechanicState {
   get memoryChunksPerSecond() {
     if (!this.canGetMemoryChunks) return 0;
     let res = this.rawMemoryChunksPerSecond * this.chunkUpgradeCurrentMult *
-      Effects.product(Ra.unlocks.continuousTTBoost.effects.memoryChunks, GlyphSacrifice.reality);
+      Effects.product(
+        Ra.unlocks.continuousTTBoost.effects.memoryChunks,
+        GlyphSacrifice.reality,
+        ExtraBonus.extraBonusToMemories
+      );
     if (this.hasRemembrance) res *= Ra.remembrance.multiplier;
     else if (Ra.petWithRemembrance) res *= Ra.remembrance.nerf;
     return res;

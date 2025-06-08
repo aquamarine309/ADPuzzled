@@ -100,7 +100,9 @@ export function totalIPMult() {
       Achievement(141).effects.ipGain,
       InfinityUpgrade.ipMult,
       DilationUpgrade.ipMultDT,
-      GlyphEffect.ipMult
+      GlyphEffect.ipMult,
+      ExtraBonus.extraBonusToIP,
+      LogicChallenge(7).reward
     );
   ipMult = ipMult.times(Replicanti.amount.powEffectOf(AlchemyResource.exponential));
   return ipMult;

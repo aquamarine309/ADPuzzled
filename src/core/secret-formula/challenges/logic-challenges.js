@@ -39,14 +39,15 @@ export const logicChallenges = [
     formatEffect: value => format(value, 3, 3),
     reward: {
       description: "Decrease the cost of Replicanti Upgrade based on current Infinity Points",
-      effect: () => Currency.infinityPoints.value.plus(1).log10().pow(0.5).times(6).pow10(),
+      effect: () => Math.pow(10, Math.sqrt(Currency.infinityPoints.value.plus(1).log10()) * 6),
       formatEffect: value => `/${format(value, 2, 3)}`
     }
   },
   {
     id: 5,
-    description: `Infinity Dimensions multiplier based on Galaxies. Galaxies no longer affect Tickspeed.
-      Tickspeed no longer affect Antimatter Dimensions production. Disable the multiplier from Logic Points and Exchange Level.
+    description: `Infinity Dimensions multiplier based on Galaxies.
+      Tickspeed cannot affect Antimatter Dimensions production.
+      Disable the multiplier from Logic Points and Exchange Level.
       Decrease conversion rate of Infinity Power.`,
     goal: DC.E5000,
     effect: () => DC.D2.pow(Math.pow(1.03, effectiveBaseGalaxies())),
@@ -62,7 +63,7 @@ export const logicChallenges = [
     effect: 0.3,
     reward: {
       description: "Galaxies are stronger based on highest Antimatter Dimension",
-      effect: () => Math.pow(2 - Puzzle.maxTier / 8, 0.25),
+      effect: () => Math.pow(2 - Puzzles.maxTier / 8, 0.25),
       formatEffect: value => `+${formatPercents(value - 1, 3, 3)}`
     }
   },
@@ -92,8 +93,9 @@ export const logicChallenges = [
   },
   {
     id: 8,
-    description: "When the number of Dimension Boosts is not a multiple of the number of Antimatter Galaxies, the production of antimatter dimensions will be reduced.",
+    description: "When the number of Dimension Boosts is not a multiple of the number of Antimatter Galaxies, the production of Antimatter Dimensions will be reduced.",
     effect: 0.5,
+    formatEffect: value => formatPow(value, 1, 1),
     effectCondition: () => !Number.isInteger(
       DimBoost.totalBoosts /
       Math.max(1, player.galaxies)

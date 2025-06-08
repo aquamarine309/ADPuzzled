@@ -97,5 +97,11 @@ export const gamespeed = {
     powValue: () => Math.clampMax(Time.thisRealityRealTime.totalMinutes / 10, 1),
     isActive: () => Laitela.isRunning,
     icon: MultiplierTabIcons.GENERIC_LAITELA,
+  },
+  lc4: {
+    name: "Logic Challenge 4",
+    multValue: () => LogicChallenge(4).effectValue,
+    isActive: () => LogicChallenge(4).isRunning,
+    icon: MultiplierTabIcons.CHALLENGE("logic")
   }
 };

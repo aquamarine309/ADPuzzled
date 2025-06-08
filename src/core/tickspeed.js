@@ -20,7 +20,7 @@ export function effectiveBaseGalaxies() {
 }
 
 export function getTickSpeedMultiplier() {
-  if (InfinityChallenge(3).isRunning) return DC.D1;
+  if (InfinityChallenge(3).isRunning || LogicChallenge(5).isRunning) return DC.D1;
   if (Ra.isRunning) return DC.C1D1_1245;
   let galaxies = effectiveBaseGalaxies();
   const effects = Effects.product(
@@ -33,7 +33,12 @@ export function getTickSpeedMultiplier() {
     Achievement(178),
     InfinityChallenge(5).reward,
     PelleUpgrade.galaxyPower,
-    PelleRifts.decay.milestones[1]
+    PelleRifts.decay.milestones[1],
+    LogicChallenge(6),
+    LogicChallenge(6).reward,
+    LogicChallenge(7).effects.galMul,
+    InfinityChallenge(9),
+    InfinityChallenge(11)
   );
   if (galaxies < 3) {
     // Magic numbers are to retain balancing from before while displaying
@@ -141,6 +146,7 @@ export const Tickspeed = {
   },
 
   get current() {
+    if (LogicChallenge(5).isRunning) return DC.E3;
     const tickspeed = Effarig.isRunning
       ? Effarig.tickspeed
       : this.baseValue.powEffectOf(DilationUpgrade.tickspeedPower);

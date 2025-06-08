@@ -46,6 +46,14 @@ export class DimBoostAutobuyerState extends UpgradeableAutobuyerState {
     this.data.limitUntilGalaxies = value;
   }
 
+  get buyMax() {
+    return this.data.buyMax;
+  }
+
+  set buyMax(value) {
+    this.data.buyMax = value;
+  }
+
   get galaxies() {
     return this.data.galaxies;
   }

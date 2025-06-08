@@ -55,6 +55,7 @@ class InfinityChallengeState extends GameMechanicState {
     player.challenge.infinity.current = this.id;
     if (!Enslaved.isRunning) Tab.dimensions.antimatter.show();
     player.break = true;
+    if (this.id === 10) GameCache.dimensionMultDecrease.invalidate();
     if (EternityChallenge.isRunning) Achievement(115).unlock();
   }
 
@@ -63,6 +64,7 @@ class InfinityChallengeState extends GameMechanicState {
   }
 
   complete() {
+    if (this.id === 10) GameCache.dimensionMultDecrease.invalidate();
     player.challenge.infinity.completedBits |= 1 << this.id;
     EventHub.dispatch(GAME_EVENT.INFINITY_CHALLENGE_COMPLETED);
   }
@@ -98,6 +100,7 @@ class InfinityChallengeState extends GameMechanicState {
   exit() {
     player.challenge.infinity.current = 0;
     bigCrunchReset(true, false);
+    if (this.id === 10) GameCache.dimensionMultDecrease.invalidate();
     if (!Enslaved.isRunning) Tab.dimensions.antimatter.show();
   }
 }

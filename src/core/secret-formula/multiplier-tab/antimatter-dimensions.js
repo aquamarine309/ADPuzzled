@@ -102,8 +102,8 @@ export const AD = {
   },
   sacrifice: {
     name: "Sacrifice Multiplier",
-    multValue: dim => ((!dim || dim === 8) ? Sacrifice.totalBoost : DC.D1),
-    isActive: dim => (!dim || dim === 8) && Sacrifice.totalBoost.gt(1) && !EternityChallenge(11).isRunning,
+    multValue: dim => ((!dim || dim === Sacrifice.requiredDimensionTier) ? Sacrifice.totalBoost : DC.D1),
+    isActive: dim => (!dim || dim === Sacrifice.requiredDimensionTier) && Sacrifice.totalBoost.gt(1) && !EternityChallenge(11).isRunning,
     icon: MultiplierTabIcons.SACRIFICE("antimatter"),
   },
   achievementMult: {
@@ -229,7 +229,7 @@ export const AD = {
       const mult = Currency.infinityPower.value.pow(InfinityDimensions.powerConversionRate).max(1);
       return Decimal.pow(mult, dim ? 1 : MultiplierTabHelper.activeDimCount("AD"));
     },
-    isActive: () => Currency.infinityPower.value.gt(1) && !EternityChallenge(9).isRunning,
+    isActive: () => Currency.infinityPower.value.gt(1) && !EternityChallenge(9).isRunning && !LogicChallenge(4).isRunning,
     icon: MultiplierTabIcons.INFINITY_POWER,
   },
   infinityChallenge: {
@@ -481,7 +481,11 @@ export const AD = {
   },
   logicChallenges: {
     name: dim => (dim ? `Logic Challenges (AD ${dim})` : "Logic Challenges"),
-    powValue: () => LogicChallenge(1).effectOrDefault(DC.D1),
+    powValue: () => DC.D1.timesEffectsOf(
+      LogicChallenge(1),
+      LogicChallenge(7).effects.dimPow,
+      LogicChallenge(8)
+    ),
     isActive: () => LogicChallenge.isRunning,
     icon: MultiplierTabIcons.CHALLENGE("logic")
   }

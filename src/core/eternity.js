@@ -13,6 +13,7 @@ function giveEternityRewards(auto) {
   }
 
   Currency.eternities.add(newEternities);
+  player.bigEternities++;
 
   if (EternityChallenge.isRunning) {
     const challenge = EternityChallenge.current;
@@ -185,6 +186,7 @@ export function initializeChallengeCompletions(isReality) {
 export function initializeResourcesAfterEternity() {
   player.sacrificed = DC.D0;
   Currency.infinities.reset();
+  player.bigCrunches = 0;
   player.records.bestInfinity.time = 999999999999;
   player.records.bestInfinity.realTime = 999999999999;
   player.records.thisInfinity.time = 0;

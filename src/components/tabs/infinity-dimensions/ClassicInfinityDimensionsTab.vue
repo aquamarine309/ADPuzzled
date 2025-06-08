@@ -53,7 +53,7 @@ export default {
         this.dimMultiplier.copyFrom(Decimal.pow(Math.max(this.infinityPower.log2(), 1), 4).max(1));
       } else if (this.isLC4Running) {
         this.dimMultiplier = new Decimal(LogicChallenge(4).effectValue);
-      }  else {
+      } else {
         this.dimMultiplier.copyFrom(this.infinityPower.pow(this.conversionRate).max(1));
       }
       this.powerPerSecond.copyFrom(InfinityDimension(1).productionPerRealSecond);

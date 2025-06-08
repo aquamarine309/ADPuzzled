@@ -22,7 +22,8 @@ export default {
       isCapped: false,
       isAutoUnlocked: false,
       isAutobuyerOn: false,
-      isEC8Running: false
+      isEC8Running: false,
+      holding: false
     };
   },
   computed: {
@@ -49,6 +50,9 @@ export default {
       this.isAutoUnlocked = autobuyer.isUnlocked;
       this.isAutobuyerOn = autobuyer.isActive;
       this.isEC8Running = EternityChallenge(8).isRunning;
+      if (this.holding) {
+        upgrade.purchase();
+      }
     }
   }
 };
@@ -66,8 +70,10 @@ export class ReplicantiUpgradeButtonSetup {
   <div class="l-spoon-btn-group l-replicanti-upgrade-button">
     <PrimaryButton
       :enabled="canBeBought"
-      class="o-primary-btn--replicanti-upgrade"
+      class="o-primary-btn--replicanti-upgrade o-longpress-support"
       @click="upgrade.purchase()"
+      @touchstart="holding = true"
+      @touchend="holding = false"
     >
       <span v-html="description" />
       <template v-if="!isCapped">

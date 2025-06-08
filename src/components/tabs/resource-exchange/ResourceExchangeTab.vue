@@ -28,7 +28,9 @@ export default {
       totalLogicPoints: new Decimal(0),
       multiplier: new Decimal(0),
       rateUnlocked: false,
-      sliderInterval: 1
+      sliderInterval: 1,
+      showIPMultiplier: false,
+      ipMult: new Decimal(0),
     };
   },
   computed: {
@@ -62,6 +64,10 @@ export default {
       this.multiplier = ResourceExchangeUpgrade.effectValue;
       this.rateUnlocked = LogicChallenge(2).isCompleted;
       this.sliderInterval = this.currentResource.exchangeRate * 100;
+      this.showIPMultiplier = LogicChallenge(7).reward.canBeApplied;
+      if (this.showIPMultiplier) {
+        this.ipMult = LogicChallenge(7).reward.effectValue;
+      }
     },
     handleToggle(index) {
       if (this.resourceId === index) return;
@@ -104,6 +110,12 @@ export default {
         <br>
         <div class="c-lp-text-row--small">
           Total Logic Points and Exchange Levels provide a <span class="c-lp-amount--small">{{ formatX(multiplier, 2, 2) }}</span> multiplier to your Antimatter Dimensions.
+        </div>
+        <div
+          v-if="showIPMultiplier"
+          class="c-lp-text-row--small"
+        >
+          IP <span class="c-lp-amount--small">{{ formatX(ipMult, 2, 2) }}</span> due to the reward of Logic Challenge 7.
         </div>
         <div
           v-if="currentResource.isUnlocked && rateUnlocked"

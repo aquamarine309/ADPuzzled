@@ -1,5 +1,3 @@
-import { DC } from "../constants";
-
 export const tabNotifications = {
   firstInfinity: {
     id: 0,
@@ -68,8 +66,8 @@ export const tabNotifications = {
       }
     ],
     condition: () => !PlayerProgress.realityUnlocked() &&
-      !PlayerProgress.eternityUnlocked() && Currency.infinityPoints.gte(DC.E140),
-    events: [GAME_EVENT.BIG_CRUNCH_AFTER]
+      !PlayerProgress.eternityUnlocked() && LogicChallenge(3).isCompleted,
+    events: [GAME_EVENT.LOGIC_CHALLENGE_COMPLETED]
   },
   firstEternity: {
     id: 5,

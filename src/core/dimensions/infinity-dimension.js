@@ -18,7 +18,8 @@ export function infinityDimensionCommonMultiplier() {
       EternityUpgrade.idMultICRecords,
       AlchemyResource.dimensionality,
       ImaginaryUpgrade(8),
-      PelleRifts.recursion.milestones[1]
+      PelleRifts.recursion.milestones[1],
+      LogicChallenge(5)
     );
 
   if (Replicanti.areUnlocked && Replicanti.amount.gt(1)) {
@@ -416,6 +417,10 @@ export const InfinityDimensions = {
     } else if (LogicChallenge(4).isRunning) {
       base = 2;
     }
-    return (base + getAdjustedGlyphEffect("infinityrate") + PelleUpgrade.infConversion.effectOrDefault(0)) * multiplier;
+    return (base +
+      getAdjustedGlyphEffect("infinityrate") +
+      PelleUpgrade.infConversion.effectOrDefault(0) +
+      InfinityChallenge(11).reward.effectOrDefault(0)
+    ) * multiplier;
   }
 };

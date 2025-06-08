@@ -134,6 +134,9 @@ export function totalReplicantiSpeedMult(overCap) {
   totalMult = totalMult.times(PelleRifts.decay.effectValue);
   totalMult = totalMult.times(Pelle.specialGlyphEffect.replication);
   totalMult = totalMult.times(ShopPurchase.replicantiPurchases.currentMult);
+  if (Replicanti.autoReplicateUnlocked) {
+    totalMult = totalMult.times(ReplicantiBoost.boost);
+  }
   if (Pelle.isDisabled("replicantiIntervalMult")) return totalMult;
 
   const preCelestialEffects = Effects.product(
@@ -141,7 +144,7 @@ export function totalReplicantiSpeedMult(overCap) {
     TimeStudy(213),
     RealityUpgrade(2),
     RealityUpgrade(6),
-    RealityUpgrade(23),
+    RealityUpgrade(23)
   );
   totalMult = totalMult.times(preCelestialEffects);
   if (TimeStudy(132).isBought) {
@@ -171,19 +174,27 @@ export function replicantiCap() {
 }
 
 // eslint-disable-next-line complexity
-export function replicantiLoop(diff) {
+export function replicantiLoop(diff, auto = true) {
   if (!player.replicanti.unl) return;
+  // This gets the pre-cap interval (above the cap we recalculate the interval).
+  const interval = getReplicantiInterval(false);
+  const canReplicate = Replicanti.canReplicate;
+  if (diff && !canReplicate) {
+    Replicanti.cooldown -= diff;
+  }
+  if (!auto && canReplicate) {
+    Replicanti.cooldown = interval.toNumber();
+  }
+  if (auto && !Replicanti.autoReplicateUnlocked) return;
   const replicantiBeforeLoop = Replicanti.amount;
   PerformanceStats.start("Replicanti");
   EventHub.dispatch(GAME_EVENT.REPLICANTI_TICK_BEFORE);
-  // This gets the pre-cap interval (above the cap we recalculate the interval).
-  const interval = getReplicantiInterval(false);
   const isUncapped = Replicanti.isUncapped;
   const areRGsBeingBought = Replicanti.galaxies.areBeingBought;
 
   // Figure out how many ticks to calculate for and roll over any leftover time to the next tick. The rollover
   // calculation is skipped if there's more than 100 replicanti ticks per game tick to reduce round-off problems.
-  let tickCount = Decimal.divide(diff + player.replicanti.timer, interval);
+  let tickCount = auto ? Decimal.divide(diff + player.replicanti.timer, interval) : new Decimal(ReplicantiBoost.boost);
   if (tickCount.lt(100)) player.replicanti.timer = tickCount.minus(tickCount.floor()).times(interval).toNumber();
   else player.replicanti.timer = 0;
   tickCount = tickCount.floor();
@@ -334,7 +345,10 @@ export const ReplicantiUpgrade = {
     }
 
     get cost() {
-      return player.replicanti.chanceCost.dividedByEffectOf(PelleRifts.vacuum.milestones[1]);
+      return player.replicanti.chanceCost.dividedByEffectsOf(
+        PelleRifts.vacuum.milestones[1],
+        LogicChallenge(4).reward
+      );
     }
 
     get baseCost() { return player.replicanti.chanceCost; }
@@ -385,7 +399,10 @@ export const ReplicantiUpgrade = {
     }
 
     get cost() {
-      return player.replicanti.intervalCost.dividedByEffectOf(PelleRifts.vacuum.milestones[1]);
+      return player.replicanti.intervalCost.dividedByEffectsOf(
+        PelleRifts.vacuum.milestones[1],
+        LogicChallenge(4).reward
+      );
     }
 
     get baseCost() { return player.replicanti.intervalCost; }
@@ -420,7 +437,11 @@ export const ReplicantiUpgrade = {
     }
 
     get cost() {
-      return this.baseCost.dividedByEffectsOf(TimeStudy(233), PelleRifts.vacuum.milestones[1]);
+      return this.baseCost.dividedByEffectsOf(
+        TimeStudy(233),
+        PelleRifts.vacuum.milestones[1],
+        LogicChallenge(4).reward
+      );
     }
 
     get baseCost() { return player.replicanti.galCost; }
@@ -516,9 +537,7 @@ export const Replicanti = {
   },
   unlock(freeUnlock = false) {
     if (player.replicanti.unl) return;
-    // TODO: Add " || LogicChallenge(3).isCompleted" to condition.
-    // Replicanti is not implemented yet, we don't want player to unlock it.
-    if (freeUnlock) {
+    if (freeUnlock || LogicChallenge(3).isCompleted) {
       player.replicanti.unl = true;
       player.replicanti.timer = 0;
       Replicanti.amount = DC.D1;
@@ -574,10 +593,18 @@ export const Replicanti = {
     return TimeStudy(192).isBought || PelleRifts.vacuum.milestones[1].canBeApplied;
   },
   get autoReplicateUnlocked() {
-    return false;
+    return LogicChallenge(7).isCompleted;
   },
   get cooldown() {
     return player.replicanti.cooldown;
+  },
+  set cooldown(value) {
+    player.replicanti.cooldown = value;
+  },
+  get canReplicate() {
+    return this.cooldown <= 0 &&
+    !this.autoReplicateUnlocked &&
+    Replicanti.amount.lt(replicantiCap());
   }
 };
 
@@ -585,22 +612,30 @@ export const ReplicantiBoost = {
   get amount() {
     return player.replicanti.boosts;
   },
+
   set amount(value) {
     player.replicanti.boosts = value;
   },
+
   get boost() {
-    return Decimal.pow(this.amount + 1, 2).times(DC.D2.pow(this.amount));
+    return Math.pow(this.amount + 1, 2) * Math.pow(2, this.amount);
   },
+
   get cost() {
     const costs = [128, 1e10, 1e100, 1e308];
     if (this.amount <= 3) {
       return new Decimal(costs[this.amount]);
-    } else {
-      return DC.E308.pow(Decimal.pow(this.amount - 2, 2));
     }
+    return DC.E1E15;
+
   },
+
+  get canBeBought() {
+    return Replicanti.amount.gte(this.cost);
+  },
+
   purchase() {
-    if (Replicanti.amount.lt(this.cost)) return;
+    if (!this.canBeBought) return;
     ++this.amount;
   }
-}
+};

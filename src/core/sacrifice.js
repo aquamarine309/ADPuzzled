@@ -7,17 +7,29 @@ export class Sacrifice {
     return Achievement(18).isUnlocked || PlayerProgress.realityUnlocked();
   }
 
+  static get requiredDimensionTier() {
+    if (PlayerProgress.infinityUnlocked() && LogicChallenge(8).isCompleted) return Math.max(Puzzles.maxTier, 2);
+    return 8;
+  }
+
+  static get requiredDimension() {
+    return AntimatterDimension(this.requiredDimensionTier);
+  }
+
   static get canSacrifice() {
     return DimBoost.purchasedBoosts > 4 && !EternityChallenge(3).isRunning && this.nextBoost.gt(1) &&
-      AntimatterDimension(8).totalAmount.gt(0) && Currency.antimatter.lt(Player.infinityLimit) &&
+      this.requiredDimension.totalAmount.gt(0) && Currency.antimatter.lt(Player.infinityLimit) &&
       !Enslaved.isRunning;
   }
 
   static get disabledCondition() {
-    if (NormalChallenge(10).isRunning) return "8th Dimensions are disabled";
+    if (
+      NormalChallenge(10).isRunning && this.requiredDimensionTier >= 6 ||
+      PlayerProgress.infinityUnlocked() && !LogicChallenge(8).isCompleted
+    ) return `${this.requiredDimension.shortDisplayName} Dimensions are disabled`;
     if (EternityChallenge(3).isRunning) return "Eternity Challenge 3";
     if (DimBoost.purchasedBoosts < 5) return `Requires ${formatInt(5)} Dimension Boosts`;
-    if (AntimatterDimension(8).totalAmount.eq(0)) return "No 8th Antimatter Dimensions";
+    if (this.requiredDimension.totalAmount.eq(0)) return `No ${this.requiredDimension.shortDisplayName} Antimatter Dimensions`;
     if (this.nextBoost.lte(1)) return `${formatX(1)} multiplier`;
     if (Player.isInAntimatterChallenge) return "Challenge goal reached";
     return "Need to Crunch";
@@ -29,7 +41,7 @@ export class Sacrifice {
     let places = 1;
     let base = `(log₁₀(AD1)/${formatInt(10)})`;
     if (f("Challenge8isRunning", NormalChallenge(8).isRunning)) {
-      factor = 1;
+      factor = 0.4;
       base = "x";
     } else if (f("InfinityChallenge2isCompleted", InfinityChallenge(2).isCompleted)) {
       factor = 1 / 120;
@@ -56,7 +68,7 @@ export class Sacrifice {
   static get sacrificeExponent() {
     let base;
     // C8 seems weaker, but it actually follows its own formula which ends up being stronger based on how it stacks
-    if (NormalChallenge(8).isRunning) base = 1;
+    if (NormalChallenge(8).isRunning) base = 0.4;
     // Pre-Reality this was 100; having ach32/57 results in 1.2x, which is brought back in line by changing to 120
     else if (InfinityChallenge(2).isCompleted) base = 1 / 120;
     else base = 2;
@@ -94,7 +106,7 @@ export class Sacrifice {
     if (player.sacrificed.eq(0)) return DC.D1;
     // C8 uses a variable that keeps track of a sacrifice boost that persists across sacrifice-resets and isn't
     // used anywhere else, which also naturally takes account of the exponent from achievements and time studies.
-    if (NormalChallenge(8).isRunning) {
+    if (NormalChallenge(8).isRunning && player.chall8TotalSacrifice.lt(this.c8SoftcappedMultiplier)) {
       return player.chall8TotalSacrifice;
     }
 
@@ -106,23 +118,32 @@ export class Sacrifice {
       prePowerBoost = new Decimal(player.sacrificed.log10() / 10);
     }
 
-    return prePowerBoost.clampMin(1).pow(this.sacrificeExponent);
+    const multiplier = prePowerBoost.clampMin(1).pow(this.sacrificeExponent);
+    if (NormalChallenge(8).isRunning) return multiplier.clampMin(this.c8SoftcappedMultiplier);
+    return multiplier;
+  }
+
+  static get c8SoftcappedMultiplier() {
+    return DC.E10000;
   }
 }
 
 export function sacrificeReset() {
   if (!Sacrifice.canSacrifice) return false;
-  if ((!player.break || (!InfinityChallenge.isRunning && NormalChallenge.isRunning)) &&
+  if ((!player.break || (!InfinityChallenge.isRunning && NormalChallenge.isRunning && !NormalChallenge.current.isBroken)) &&
     Currency.antimatter.gt(Decimal.NUMBER_MAX_VALUE)) return false;
   if (
     NormalChallenge(8).isRunning &&
-    (Sacrifice.totalBoost.gte(Decimal.NUMBER_MAX_VALUE))
+    !NormalChallenge(8).isBroken &&
+    Sacrifice.totalBoost.gte(Decimal.NUMBER_MAX_VALUE)
   ) {
     return false;
   }
   EventHub.dispatch(GAME_EVENT.SACRIFICE_RESET_BEFORE);
   const nextBoost = Sacrifice.nextBoost;
-  player.chall8TotalSacrifice = player.chall8TotalSacrifice.times(nextBoost);
+  if (player.chall8TotalSacrifice.lt(Sacrifice.c8SoftcappedMultiplier)) {
+    player.chall8TotalSacrifice = player.chall8TotalSacrifice.times(nextBoost).clampMax(Sacrifice.c8SoftcappedMultiplier);
+  }
   player.sacrificed = player.sacrificed.plus(AntimatterDimension(1).amount);
   const isAch118Unlocked = Achievement(118).canBeApplied;
   if (NormalChallenge(8).isRunning) {
@@ -131,7 +152,9 @@ export function sacrificeReset() {
     }
     Currency.antimatter.reset();
   } else if (!isAch118Unlocked) {
-    AntimatterDimensions.resetAmountUpToTier(NormalChallenge(12).isRunning ? 6 : 7);
+    const base = Sacrifice.requiredDimensionTier - 1;
+    const offset = NormalChallenge(12).isRunning ? -1 : 0;
+    AntimatterDimensions.resetAmountUpToTier(Math.max(base + offset, 1));
   }
   player.requirementChecks.infinity.noSacrifice = false;
   EventHub.dispatch(GAME_EVENT.SACRIFICE_RESET_AFTER);

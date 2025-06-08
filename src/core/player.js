@@ -58,7 +58,7 @@ window.player = {
     },
     infinity: {
       current: 0,
-      bestTimes: Array.repeat(Number.MAX_VALUE, 8),
+      bestTimes: Array.repeat(Number.MAX_VALUE, 11),
       completedBits: 0,
     },
     eternity: {
@@ -123,7 +123,8 @@ window.player = {
       galaxies: 10,
       buyMaxInterval: 0,
       isActive: true,
-      lastTick: 0
+      lastTick: 0,
+      buyMax: true
     },
     tickspeed: {
       isUnlocked: false,
@@ -221,6 +222,7 @@ window.player = {
   },
   infinityPoints: DC.D0,
   infinities: DC.D0,
+  bigCrunches: 0,
   infinitiesBanked: DC.D0,
   dimensionBoosts: 0,
   galaxies: 0,
@@ -378,11 +380,13 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: 0,
-  version: 30,
+  version: 31,
   infinityPower: DC.D1,
   postC4Tier: 0,
+  extraBonusTimeLeft: 0,
   eternityPoints: DC.D0,
   eternities: DC.D0,
+  bigEternities: 0,
   eternityUpgrades: new Set(),
   epmultUpgrades: 0,
   timeShards: DC.D0,
@@ -969,7 +973,8 @@ export const Player = {
   },
 
   get canEternity() {
-    return player.records.thisEternity.maxIP.gte(Player.eternityGoal);
+    // TODO: replace it to "player.records.thisEternity.maxIP.gte(Player.eternityGoal)"
+    return false;
   },
 
   get bestRunIPPM() {

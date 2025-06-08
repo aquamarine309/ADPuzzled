@@ -40,6 +40,15 @@ export default {
       scrambledText: "",
       maxReplicanti: new Decimal(),
       estimateToMax: 0,
+      autoReplicateUnlocked: false,
+      canReplicate: false,
+      cooldown: 1e3,
+      boosts: 0,
+      boostAvailable: false,
+      boostCost: new Decimal(),
+      boostEffect: 0,
+      holding: false,
+      isCapped: false
     };
   },
   computed: {
@@ -121,6 +130,12 @@ export default {
       return this.estimateToMax.lt(0.01)
         ? "Currently Increasing"
         : TimeSpan.fromSeconds(this.estimateToMax.toNumber()).toStringShort();
+    },
+    replicateText() {
+      if (this.autoReplicateUnlocked) return "Auto";
+      if (this.isCapped) return "Capped";
+      if (this.canReplicate) return "Available";
+      return timeDisplayShort(this.cooldown);
     }
   },
   methods: {
@@ -150,6 +165,7 @@ export default {
       this.isUncapped = PelleRifts.vacuum.milestones[1].canBeApplied;
       this.hasRaisedCap = EffarigUnlock.infinity.isUnlocked && !this.isUncapped;
       this.replicantiCap.copyFrom(replicantiCap());
+      this.isCapped = this.amount.gte(this.replicantiCap);
       if (this.hasRaisedCap) {
         const mult = this.replicantiCap.div(Decimal.NUMBER_MAX_VALUE);
         this.capMultText = TimeStudy(31).canBeApplied
@@ -166,6 +182,14 @@ export default {
         Replicanti.galaxies.max >= 1 || PlayerProgress.eternityUnlocked();
       this.maxReplicanti.copyFrom(player.records.thisReality.maxReplicanti);
       this.estimateToMax = this.calculateEstimate();
+      this.canReplicate = Replicanti.canReplicate;
+      this.autoReplicateUnlocked = Replicanti.autoReplicateUnlocked;
+      this.cooldown = Replicanti.cooldown;
+      if (this.holding) this.replicate();
+      this.boosts = ReplicantiBoost.amount;
+      this.boostAvailable = ReplicantiBoost.canBeBought;
+      this.boostCost = ReplicantiBoost.cost;
+      this.boostEffect = ReplicantiBoost.boost;
     },
     vacuumText() {
       return wordShift.wordCycle(PelleRifts.vacuum.name);
@@ -179,6 +203,13 @@ export default {
       const nextMilestone = this.maxReplicanti;
       const coeff = Decimal.divide(updateRateMs / 1000, logGainFactorPerTick.times(postScale));
       return coeff.times(nextMilestone.divide(this.amount).pow(postScale).minus(1));
+    },
+    replicate() {
+      if (!this.canReplicate) return;
+      replicantiLoop(null, false);
+    },
+    purchaseBoost() {
+      ReplicantiBoost.purchase();
     }
   },
 };
@@ -249,7 +280,42 @@ export default {
       <br><br>
       <ReplicantiGainText />
       <br>
-      <ReplicantiGalaxyButton v-if="canSeeGalaxyButton" />
+      <div class="l-replicanti-upgrade-row">
+        <div
+          v-if="!autoReplicateUnlocked"
+          class="l-spoon-btn-group"
+        >
+          <PrimaryButton
+            :enabled="canReplicate"
+            class="o-primary-btn--replicanti-galaxy l-replicanti-upgrade-button o-longpress-support"
+            @click="replicate"
+            @touchstart="holding = true"
+            @touchend="holding = false"
+          >
+            Replicate ({{ replicateText }})
+          </PrimaryButton>
+        </div>
+        <ReplicantiGalaxyButton v-if="canSeeGalaxyButton" />
+        <div
+          v-if="!autoReplicateUnlocked"
+          class="l-spoon-btn-group"
+        >
+          <PrimaryButton
+            :enabled="boostAvailable"
+            class="o-primary-btn--replicanti-galaxy l-replicanti-upgrade-button o-longpress-support"
+            @click="purchaseBoost"
+          >
+            Boost Replicanti
+            <br>
+            Currently: {{ formatX(boostEffect) }}
+            <br>
+            Requirement: {{ format(boostCost) }} Replicanti
+          </PrimaryButton>
+        </div>
+      </div>
+      <div v-if="!autoReplicateUnlocked">
+        Hold the button (Mobile) or the C key (PC) for continuous Replication.
+      </div>
     </template>
   </div>
 </template>

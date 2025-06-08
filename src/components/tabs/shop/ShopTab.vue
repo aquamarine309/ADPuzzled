@@ -13,16 +13,25 @@ export default {
       IAPsEnabled: false,
       creditsClosed: false,
       hasDLC: false,
-      gotSTD: false
+      gotSTD: false,
+      extraBonusUnlocked: false,
+      extraBonusTimeLeft: 0
     };
   },
   computed: {
+    isDoomed: () => Pelle.isDoomed,
     purchases() {
       return ShopPurchase.all;
     },
     enableText() {
       return `In-app Purchases: ${this.IAPsEnabled ? "Enabled" : "Disabled"}`;
-    }
+    },
+    leftTime() {
+      return TimeSpan.fromMilliseconds(this.extraBonusTimeLeft).toStringShort();
+    },
+    hasBonus() {
+      return this.extraBonusTimeLeft > 0;
+    },
   },
   methods: {
     update() {
@@ -30,6 +39,19 @@ export default {
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.hasDLC = player.hasDLC;
       this.gotSTD = player.gotSTD;
+      this.extraBonusUnlocked = LogicChallenge(5).isCompleted;
+      if (this.extraBonusUnlocked) {
+        if (this.isDoomed) {
+          this.description = wordShift.wordCycle(["Destroyed", "Annihilated", "Nullified"]);
+          return;
+        }
+        this.extraBonusTimeLeft = player.extraBonusTimeLeft;
+        if (!this.hasBonus) {
+          this.description = "Click here to receive free bonus!";
+        } else {
+          this.description = ExtraBonus.current.description;
+        }
+      }
     },
     showStore() {
       if (this.creditsClosed) return;
@@ -48,6 +70,12 @@ export default {
         "o-primary-btn--subtab-option": true,
         "o-pelle-disabled-pointer": this.creditsClosed
       };
+    },
+    getBonus() {
+      if (this.hasBonus || this.isDoomed) return false;
+      // 5 hours
+      player.extraBonusTimeLeft += 1.8e7;
+      GameUI.update();
     }
   },
 };
@@ -56,8 +84,8 @@ export default {
 <template>
   <div class="tab shop">
     <div class="c-shop-disclaimer">
-      Disclaimer: These are required to progress in the game, they are not just for supporting the developer.
-      The game is balanced with the use of any microtransactions.
+      Not a Disclaimer: These are required to progress in the game, they are not just for supporting the developer.
+      The game is balanced with the use of some microtransactions.
     </div>
     <div class="c-subtab-option-container">
       <PrimaryButton
@@ -75,6 +103,24 @@ export default {
         Respec Shop
       </PrimaryButton>
     </div>
+    <button
+      v-if="extraBonusUnlocked"
+      class="extra-bonus-btn"
+      @click="getBonus"
+    >
+      <div v-if="isDoomed">
+        Extra Bonus has been
+        <b class="extra-bonus-destoryed">
+          {{ description }}
+        </b>
+      </div>
+      <div v-else>
+        {{ description }}
+      </div>
+      <div v-if="hasBonus">
+        {{ leftTime }} left
+      </div>
+    </button>
     <div class="c-shop-header">
       <span>You have {{ gotSTD && !hasDLC ? "1" : "0" }}</span>
       <img

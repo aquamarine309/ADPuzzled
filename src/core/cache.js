@@ -64,8 +64,8 @@ export const GameCache = {
 
   dimensionMultDecrease: new Lazy(() => 10 - Effects.sum(
     BreakInfinityUpgrade.dimCostMult,
-    EternityChallenge(6).reward
-  )),
+    EternityChallenge(6).reward,
+  ) + InfinityChallenge(10).effectOrDefault(0)),
 
   timeStudies: new Lazy(() => NormalTimeStudyState.studies
     .map(s => player.timestudy.studies.includes(s.id))),
@@ -117,7 +117,15 @@ export const GameCache = {
 
   logicPoints: new Lazy(() => getLogicPoints()),
 
-  maxTier: new Lazy(() => 1 + Effects.sum(...Array.range(1, 7).map(id => LogicUpgrade(id))))
+  maxTier: new Lazy(() => 1 + Effects.sum(...Array.range(1, 7).map(id => LogicUpgrade(id)))),
+
+  currentBonus: new Lazy(() => {
+    for (let i = ExtraBonus.all.length - 1; i >= 0; i--) {
+      if (ExtraBonus.all[i].isUnlocked) {
+        return ExtraBonus.all[i];
+      }
+    }
+  })
 };
 
 EventHub.logic.on(GAME_EVENT.GLYPHS_CHANGED, () => {

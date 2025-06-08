@@ -44,7 +44,7 @@ export default {
     },
     amountText() {
       if (this.formattedAmount) return this.formattedAmount;
-      const amount = this.tier < 8 ? format(this.amount, 2) : formatInt(this.amount);
+      const amount = this.tier < Puzzles.maxTier ? format(this.amount, 2) : formatInt(this.amount);
       return `${amount} (${formatInt(this.boughtBefore10)})`;
     },
     singleText() {
@@ -95,7 +95,7 @@ export default {
   methods: {
     update() {
       const tier = this.tier;
-      if (tier === 8 && this.isDoomed) this.formattedAmount = formatInt(this.amount);
+      if (tier === Puzzles.maxTier && this.isDoomed) this.formattedAmount = formatInt(this.amount);
       if (tier > DimBoost.maxDimensionsUnlockable) return;
       const dimension = AntimatterDimension(tier);
       this.isUnlocked = dimension.isAvailableForPurchase;
@@ -107,7 +107,7 @@ export default {
       this.boughtBefore10 = dimension.boughtBefore10;
       this.singleCost.copyFrom(dimension.cost);
       this.until10Cost.copyFrom(dimension.costUntil10);
-      if (tier < 8) {
+      if (tier < Puzzles.maxTier) {
         this.rateOfChange.copyFrom(dimension.rateOfChange);
       }
       this.isAffordable = dimension.isAffordable;

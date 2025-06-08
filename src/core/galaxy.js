@@ -71,6 +71,9 @@ export class Galaxy {
   }
 
   static get costMult() {
+    if (LogicChallenge(6).isRunning) {
+      return 10;
+    }
     const mult = Effects.min(NormalChallenge(10).isRunning ? 90 : 60, TimeStudy(42));
     if (PlayerProgress.infinityUnlocked() && !LogicChallenge(2).isCompleted) {
       return mult * 2.5;

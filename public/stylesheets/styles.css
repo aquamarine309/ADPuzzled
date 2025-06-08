@@ -73,6 +73,7 @@ html {
   --color-gh-purple: #8957e5;
   --color-notification: red;
   --color-overlay: rgba(30, 30, 50, 70%);
+  --color-extra: #b0e236;
 
   --color-antimatter: #2196f3;
   --color-infinity: #b67f33;
@@ -311,8 +312,15 @@ html {
   --color-text: #e0e0e0;
   --color-text-inverted: black;
   --color-base: black;
-  --color-accent: #fbc21b;
+  --color-accent: #ffda71;
   --color-notification: yellow;
+  --color-good: #51BC55;
+  --color-good-dark: #0B6B16;
+  --color-bad: #FF2400;
+  --color-infinity: #FF6A00;
+  --color-eternity: #EA18B2;
+  --color-reality: #0C7E19;
+  --color-celestials: #3C3DCB;
   --color-overlay: rgba(60, 60, 100, 50%);
 
   --color-prestige--accent: black;
@@ -832,6 +840,15 @@ button:focus {
   align-items: center;
   font-size: 7rem;
   background-color: black;
+}
+
+.o-longpress-support {
+  -webkit-touch-callout: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .l-reality-button {
@@ -1820,10 +1837,15 @@ br {
 }
 
 .o-primary-btn--replicanti-galaxy {
-  width: 22rem;
-  height: 7rem;
-  font-size: 1.2rem;
+  width: 18rem;
+  height: 6rem;
+  font-size: 1rem;
   padding: 0.1rem 0.6rem;
+}
+
+.o-primary-btn--replicanti-galaxy--bigger {
+  height: 9rem;
+  font-size: 1.2rem;
 }
 
 .o-primary-btn--replicanti-galaxy-toggle {
@@ -2399,7 +2421,8 @@ br {
 }
 
 .t-dark-metro .c-game-header__antimatter,
-.t-amoled-metro .c-game-header__antimatter {
+.t-amoled-metro .c-game-header__antimatter,
+.t-s14 .c-game-header__antimatter {
   color: #e0e0e0;
 }
 
@@ -4050,16 +4073,17 @@ br {
   position: relative;
 }
 
-.t-s14 .o-infinity-upgrade-btn--bought::after {
+.t-s14 .o-infinity-upgrade-btn--bought::before {
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
-  color: white;
-  font-size: 2rem;
-  background-image: url("../images/sold-out.png");
-  background-repeat: no-repeat;
+  background-image: url("../images/sold-out.png"), url("../images/baixie.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
 }
 
 .o-infinity-upgrade-btn--useless {
@@ -9779,4 +9803,22 @@ input.o-automator-block-input {
 .t-s10.c-logic-upgrade-btn--bought:hover {
   color: #ffffff;
   background-color: var(--color-logic);
+}
+
+.extra-bonus-btn {
+  padding: 1rem;
+  background-color: var(--color-extra);
+  border: 0.1rem solid black;
+  border-radius: var(--var-border-radius, 1rem);
+  margin: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: Typewriter, serif;
+  transition-duration: 0.2s;
+}
+
+.extra-bonus-btn:hover {
+  background-color: black;
+  color: var(--color-extra);
+  border-color: var(--color-extra);
 }

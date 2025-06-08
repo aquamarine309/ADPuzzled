@@ -152,6 +152,7 @@ class ResourceExchangeUpgradeState extends GameMechanicState {
   }
 
   get effectValue() {
+    if (LogicChallenge(5).isRunning) return DC.D1;
     let effectivePoints = GameCache.logicPoints.value;
     if (effectivePoints.gte(DC.E50)) effectivePoints = DC.E45.times(effectivePoints.pow(0.1));
     return DC.E5.pow(

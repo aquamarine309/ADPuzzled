@@ -424,6 +424,12 @@ export const migrations = {
       if (player.auto.antimatterDims.all[2].interval <= 100) {
         player.logic.upgReqs |= (1 << 10);
       }
+    },
+    31: player => {
+      const times = player.challenge.infinity.bestTimes;
+      while (times.length < 11) {
+        times.push(Number.MAX_VALUE);
+      }
     }
   },
 

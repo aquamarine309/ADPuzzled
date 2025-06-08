@@ -1,5 +1,7 @@
 import TWEEN from "tween.js";
 
+import eruda from "eruda";
+
 import { ElectronRuntime, SteamRuntime } from "@/steam";
 
 import { DC } from "./core/constants";
@@ -11,7 +13,6 @@ import { Cloud } from "./core/storage";
 import { supportedBrowsers } from "./supported-browsers";
 
 import Payments from "./core/payments";
-import eruda from "eruda";
 
 if (GlobalErrorHandler.handled) {
   throw new Error("Initialization failed");
@@ -134,7 +135,8 @@ function totalEPMult() {
         TimeStudy(121),
         TimeStudy(123),
         RealityUpgrade(12),
-        GlyphEffect.epMult
+        GlyphEffect.epMult,
+        ExtraBonus.extraBonusToEP
       );
 }
 
@@ -187,11 +189,12 @@ export function ratePerMinute(amount, time) {
 
 // eslint-disable-next-line max-params
 export function addInfinityTime(time, realTime, ip, infinities) {
-  let challenge = "";
-  if (player.challenge.normal.current) challenge = `Normal Challenge ${player.challenge.normal.current}`;
-  if (player.challenge.infinity.current) challenge = `Infinity Challenge ${player.challenge.infinity.current}`;
+  const challenges = [];
+  if (player.challenge.normal.current) challenges.push(`Normal Challenge ${player.challenge.normal.current}`);
+  if (player.challenge.infinity.current) challenges.push(`Infinity Challenge ${player.challenge.infinity.current}`);
+  if (player.challenge.logic.current) challenges.push(`Logic Challenge ${player.challenge.logic.current}`);
   player.records.recentInfinities.pop();
-  player.records.recentInfinities.unshift([time, realTime, ip, infinities, challenge]);
+  player.records.recentInfinities.unshift([time, realTime, ip, infinities, makeEnumeration(challenges)]);
   GameCache.bestRunIPPM.invalidate();
 }
 
@@ -348,9 +351,13 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   if (effects.includes(GAME_SPEED_EFFECT.SINGULARITY_MILESTONE)) {
     factor *= SingularityMilestone.gamespeedFromSingularities.effectOrDefault(1);
   }
-  
+
   if (effects.includes(GAME_SPEED_EFFECT.LOGIC_CHALLENGE)) {
     factor *= LogicChallenge(4).effectOrDefault(1);
+  }
+
+  if (effects.includes(GAME_SPEED_EFFECT.EXTRA_BONUS)) {
+    factor *= ExtraBonus.extraBonusToGamespeed.effectOrDefault(1);
   }
 
   if (effects.includes(GAME_SPEED_EFFECT.TIME_GLYPH)) {
@@ -575,6 +582,8 @@ export function gameLoop(passDiff, options = {}) {
   TimeDimensions.tick(diff);
   InfinityDimensions.tick(diff);
   AntimatterDimensions.tick(diff);
+
+  ExtraBonus.tick(realDiff);
 
   const gain = Math.clampMin(FreeTickspeed.fromShards(Currency.timeShards.value).newAmount - player.totalTickGained, 0);
   player.totalTickGained += gain;

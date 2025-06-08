@@ -85,6 +85,7 @@ function bigCrunchGiveRewards(enteringAntimatterChallenge) {
   const infinityPoints = gainedInfinityPoints();
   Currency.infinityPoints.add(infinityPoints);
   Currency.infinities.add(gainedInfinities().round());
+  player.bigCrunches++;
 
   bigCrunchTabChange(!PlayerProgress.infinityUnlocked(), enteringAntimatterChallenge);
   bigCrunchCheckUnlocks();

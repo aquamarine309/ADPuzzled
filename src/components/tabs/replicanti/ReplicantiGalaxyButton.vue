@@ -16,7 +16,8 @@ export default {
       isAutoEnabled: false,
       isDivideUnlocked: false,
       boughtGalaxies: 0,
-      extraGalaxies: 0
+      extraGalaxies: 0,
+      autoReplicateUnlocked: false
     };
   },
   computed: {
@@ -51,6 +52,7 @@ export default {
       this.isAutoUnlocked = auto.isUnlocked;
       this.isAutoActive = auto.isActive;
       this.isAutoEnabled = auto.isEnabled;
+      this.autoReplicateUnlocked = Replicanti.autoReplicateUnlocked;
     },
     handleAutoToggle(value) {
       Autobuyer.replicantiGalaxy.isActive = value;
@@ -58,6 +60,12 @@ export default {
     },
     handleClick() {
       replicantiGalaxyRequest();
+    },
+    setHoldingR(value) {
+      if (value === true) {
+        replicantiGalaxyRequest();
+      }
+      setHoldingR(value);
     }
   }
 };
@@ -67,8 +75,11 @@ export default {
   <div class="l-spoon-btn-group">
     <PrimaryButton
       :enabled="isAvailable"
-      class="o-primary-btn--replicanti-galaxy"
+      class="o-primary-btn--replicanti-galaxy l-replicanti-upgrade-button o-longpress-support"
+      :class="{ 'o-primary-btn--replicanti-galaxy--bigger': autoReplicateUnlocked }"
       @click="handleClick"
+      @touchstart="setHoldingR(true)"
+      @touchend="setHoldingR(false)"
     >
       {{ resetActionDisplay }} for a Replicanti Galaxy
       <br>

@@ -91,7 +91,17 @@ export const shortcuts = [
     keys: ["x"],
     type: "bindRepeatableHotkey",
     function: () => ResourceExchange.selected.exchange(),
-    visible: true
+    visible: () => PlayerProgress.infinityUnlocked()
+  }, {
+    name: "Continuous Replicate",
+    keys: ["c"],
+    type: "bindRepeatableHotkey",
+    function: () => {
+      if (Replicanti.canReplicate) {
+        replicantiLoop(null, false);
+      }
+    },
+    visible: () => Replicanti.areUnlocked || PlayerProgress.eternityUnlocked()
   }, {
     name: "Replicanti Galaxy",
     keys: ["r"],
