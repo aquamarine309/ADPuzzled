@@ -22,7 +22,7 @@ import { GameKeyboard } from "./keyboard";
 // for the other modifier keys (#3093).
 
 // Free keys:
-// i, j, k, l, n, o, p, q, v, w, x
+// i, j, k, l, n, o, p, q, v, w
 
 
 export const shortcuts = [
@@ -94,7 +94,7 @@ export const shortcuts = [
     visible: () => PlayerProgress.infinityUnlocked()
   }, {
     name: "Continuous Replicate",
-    keys: ["c"],
+    keys: ["o"],
     type: "bindRepeatableHotkey",
     function: () => {
       if (Replicanti.canReplicate) {
