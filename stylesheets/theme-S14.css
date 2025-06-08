@@ -1,12 +1,23 @@
 body {
   color: #999999;
-  background-color: black;
-  background-position: center;
-  background-size: 100%;
-  background-image: url("../images/baixie.png");
-  background-blend-mode: multiply;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url('../images/baixie.png') center/cover #1b1a1e;
+  min-height: 100vh;
+  font-weight: bold;
+  filter: sepia(0.4) brightness(0.8) contrast(1.2);
 }
 
 * {
   cursor: url("./baixie.cur"), auto !important;
+  font-family: "Eater", cursive !important;
+  text-transform: uppercase !important;
+}
+
+button:hover {
+  filter: brightness(0.6) contrast(1.5) hue-rotate(-20deg) blur(0.1rem);
+}
+
+.o-primary-btn {
+  box-shadow: 0 0 1rem 0.1rem red;
 }
