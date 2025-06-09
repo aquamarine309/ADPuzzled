@@ -134,6 +134,10 @@ export function eternity(force, auto, specialConditions = {}) {
   resetTickspeed();
   playerInfinityUpgradesOnReset();
   AchievementTimers.marathon2.reset();
+  ResourceExchangeUpgrade.reset();
+  resetAllResourceExchange();
+  LogicChallenges.clearCompletions();
+  LogicUpgrades.reset();
   applyEU1();
   player.records.thisInfinity.maxAM = DC.D0;
   player.records.thisEternity.maxAM = DC.D0;

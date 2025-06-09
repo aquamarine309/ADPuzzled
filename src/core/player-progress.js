@@ -32,20 +32,20 @@ export class PlayerProgress {
     return new PlayerProgress(player);
   }
 
-  static infinityUnlocked() {
-    return PlayerProgress.current.isInfinityUnlocked;
+  static infinityUnlocked(fake = PlayerProgress.fakeReset()) {
+    return !fake && PlayerProgress.current.isInfinityUnlocked;
   }
 
-  static hasBroken() {
-    return player.break || this.isEternityUnlocked || this.isRealityUnlocked;
+  static hasBroken(fake = PlayerProgress.fakeReset()) {
+    return !fake && (player.break || this.isEternityUnlocked || this.isRealityUnlocked);
   }
 
-  static replicantiUnlocked() {
-    return Replicanti.areUnlocked || this.isEternityUnlocked;
+  static replicantiUnlocked(fake = PlayerProgress.fakeReset()) {
+    return !fake && (Replicanti.areUnlocked || this.isEternityUnlocked);
   }
 
-  static eternityUnlocked() {
-    return PlayerProgress.current.isEternityUnlocked;
+  static eternityUnlocked(fake = PlayerProgress.fakeReset()) {
+    return !fake && PlayerProgress.current.isEternityUnlocked;
   }
 
   static dilationUnlocked() {
@@ -56,9 +56,9 @@ export class PlayerProgress {
     return PlayerProgress.current.isRealityUnlocked;
   }
 
-  static seenAlteredSpeed() {
+  static seenAlteredSpeed(fake = PlayerProgress.fakeReset()) {
     const lc4 = LogicChallenge(4);
-    return lc4.isRunning || lc4.isCompleted || this.eternityUnlocked();
+    return !fake && (lc4.isRunning || lc4.isCompleted || PlayerProgress.current.isEternityUnlocked);
   }
 
   static challengeCompleted() {
@@ -67,5 +67,9 @@ export class PlayerProgress {
 
   static infinityChallengeCompleted() {
     return InfinityChallenges.all.some(c => c.isCompleted);
+  }
+  
+  static fakeReset() {
+    return GameCache.fakeReset.value;
   }
 }

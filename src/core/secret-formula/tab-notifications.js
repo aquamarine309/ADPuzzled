@@ -83,10 +83,6 @@ export const tabNotifications = {
       {
         parent: "eternity",
         tab: "upgrades"
-      },
-      {
-        parent: "dimensions",
-        tab: "time"
       }
     ],
     condition: () => !PlayerProgress.realityUnlocked() &&
@@ -222,4 +218,15 @@ export const tabNotifications = {
     // Always externally triggered
     condition: () => true,
   },
+  completeAchHint: {
+    id: 17,
+    tabsToHighLight: [
+      {
+        parent: "achievements",
+        tab: "normal"
+      }
+    ],
+    condition: () => PlayerProgress.fakeReset(),
+    events: [GAME_EVENT.BIG_CRUNCH_BEFORE]
+  }
 };

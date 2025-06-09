@@ -31,7 +31,8 @@ export default {
       garbleTimer: 0,
       garbleKey: 0,
       achievementTime: 0,
-      hintActive: false
+      hintActive: false,
+      fakeHint: false
     };
   },
   computed: {
@@ -64,6 +65,7 @@ export default {
     },
     indicatorIconClass() {
       if (this.isUnlocked) return "fas fa-check";
+      if (this.fakeHint) return "fas fa-exclamation-triangle";
       if (this.isPreRealityAchievement && !this.isDisabled) return "far fa-clock";
       return "fas fa-times";
     },
@@ -120,7 +122,8 @@ export default {
       this.isCancer = Theme.current().name === "S4" || player.secretUnlocks.cancerAchievements;
       this.showUnlockState = player.options.showHintText.achievementUnlockStates;
       this.realityUnlocked = PlayerProgress.realityUnlocked();
-      this.hintActive = ("hint" in this.config) && this.config.hintCondition();
+      this.hintActive = this.config.hint !== undefined && this.config.hintCondition();
+      this.fakeHint = PlayerProgress.fakeReset() && Puzzles.fakeAchievements.includes(this.id);
 
       this.processedName = this.processText(this.config.name, this.garbledNameTemplate);
       this.processedId = this.processText(this.displayId, this.garbledIDTemplate);

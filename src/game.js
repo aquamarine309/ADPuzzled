@@ -502,6 +502,7 @@ export function gameLoop(passDiff, options = {}) {
   GameCache.infinityDimensionCommonMultiplier.invalidate();
   GameCache.timeDimensionCommonMultiplier.invalidate();
   GameCache.totalIPMult.invalidate();
+  GameCache.fakeReset.invalidate();
 
   const blackHoleDiff = realDiff;
   const fixedSpeedActive = EternityChallenge(12).isRunning;

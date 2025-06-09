@@ -55,6 +55,7 @@ export default {
       return `${prefix} ${format(this.singleCost)} ${suffix}`;
     },
     until10Text() {
+      if (!this.hasDLC) return "Requires DLC";
       if (this.isCapped) return "Shattered by Nameless";
       if (this.isContinuumActive) return `Continuum: ${this.continuumString}`;
 

@@ -36,6 +36,7 @@ window.player = {
   infinityUpgrades: new Set(),
   infinityRebuyables: [0, 0, 0],
   hasDLC: false,
+  hasFakeDLC: false,
   gotSTD: false,
   logic: {
     resourceExchange: {
@@ -973,8 +974,7 @@ export const Player = {
   },
 
   get canEternity() {
-    // TODO: replace it to "player.records.thisEternity.maxIP.gte(Player.eternityGoal)"
-    return false;
+    return player.records.thisEternity.maxIP.gte(Player.eternityGoal);
   },
 
   get bestRunIPPM() {
