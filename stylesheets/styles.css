@@ -9253,6 +9253,15 @@ input.o-automator-block-input {
   background: var(--color-celestials);
 }
 
+.c-hide-modal-tab-button--logic {
+  color: var(--color-logic);
+  border-color: var(--color-logic);
+}
+
+.c-hide-modal-tab-button--logic:hover {
+  background: var(--color-logic);
+}
+
 /* Prevent any themes overriding font awesome */
 .fa,
 .far,
@@ -9821,4 +9830,20 @@ input.o-automator-block-input {
   background-color: black;
   color: var(--color-extra);
   border-color: var(--color-extra);
+}
+
+.c-code-keyword {
+  color: #c586c0;
+}
+
+.c-code-identity {
+  color: #9cdcfe;
+}
+
+.c-code-function {
+  color: #dcdcaa
+}
+
+.c-code-string {
+  color: #ce9178;
 }
