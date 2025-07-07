@@ -129,7 +129,7 @@ export const GameCache = {
   
   fakeReset: new Lazy(() => {
     return PlayerProgress.current.isEternityUnlocked &&
-      (Currency.infinities.lt(1) ||
+      (player.bigCrunches < 1 ||
       Puzzles.fakeAchievements.some(id => !Achievement(id).isUnlocked))
   })
 };

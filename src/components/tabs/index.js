@@ -20,6 +20,7 @@ import InfinityDimensionsTab from "./infinity-dimensions/InfinityDimensionsTab";
 import InfinityUpgradesTab from "./infinity-upgrades/InfinityUpgradesTab";
 import LaitelaTab from "./celestial-laitela/LaitelaTab";
 import LogicChallengesTab from "./logic-challenges/LogicChallengesTab";
+import MevhanicMeaverTab from "./mechanic-meaver/MevhanicMeaverTab";
 import MultiplierBreakdownTab from "./statistics/MultiplierBreakdownTab";
 import NormalAchievementsTab from "./normal-achievements/NormalAchievementsTab";
 import NormalChallengesTab from "./normal-challenges/NormalChallengesTab";
@@ -88,7 +89,8 @@ const TabComponents = {
   CelestialNavigationTab,
   ShopTab,
   MultiplierBreakdownTab,
-  ResourceExchangeTab
+  ResourceExchangeTab,
+  MevhanicMeaverTab
 };
 
 export default TabComponents;

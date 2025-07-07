@@ -90,7 +90,7 @@ export function breakInfinity() {
 }
 
 export function gainedInfinityPoints() {
-  if (LogicChallenge.isRunning) return DC.D0;
+  if (LogicChallenge.isRunning || PlayerProgress.fakeReset()) return DC.D0;
   const div = Effects.min(
     308,
     Achievement(103),
@@ -189,6 +189,7 @@ export function ratePerMinute(amount, time) {
 
 // eslint-disable-next-line max-params
 export function addInfinityTime(time, realTime, ip, infinities) {
+  if (PlayerProgress.fakeReset()) return;
   const challenges = [];
   if (player.challenge.normal.current) challenges.push(`Normal Challenge ${player.challenge.normal.current}`);
   if (player.challenge.infinity.current) challenges.push(`Infinity Challenge ${player.challenge.infinity.current}`);
@@ -272,6 +273,7 @@ export function addRealityTime(time, realTime, rm, level, realities, ampFactor, 
 }
 
 export function gainedInfinities() {
+  if (PlayerProgress.fakeReset()) return DC.D0;
   if (EternityChallenge(4).isRunning || Pelle.isDisabled("InfinitiedMults")) {
     return DC.D1;
   }

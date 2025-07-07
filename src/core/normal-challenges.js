@@ -94,8 +94,10 @@ class NormalChallengeState extends GameMechanicState {
   start() {
     if (this.id === 1 || this.isOnlyActiveChallenge) return;
     if (!Tab.challenges.isUnlocked) return;
-    // TODO: remove it next update, this version is just for fixing bugs
-    if (PlayerProgress.eternityUnlocked()) return;
+    if (PlayerProgress.eternityUnlocked() && !MechanicMeaver.mechanics.allowNC.value) {
+      Modal.message.show("The Challenge is disabled.");
+      return;
+    }
     // Forces big crunch reset but ensures IP gain, if any.
     bigCrunchReset(true, true);
     player.challenge.normal.current = this.id;
