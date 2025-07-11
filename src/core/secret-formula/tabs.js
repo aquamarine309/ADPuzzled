@@ -528,7 +528,8 @@ export const tabs = [
         symbol: "<i class='fas fa-cog'></i>",
         component: "MevhanicMeaverTab",
         id: 1,
-        hidable: true
+        hidable: true,
+        condition: () => PlayerProgress.eternityUnlocked(),
       }
     ]
   }

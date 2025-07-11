@@ -526,3 +526,10 @@ window.GAME_STAGES = {
   COMPLETED: 2,
   FAILED: 3
 };
+
+window.MEAVER_TYPE = {
+  BOOLEAN: 0,
+  NUMBER: 1,
+  DECIMAL: 2,
+  ENUM: 3
+}

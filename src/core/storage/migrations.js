@@ -444,6 +444,10 @@ export const migrations = {
       player.logic.spentPoints = new Decimal(0);
       player.upgradeBits = 0;
       player.upgReqs = 0;
+    },
+    33: player => {
+      if (player.eternities.lte(0)) return;
+      player.logic.logicFragments = 1;
     }
   },
 

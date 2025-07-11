@@ -7,7 +7,7 @@ import { ElectronRuntime, SteamRuntime } from "@/steam";
 import { DC } from "./core/constants";
 import { deepmergeAll } from "@/utility/deepmerge";
 import { DEV } from "@/env";
-import { isDevEnvironment } from "./core/devtools";
+import { isLocalEnvironment } from "./core/devtools";
 import { SpeedrunMilestones } from "./core/speedrun";
 import { Cloud } from "./core/storage";
 import { supportedBrowsers } from "./supported-browsers";
@@ -1111,7 +1111,7 @@ export function init() {
     // eslint-disable-next-line no-console
     console.log("👨‍💻 Development Mode 👩‍💻");
   }
-  if (isDevEnvironment()) {
+  if (isLocalEnvironment()) {
     eruda.init();
   }
   ElectronRuntime.initialize();

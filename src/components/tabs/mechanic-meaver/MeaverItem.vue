@@ -17,13 +17,17 @@ export default {
   data() {
     return {
       cost: 0,
-      isAffordable: false
+      isAffordable: false,
+      isExpanded: false
     }
   },
   methods: {
     update() {
       this.cost = this.item.cost;
       this.isAffordable = this.item.isAffordable;
+    },
+    modify() {
+      this.item.modify();
     }
   }
 }
@@ -31,19 +35,32 @@ export default {
 
 <template>
   <div class="l-meaver-item-container">
-    <div class="c-meaver-item-file">
-      <div>// {{ item.config.file }}.js</div>
+    <div
+      class="c-meaver-item-file"
+      @click="isExpanded = !isExpanded"
+    >
+      <div>// {{ item.config.file }}</div>
       <div class="c-modify-cost-info">
+        <span>Cost: {{ quantify("Fragment", cost, 2) }}</span>
+        <span v-if="cost < 0">(50% less)</span>
         <PrimaryButton
-          :enabled="isAffordable"
-          class="o-primary-btn--save-modification"
+          class="o-primary-btn--meaver"
+          @click.stop="modify"
         >
           Save
         </PrimaryButton>
-        <span>Cost: {{ quantify("Fragment", cost, 2) }}</span>
+        <span class="c-expand-btn">
+          <i
+            class="far"
+            :class="isExpanded ? 'fa-plus-square' : 'fa-minus-square'"
+          />
+        </span>
       </div>
     </div>
-    <CommandPreview :item="item" />
+    <CommandPreview
+      v-if="isExpanded"
+      :item="item"
+    />
   </div>
 </template>
 
@@ -51,8 +68,8 @@ export default {
 .l-meaver-item-container {
   display: flex;
   flex-direction: column;
-  padding: 3rem;
-  margin: 1.2rem 1rem;
+  padding: 0 3rem;
+  margin: 4.2rem 1rem;
   border-radius: var(--var-border-radius, 0.5rem);
 }
 
@@ -65,7 +82,7 @@ export default {
   font-size: 1.3rem;
   display: flex;
   align-items: center;
-  background: #243562;
+  background: var(--color-meaver-deep);
   border-top-left-radius: var(--var-border-radius, 0.5rem);
   border-top-right-radius: var(--var-border-radius, 0.5rem);
   position: relative;
@@ -73,9 +90,12 @@ export default {
 
 .c-modify-cost-info {
   margin: 0 3rem;
+  position: absolute;
+  right: 0;
 }
 
-.o-primary-btn--save-modification {
-  margin: 0 0.6rem;
+.c-expand-btn {
+  margin-left: 2rem;
+  font-size: 1.4rem;
 }
 </style>

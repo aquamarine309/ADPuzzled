@@ -1,19 +1,39 @@
 <script>
 import MeaverItem from "./MeaverItem";
+import LogicFragmentContainer from "./LogicFragmentContainer";
+import DebugConsoleContainer from "./DebugConsoleContainer";
+import PrimaryButton from "@/components/PrimaryButton";
 
 export default {
   name: "MevhanicMeaverTab",
   components: {
-    MeaverItem
+    MeaverItem,
+    LogicFragmentContainer,
+    DebugConsoleContainer,
+    PrimaryButton
   },
   computed: {
     mechanics: () => MechanicMeaver.mechanics
+  },
+  methods: {
+    showMeaverHowTo() {
+      ui.view.h2pForcedTab = GameDatabase.h2p.tabs.filter(tab => tab.name === "Mechanic Meaver")[0];
+      Modal.h2p.show();
+    },
   }
 }
 </script>
 
 <template>
-  <div>
+  <div class="l-meaver-tab">
+    <PrimaryButton
+      class="o-primary-btn--subtab-option"
+      @click="showMeaverHowTo()"
+    >
+      Click for Mechanic Meaver info
+    </PrimaryButton>
+    <div class="c-meaver-title">[Logic Fragments]</div>
+    <LogicFragmentContainer />
     <div class="c-meaver-title">[Mechanics]</div>
     <MeaverItem
       v-for="item of mechanics.all"
@@ -21,11 +41,9 @@ export default {
       :item="item"
     />
     <div class="c-meaver-title">[Formulas]</div>
-    <div>Coming Soon</div>
-    <div class="c-meaver-title">[Player Data]</div>
-    <div>Coming Soon</div>
+    <div><i class="fas fa-lock" /> How about we explore the area ahead of us later?</div>
     <div class="c-meaver-title">[Debug Console]</div>
-    <div>Coming Soon</div>
+    <DebugConsoleContainer />
   </div>
 </template>
 

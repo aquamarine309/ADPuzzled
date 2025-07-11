@@ -224,6 +224,10 @@ export const tabNotifications = {
       {
         parent: "achievements",
         tab: "normal"
+      },
+      {
+        parent: "logic",
+        tab: "mechanic-meaver"
       }
     ],
     condition: () => PlayerProgress.fakeReset(),

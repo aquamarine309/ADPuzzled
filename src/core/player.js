@@ -51,12 +51,26 @@ window.player = {
     upgradeBits: 0,
     upgReqs: 0,
     logicFragments: 0,
+    spentFragments: 0,
+    respec: false,
     meaver: {
       mechanics: {
         allowNC: {
           value: false,
           valueToModify: false
-        }
+        },
+        noNumberle: {
+          value: false,
+          valueToModify: false
+        },
+        startingExtra: {
+          value: false,
+          valueToModify: false
+        },
+        keepExtra: {
+          value: 0,
+          valueToModify: 0
+        },
       }
     }
   },
@@ -403,7 +417,7 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: 0,
-  version: 32,
+  version: 33,
   infinityPower: DC.D1,
   postC4Tier: 0,
   extraBonusTimeLeft: 0,
@@ -996,7 +1010,7 @@ export const Player = {
   },
 
   get canEternity() {
-    return player.records.thisEternity.maxIP.gte(Player.eternityGoal);
+    return player.records.thisEternity.maxIP.gte(Player.eternityGoal) && LogicFragment.totalLF < 10;
   },
 
   get bestRunIPPM() {

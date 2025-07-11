@@ -104,6 +104,10 @@ export default {
     },
     toggleDLC() {
       if (!player.hasFakeDLC) {
+        if (MechanicMeaver.mechanics.noNumberle.value) {
+          player.hasFakeDLC = true;
+          return;
+        }
         Puzzles.numberle.reset();
         Modal.numberle.show();
         return;

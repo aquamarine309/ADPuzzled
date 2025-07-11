@@ -9,11 +9,12 @@ function giveEternityRewards(auto) {
   const newEternities = gainedEternities();
 
   if (Currency.eternities.eq(0) && newEternities.lte(10)) {
-    Tab.dimensions.time.show();
+    Tab.dimensions.time.show(true);
   }
 
   Currency.eternities.add(newEternities);
   player.bigEternities++;
+  LogicFragment.handleEternity(auto);
 
   if (EternityChallenge.isRunning) {
     const challenge = EternityChallenge.current;
@@ -121,6 +122,11 @@ export function eternity(force, auto, specialConditions = {}) {
     }
     respecTimeStudies(auto);
     player.respec = false;
+  }
+
+  if (player.logic.respec) {
+    MechanicMeaver.reset();
+    player.logic.respec = false;
   }
 
   Currency.infinityPoints.reset();

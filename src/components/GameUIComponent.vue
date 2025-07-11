@@ -41,6 +41,10 @@ export default {
     },
     themeCss() {
       return `stylesheets/theme-${this.view.theme}.css`;
+    },
+    prismCss() {
+      const name = Themes.find(this.view.theme).isDark() ? "prism-tomorrow" : "prism";
+      return `stylesheets/prismjs/${name}.min.css`;
     }
   }
 };
@@ -69,6 +73,11 @@ export default {
         type="text/css"
         rel="stylesheet"
         :href="themeCss"
+      >
+      <link
+        type="text/css"
+        rel="stylesheet"
+        :href="prismCss"
       >
     </div>
     <GameUiComponentFixed v-if="!isThemeS12" />
