@@ -140,7 +140,7 @@ export default {
   background: var(--color-meaver-background);
   text-align: left;
   border-bottom-left-radius: var(--var-border-radius, 0.5rem);
-  border-bottom-left-radius: var(--var-border-radius, 0.5rem);
+  border-bottom-right-radius: var(--var-border-radius, 0.5rem);
   color: var(--color-code-text);
   display: flex;
   flex-direction: row;

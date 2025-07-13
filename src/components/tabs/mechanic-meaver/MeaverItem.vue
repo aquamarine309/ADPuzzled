@@ -71,6 +71,7 @@ export default {
   padding: 0 3rem;
   margin: 4.2rem 1rem;
   border-radius: var(--var-border-radius, 0.5rem);
+  cursor: pointer;
 }
 
 .c-meaver-item-file {

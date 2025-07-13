@@ -191,6 +191,7 @@ export function initializeChallengeCompletions(isReality) {
   if (Achievement(133).isUnlocked && !Pelle.isDoomed) InfinityChallenges.completeAll();
   player.challenge.normal.current = 0;
   player.challenge.infinity.current = 0;
+  player.challenge.logic.current = 0;
 }
 
 export function initializeResourcesAfterEternity() {
