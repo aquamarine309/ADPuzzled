@@ -11,5 +11,14 @@ module.exports = {
   outputDir: STEAM ? "../AppFiles" : "dist",
   configureWebpack: {
     devtool: DEV ? "eval-source-map" : "source-map",
+    devServer: {
+      hot: true,
+      liveReload: false,
+    },
+    plugins: [
+      new VueLoaderPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NamedModulesPlugin()
+    ]
   }
 };

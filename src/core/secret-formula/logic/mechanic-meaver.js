@@ -91,6 +91,25 @@ Object.defineProperty(ExtraBonus, "isUnlocked", {
             player.extraBonusTimeLeft = value;
         }
       }
+    },
+    startingDim: {
+      id: "startingDim",
+      cost: [0, 1, 3, 6],
+      effectFn: index => index + 1,
+      labels: ["1st Dim", "2nd Dim", "3rd Dim", "4th Dim"],
+      code: value => `
+get maxTier() {
+  return ${value};
+}`,
+      type: MEAVER_TYPE.ENUM,
+      default: 0,
+      name: "Starting With Dimensions",
+      description: "Starting with some available Dimensions can avoid many unnecessary troubles. (Note: Some Logic Upgrades will not work)",
+      file: "antimatter-dimensions.js",
+      formatEffect: value => `Starting with ${AntimatterDimension(value).shortDisplayName} Dimension`,
+      onSaving() {
+        GameCache.maxTier.invalidate();
+      }
     }
   }
 };

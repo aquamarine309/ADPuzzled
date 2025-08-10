@@ -71,6 +71,10 @@ window.player = {
           value: 0,
           valueToModify: 0
         },
+        startingDim: {
+          value: 0,
+          valueToModify: 0
+        }
       }
     }
   },

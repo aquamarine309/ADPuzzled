@@ -7,3 +7,6 @@ import { watchLatestCommit } from "./commit-watcher";
 
 if (browserCheck()) init();
 if (DEV) watchLatestCommit();
+if (module.hot) {
+  module.hot.accept();
+}
