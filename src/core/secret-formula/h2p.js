@@ -551,14 +551,16 @@ toggle the associated autobuyer.
     }, {
       name: "Logic",
       info: () => `
-You have now completed your first Big Crunch. After that, you unlock the Logic Tab and Resource Exchange, a major feature in this mod. However, all Antimatter Dimensions except the 1st Antimatter Dimension are locked.
-
-You start with 1 Logic Point. To increase Logic Points, you may exchange up to ${formatInt(6)} types of resources (${makeEnumeration(ResourceExchange.all.map(r => (r.isUnlocked ? r.name : "???")))}) for different multipliers to your total Logic Points. You can level up Exchange to unlock a new exchangeable resource. As long as you have enough Logic Points, level up Exchange immediately as it provides a significant boost.
-
-The Logic Upgrades below, similar to Reality Upgrades, require you to meet certain conditions to unlock them. In addition, once unlocked, they will remain permanently unlocked (unless you reset the game). You can then use Logic Points to purchase unlocked upgrades. All 10 Logic Upgrades are shown immediately after your first Big Crunch. The final Logic Upgrade unlocks Logic Challenges.
+Now you have done your first Big Crunch. After that, you unlock the Logic Tab and Resource Exchange, a major feature in this mod. However, all Antimatter Dimensions except the 1st Antimatter Dimension are locked.
+<br>
+<br>
+You start with 1 Logic Point. To increase Logic Points, you may exchange at most ${formatInt(6)} types of resources (${makeEnumeration(ResourceExchange.all.map(r => (r.isUnlocked ? r.name : "???")))}) for different multipliers to the total Logic Points. You can level up Exchange to unlock a new exchangeable resource. As long as you get enough Logic Points, just level up Exchange at once because it gives you a huge boost.
+<br>
+<br>
+The Logic Upgrades below, similar to the Reality Upgrades, requires you to reach certain condition to unlock. In addition, once unlocked, it will never be locked again (unless you reset the game). Then, you can use Logic Points to buy the unlocked upgrades. Currently, there are 10 Logic Upgrades, which are all shown as soon as you Big Crunch for the first time. The last Logic Upgrade unlocks Logic Challenges.
 `,
       isUnlocked: () => PlayerProgress.infinityUnlocked(),
-      tags: ["earlygame", "logic", "mod", "puzzle", "new", "ext", "extra", "exchange", "resource"],
+      tags: ["earlygame", "logic", "mod", "puzzle", "new", "ext", "extra"],
       tab: "logic/exchange"
     }, {
       name: "Break Infinity",
@@ -726,33 +728,6 @@ properly, as noted on the milestone page itself.
       isUnlocked: () => PlayerProgress.eternityUnlocked(),
       tags: ["eternities", "rewards", "automation", "midgame"],
       tab: "eternity/milestones"
-    }, {
-      name: "Mechanic Meaver",
-      info: () => `
-<p>Reaching Eternity restores 8 dimensions as your new baseline. Complete achievement-gated Infinity cycles to permanently unlock the <b>Mechanic Meaver</b> subtab.</p>
-
-<h3>Logic Fragments (LF) System</h3>
-<p>Spend LF to directly modify:</p>
-<ul>
-<li><b>Mechanics</b> (game rules)</li>
-<li><b>Formulas</b> (calculation systems)</li>
-</ul>
-<p>Modification costs scale dynamically. Weakening mechanics returns partial LF.</p>
-
-<h3>Progression & Reset</h3>
-<ul>
-<li>Earn LF through Eternity resets</li>
-<li>Accumulated LF unlocks new stage</li>
-<li>Optional full reset before Eternity:
-  <ul>
-  <li>Reverts all modifications</li>
-  <li>Refunds 100% LF</li>
-  </ul>
-</li>
-</ul>
-`,
-      isUnlocked: () => PlayerProgress.eternityUnlocked(),
-      tags: ["eternity", "dlc", "mechanic", "meaver", "midgame", "new", "extra", "logic", "formula", "code", "console"]
     }, {
       name: "Time Dimensions",
       info: () => `

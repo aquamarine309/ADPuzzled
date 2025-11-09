@@ -430,24 +430,6 @@ export const migrations = {
       while (times.length < 11) {
         times.push(Number.MAX_VALUE);
       }
-    },
-    32: player => {
-      if (player.eternities.lte(0)) return;
-      player.infinities = new Decimal(0);
-      player.infinityPoints = new Decimal(0);
-      player.infinityUpgrades = new Set();
-      const exchange = player.logic.resourceExchange;
-      for (let i = 0; i < exchange.all.length; i++) {
-        exchange.all[i].value = new Decimal(0);
-      }
-      exchange.level = 0;
-      player.logic.spentPoints = new Decimal(0);
-      player.upgradeBits = 0;
-      player.upgReqs = 0;
-    },
-    33: player => {
-      if (player.eternities.lte(0)) return;
-      player.logic.logicFragments = 1;
     }
   },
 

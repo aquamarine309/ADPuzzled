@@ -519,17 +519,3 @@ window.SPEEDRUN_SEED_STATE = {
   RANDOM: 2,
   PLAYER: 3,
 };
-
-window.GAME_STAGES = {
-  NOT_STARTED: 0,
-  IN_PROGRESS: 1,
-  COMPLETED: 2,
-  FAILED: 3
-};
-
-window.MEAVER_TYPE = {
-  BOOLEAN: 0,
-  NUMBER: 1,
-  DECIMAL: 2,
-  ENUM: 3
-}

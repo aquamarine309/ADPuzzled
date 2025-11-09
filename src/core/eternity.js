@@ -9,12 +9,11 @@ function giveEternityRewards(auto) {
   const newEternities = gainedEternities();
 
   if (Currency.eternities.eq(0) && newEternities.lte(10)) {
-    Tab.dimensions.time.show(true);
+    Tab.dimensions.time.show();
   }
 
   Currency.eternities.add(newEternities);
   player.bigEternities++;
-  LogicFragment.handleEternity(auto);
 
   if (EternityChallenge.isRunning) {
     const challenge = EternityChallenge.current;
@@ -124,11 +123,6 @@ export function eternity(force, auto, specialConditions = {}) {
     player.respec = false;
   }
 
-  if (player.logic.respec) {
-    MechanicMeaver.reset();
-    player.logic.respec = false;
-  }
-
   Currency.infinityPoints.reset();
   InfinityDimensions.resetAmount();
   player.records.thisInfinity.bestIPmin = DC.D0;
@@ -191,7 +185,6 @@ export function initializeChallengeCompletions(isReality) {
   if (Achievement(133).isUnlocked && !Pelle.isDoomed) InfinityChallenges.completeAll();
   player.challenge.normal.current = 0;
   player.challenge.infinity.current = 0;
-  player.challenge.logic.current = 0;
 }
 
 export function initializeResourcesAfterEternity() {

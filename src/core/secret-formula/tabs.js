@@ -521,15 +521,6 @@ export const tabs = [
         component: "ResourceExchangeTab",
         id: 0,
         hidable: true
-      },
-      {
-        key: "mechanic-meaver",
-        name: "Mechanic Meaver",
-        symbol: "<i class='fas fa-cog'></i>",
-        component: "MevhanicMeaverTab",
-        id: 1,
-        hidable: true,
-        condition: () => PlayerProgress.eternityUnlocked(),
       }
     ]
   }

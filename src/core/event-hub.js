@@ -106,7 +106,6 @@ window.GAME_EVENT = {
   PELLE_STRIKE_UNLOCKED: "PELLE_STRIKE_UNLOCKED",
   EXCHANGE_LEVEL_UP: "EXCHANGE_LEVEL_UP",
   LOGIC_CHALLENGE_COMPLETED: "LOGIC_CHALLENGE_COMPLETED",
-  DEBUG_CONSOLE_UPDATE: "DEBUG_CONSOLE_UPDATE",
 
   // Used by events to signify that they are triggered by a particular
   // event, not handled by the event hub

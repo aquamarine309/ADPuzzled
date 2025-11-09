@@ -23,8 +23,7 @@ export default {
       infinityUnlocked: false,
       automatorUnlocked: false,
       automatorLogSize: 0,
-      showDLCbutton: false,
-      hasFakeDLC: false
+      showDLCbutton: false
     };
   },
   computed: {
@@ -85,8 +84,7 @@ export default {
       this.infinityUnlocked = PlayerProgress.current.isInfinityUnlocked;
       this.automatorUnlocked = Player.automatorUnlocked;
       this.automatorLogSize = options.automatorEvents.maxEntries;
-      this.showDLCbutton = PlayerProgress.fakeReset() && !player.hasFakeDLC || PlayerProgress.eternityUnlocked() && PlayerProgress.infinityUnlocked();
-      this.hasFakeDLC = player.hasFakeDLC;
+      this.showDLCbutton = PlayerProgress.fakeReset() && !player.hasFakeDLC;
     },
     // Given the endpoints of 22-54, this produces 500, 600, ... , 900, 1000, 2000, ... , 1e6 ticks
     // It's essentially 10^(x/10) but with the mantissa spaced linearly instead of logarithmically
@@ -102,18 +100,9 @@ export default {
       this.automatorLogSize = value;
       player.options.automatorEvents.maxEntries = this.automatorLogSize;
     },
-    toggleDLC() {
-      if (!player.hasFakeDLC) {
-        if (MechanicMeaver.mechanics.noNumberle.value) {
-          player.hasFakeDLC = true;
-          return;
-        }
-        Puzzles.numberle.reset();
-        Modal.numberle.show();
-        return;
-      }
-      player.hasFakeDLC = false;
-      eternity(true, false);
+    getDLC() {
+      player.hasFakeDLC = true;
+      this.showDLCbutton = false;
     }
   }
 };
@@ -179,9 +168,9 @@ export default {
         <OptionsButton
           v-if="showDLCbutton"
           class="o-primary-btn--option"
-          @click="toggleDLC"
+          @click="getDLC"
         >
-          {{ hasFakeDLC ? "Disable" : "Enable" }} DLC
+          Enable DLC
         </OptionsButton>
       </div>
       <OpenModalHotkeysButton />

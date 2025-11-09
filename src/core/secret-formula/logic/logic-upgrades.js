@@ -84,7 +84,7 @@ export const logicUpgrades = [
     id: 8,
     description: "You can buy five times as many Dimension Boosts at once.",
     requirement: () => `Infinity with less than ${formatInt(18)} Dimension Boosts with 2+ Dimensions unlocked.`,
-    checkRequirement: () => DimBoost.purchasedBoosts < 18 && Puzzles.maxTier >= 2 && !Player.canCrunch,
+    checkRequirement: () => DimBoost.purchasedBoosts < 18 && Puzzles.maxTier >= 2,
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     hasFailed: () => DimBoost.purchasedBoosts >= 18 || Puzzles.maxTier < 2,
     cost: 1e21,

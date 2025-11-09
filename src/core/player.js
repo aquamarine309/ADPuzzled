@@ -49,47 +49,7 @@ window.player = {
     },
     spentPoints: DC.D0,
     upgradeBits: 0,
-    upgReqs: 0,
-    logicFragments: 0,
-    spentFragments: 0,
-    respec: false,
-    meaver: {
-      mechanics: {
-        allowNC: {
-          value: false,
-          valueToModify: false
-        },
-        noNumberle: {
-          value: false,
-          valueToModify: false
-        },
-        startingExtra: {
-          value: false,
-          valueToModify: false
-        },
-        keepExtra: {
-          value: 0,
-          valueToModify: 0
-        },
-        startingDim: {
-          value: 0,
-          valueToModify: 0
-        }
-      }
-    }
-  },
-  numberle: {
-    stage: GAME_STAGES.NOT_STARTED,
-    rows: null,
-    question: "",
-    currentRow: 0,
-    options: {
-      maxResult: 9,
-      minResult: 1,
-      maxLength: 10,
-      minLength: 6,
-      row: 6
-    }
+    upgReqs: 0
   },
   challenge: {
     normal: {
@@ -421,7 +381,7 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: 0,
-  version: 33,
+  version: 31,
   infinityPower: DC.D1,
   postC4Tier: 0,
   extraBonusTimeLeft: 0,
@@ -1014,7 +974,7 @@ export const Player = {
   },
 
   get canEternity() {
-    return player.records.thisEternity.maxIP.gte(Player.eternityGoal) && LogicFragment.totalLF < 10;
+    return player.records.thisEternity.maxIP.gte(Player.eternityGoal);
   },
 
   get bestRunIPPM() {

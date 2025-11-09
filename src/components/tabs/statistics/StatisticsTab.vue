@@ -37,7 +37,6 @@ export default {
         this: TimeSpan.zero,
         thisReal: TimeSpan.zero,
         bestRate: new Decimal(0),
-        fake: false
       },
       reality: {
         isUnlocked: false,
@@ -121,7 +120,6 @@ export default {
         eternity.best.setFrom(bestEternity.time);
         eternity.this.setFrom(records.thisEternity.time);
         eternity.bestRate.copyFrom(bestEternity.bestEPminReality);
-        eternity.fake = PlayerProgress.fakeReset();
       }
 
       const isRealityUnlocked = progress.isRealityUnlocked;
@@ -263,7 +261,7 @@ export default {
       class="c-stats-tab-subheader c-stats-tab-general"
     >
       <div class="c-stats-tab-title c-stats-tab-eternity">
-        {{ eternity.fake ? "Eternity of The Loop" : "Eternity" }}
+        Eternity
       </div>
       <div>
         You have {{ eternityCountString }}<span v-if="reality.isUnlocked"> this Reality</span>.
@@ -292,9 +290,6 @@ export default {
         Your best Eternity Points per minute
         <span v-if="reality.isUnlocked">this Reality </span>
         is {{ format(eternity.bestRate, 2, 2) }}.
-      </div>
-      <div v-if="eternity.fake">
-        <b>Try to complete some achievements to escape from the loop!</b>
       </div>
       <br>
     </div>

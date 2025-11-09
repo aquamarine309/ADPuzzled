@@ -15,8 +15,7 @@ export default {
       hasDLC: false,
       gotSTD: false,
       extraBonusUnlocked: false,
-      extraBonusTimeLeft: 0,
-      isPermanent: false
+      extraBonusTimeLeft: 0
     };
   },
   computed: {
@@ -40,13 +39,12 @@ export default {
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.hasDLC = player.hasDLC;
       this.gotSTD = player.gotSTD;
-      this.extraBonusUnlocked = ExtraBonus.isUnlocked;
+      this.extraBonusUnlocked = LogicChallenge(5).isCompleted;
       if (this.extraBonusUnlocked) {
         if (this.isDoomed) {
           this.description = wordShift.wordCycle(["Destroyed", "Annihilated", "Nullified"]);
           return;
         }
-        this.isPermanent = ExtraBonus.isPermanent;
         this.extraBonusTimeLeft = player.extraBonusTimeLeft;
         if (!this.hasBonus) {
           this.description = "Click here to receive free bonus!";
@@ -75,7 +73,8 @@ export default {
     },
     getBonus() {
       if (this.hasBonus || this.isDoomed) return false;
-      player.extraBonusTimeLeft += 3.6e6 * (5 + MechanicMeaver.mechanics.keepExtra.effectValue);
+      // 5 hours
+      player.extraBonusTimeLeft += 1.8e7;
       GameUI.update();
     }
   },
@@ -85,7 +84,7 @@ export default {
 <template>
   <div class="tab shop">
     <div class="c-shop-disclaimer">
-      Not a Disclaimer: These are required to progress in the game, they are not for supporting the developer.
+      Not a Disclaimer: These are required to progress in the game, they are not just for supporting the developer.
       The game is balanced with the use of some microtransactions.
     </div>
     <div class="c-subtab-option-container">
@@ -119,8 +118,7 @@ export default {
         {{ description }}
       </div>
       <div v-if="hasBonus">
-        <span v-if="isPermanent">Permanent</span>
-        <span v-else>{{ leftTime }} left</span>
+        {{ leftTime }} left
       </div>
     </button>
     <div class="c-shop-header">

@@ -7,7 +7,7 @@ import { ElectronRuntime, SteamRuntime } from "@/steam";
 import { DC } from "./core/constants";
 import { deepmergeAll } from "@/utility/deepmerge";
 import { DEV } from "@/env";
-import { isLocalEnvironment } from "./core/devtools";
+import { isDevEnvironment } from "./core/devtools";
 import { SpeedrunMilestones } from "./core/speedrun";
 import { Cloud } from "./core/storage";
 import { supportedBrowsers } from "./supported-browsers";
@@ -90,7 +90,7 @@ export function breakInfinity() {
 }
 
 export function gainedInfinityPoints() {
-  if (LogicChallenge.isRunning || PlayerProgress.fakeReset()) return DC.D0;
+  if (LogicChallenge.isRunning) return DC.D0;
   const div = Effects.min(
     308,
     Achievement(103),
@@ -189,7 +189,6 @@ export function ratePerMinute(amount, time) {
 
 // eslint-disable-next-line max-params
 export function addInfinityTime(time, realTime, ip, infinities) {
-  if (PlayerProgress.fakeReset()) return;
   const challenges = [];
   if (player.challenge.normal.current) challenges.push(`Normal Challenge ${player.challenge.normal.current}`);
   if (player.challenge.infinity.current) challenges.push(`Infinity Challenge ${player.challenge.infinity.current}`);
@@ -273,7 +272,6 @@ export function addRealityTime(time, realTime, rm, level, realities, ampFactor, 
 }
 
 export function gainedInfinities() {
-  if (PlayerProgress.fakeReset()) return DC.D0;
   if (EternityChallenge(4).isRunning || Pelle.isDisabled("InfinitiedMults")) {
     return DC.D1;
   }
@@ -1111,7 +1109,7 @@ export function init() {
     // eslint-disable-next-line no-console
     console.log("👨‍💻 Development Mode 👩‍💻");
   }
-  if (isLocalEnvironment()) {
+  if (isDevEnvironment()) {
     eruda.init();
   }
   ElectronRuntime.initialize();

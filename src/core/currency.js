@@ -490,13 +490,3 @@ Currency.logicPoints = new class extends DecimalCurrency {
     player.logic.spentPoints = player.logic.spentPoints.add(spent);
   }
 }();
-
-Currency.logicFragments = new class extends NumberCurrency {
-  get value() {
-    return player.logic.logicFragments;
-  }
-  
-  set value(value) {
-    player.logic.logicFragments = value;
-  }
-}

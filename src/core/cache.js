@@ -117,10 +117,7 @@ export const GameCache = {
 
   logicPoints: new Lazy(() => getLogicPoints()),
 
-  maxTier: new Lazy(() => {
-    const startingDim = MechanicMeaver.mechanics.startingDim.effectValue;
-    return startingDim + Effects.sum(...Array.range(startingDim, 7).map(id => LogicUpgrade(id)))
-   }),
+  maxTier: new Lazy(() => 1 + Effects.sum(...Array.range(1, 7).map(id => LogicUpgrade(id)))),
 
   currentBonus: new Lazy(() => {
     for (let i = ExtraBonus.all.length - 1; i >= 0; i--) {
@@ -132,7 +129,7 @@ export const GameCache = {
   
   fakeReset: new Lazy(() => {
     return PlayerProgress.current.isEternityUnlocked &&
-      (player.bigCrunches < 1 ||
+      (Currency.infinities.lt(1) ||
       Puzzles.fakeAchievements.some(id => !Achievement(id).isUnlocked))
   })
 };

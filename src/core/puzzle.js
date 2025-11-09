@@ -5,21 +5,5 @@ export const Puzzles = {
     return GameCache.maxTier.value;
   },
   
-  fakeAchievements: [23, 43],
-  
-  numberle: {
-    get stage() {
-      return player.numberle.stage;
-    },
-
-    get isCompleted() {
-      return this.stage === GAME_STAGES.COMPLETED;
-    },
-
-    reset() {
-      player.numberle.stage = GAME_STAGES.IN_PROGRESS;
-      player.numberle.rows = null;
-      player.numberle.currentRow = 0;
-    }
-  }
+  fakeAchievements: [23, 43]
 };
