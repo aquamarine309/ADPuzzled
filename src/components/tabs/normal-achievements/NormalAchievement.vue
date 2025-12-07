@@ -31,8 +31,7 @@ export default {
       garbleTimer: 0,
       garbleKey: 0,
       achievementTime: 0,
-      hintActive: false,
-      fakeHint: false
+      hintActive: false
     };
   },
   computed: {
@@ -65,7 +64,6 @@ export default {
     },
     indicatorIconClass() {
       if (this.isUnlocked) return "fas fa-check";
-      if (this.fakeHint) return "fas fa-exclamation-triangle";
       if (this.isPreRealityAchievement && !this.isDisabled) return "far fa-clock";
       return "fas fa-times";
     },
@@ -123,7 +121,6 @@ export default {
       this.showUnlockState = player.options.showHintText.achievementUnlockStates;
       this.realityUnlocked = PlayerProgress.realityUnlocked();
       this.hintActive = this.config.hint !== undefined && this.config.hintCondition();
-      this.fakeHint = PlayerProgress.fakeReset() && Puzzles.fakeAchievements.includes(this.id);
 
       this.processedName = this.processText(this.config.name, this.garbledNameTemplate);
       this.processedId = this.processText(this.displayId, this.garbledIDTemplate);

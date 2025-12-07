@@ -36,7 +36,6 @@ window.player = {
   infinityUpgrades: new Set(),
   infinityRebuyables: [0, 0, 0],
   hasDLC: false,
-  hasFakeDLC: false,
   gotSTD: false,
   logic: {
     resourceExchange: {
@@ -381,7 +380,7 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: 0,
-  version: 31,
+  version: 35,
   infinityPower: DC.D1,
   postC4Tier: 0,
   extraBonusTimeLeft: 0,

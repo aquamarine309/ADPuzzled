@@ -125,12 +125,6 @@ export const GameCache = {
         return ExtraBonus.all[i];
       }
     }
-  }),
-  
-  fakeReset: new Lazy(() => {
-    return PlayerProgress.current.isEternityUnlocked &&
-      (Currency.infinities.lt(1) ||
-      Puzzles.fakeAchievements.some(id => !Achievement(id).isUnlocked))
   })
 };
 

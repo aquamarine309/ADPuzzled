@@ -430,6 +430,15 @@ export const migrations = {
       while (times.length < 11) {
         times.push(Number.MAX_VALUE);
       }
+    },
+    35: player => {
+      if (player.eternities.gt(0)) {
+        player.eternities = new Decimal(0);
+        Modal.message.show("Sorry. The game after Eternity is removed. So your save is backed to Infinity.");
+        player.logic.upgReqs = 0;
+        player.logic.upgradeBits = 0;
+        player.logic.spentPoints = new Decimal(0);
+      }
     }
   },
 

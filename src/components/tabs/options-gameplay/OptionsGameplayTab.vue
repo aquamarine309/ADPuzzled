@@ -22,8 +22,7 @@ export default {
       automaticTabSwitching: false,
       infinityUnlocked: false,
       automatorUnlocked: false,
-      automatorLogSize: 0,
-      showDLCbutton: false
+      automatorLogSize: 0
     };
   },
   computed: {
@@ -84,7 +83,6 @@ export default {
       this.infinityUnlocked = PlayerProgress.current.isInfinityUnlocked;
       this.automatorUnlocked = Player.automatorUnlocked;
       this.automatorLogSize = options.automatorEvents.maxEntries;
-      this.showDLCbutton = PlayerProgress.fakeReset() && !player.hasFakeDLC;
     },
     // Given the endpoints of 22-54, this produces 500, 600, ... , 900, 1000, 2000, ... , 1e6 ticks
     // It's essentially 10^(x/10) but with the mantissa spaced linearly instead of logarithmically
@@ -99,10 +97,6 @@ export default {
     adjustSliderValueAutomatorLogSize(value) {
       this.automatorLogSize = value;
       player.options.automatorEvents.maxEntries = this.automatorLogSize;
-    },
-    getDLC() {
-      player.hasFakeDLC = true;
-      this.showDLCbutton = false;
     }
   }
 };
@@ -165,13 +159,6 @@ export default {
             @input="adjustSliderValueAutomatorLogSize($event)"
           />
         </div>
-        <OptionsButton
-          v-if="showDLCbutton"
-          class="o-primary-btn--option"
-          @click="getDLC"
-        >
-          Enable DLC
-        </OptionsButton>
       </div>
       <OpenModalHotkeysButton />
     </div>
