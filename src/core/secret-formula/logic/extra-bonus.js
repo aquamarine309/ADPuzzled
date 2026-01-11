@@ -1,4 +1,4 @@
-// Copy from Android version (AD bonus)
+// Copied from Android version (AD bonus)
 export const extraBonus = {
   extraBonusToAD: {
     id: "extraBonusToAD",

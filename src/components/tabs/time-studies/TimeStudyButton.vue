@@ -21,6 +21,11 @@ export default {
       required: false,
       default: false
     },
+    showLpCost: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     specialClick: {
       type: Function,
       required: false,
@@ -35,6 +40,7 @@ export default {
       STCost: 0,
       eternityChallengeRunning: false,
       isCompleteEC: false,
+      LPCost: new Decimal(0)
     };
   },
   computed: {
@@ -64,6 +70,7 @@ export default {
     pathClass() {
       switch (this.study.type) {
         case TIME_STUDY_TYPE.NORMAL:
+          if (this.study.isLogic) return "o-time-study-logic";
           switch (this.setup.path) {
             case TIME_STUDY_PATH.ANTIMATTER_DIM: return "o-time-study-antimatter-dim";
             case TIME_STUDY_PATH.INFINITY_DIM: return "o-time-study-infinity-dim";
@@ -110,7 +117,7 @@ export default {
     },
     showDefaultCostDisplay() {
       const costCond = (this.showCost && !this.showStCost) || this.STCost === 0;
-      return !this.setup.isSmall && !this.doomedRealityStudy && costCond;
+      return !this.showLpCost && !this.setup.isSmall && !this.doomedRealityStudy && costCond;
     },
     isDisabledByEnslaved() {
       return this.study.id === 192 && Enslaved.isRunning;
@@ -119,13 +126,20 @@ export default {
       const ttStr = this.setup.isSmall
         ? `${formatInt(this.config.cost)} TT`
         : quantifyInt("Time Theorem", this.config.cost);
-      const stStr = this.setup.isSmall
-        ? `${formatInt(this.STCost)} ST`
-        : quantifyInt("Space Theorem", this.STCost);
-
       const costs = [];
       if (this.config.cost) costs.push(ttStr);
-      if (this.STCost && this.showStCost) costs.push(stStr);
+      if (this.STCost && this.showStCost) {
+        const stStr = this.setup.isSmall
+        ? `${formatInt(this.STCost)} ST`
+        : quantifyInt("Space Theorem", this.STCost);
+        costs.push(stStr);
+      }
+      if (this.LPCost && this.showLpCost) {
+        const lpStr = this.setup.isSmall
+        ? `${format(this.LPCost, 2)} LP`
+        : quantify("Logic Point", this.LPCost, 2);
+        costs.push(lpStr);
+      }
       return costs.join(" + ");
     },
     doomedRealityStudy() {
@@ -143,6 +157,9 @@ export default {
         this.isAvailableForPurchase = study.canBeBought && study.isAffordable;
       }
       this.STCost = this.study.STCost;
+      if (this.showLpCost) {
+        this.LPCost = this.study.config.LPCost ?? 0;
+      }
       this.isCompleteEC = this.study.type === TIME_STUDY_TYPE.ETERNITY_CHALLENGE &&
         EternityChallenge(this.study.id).remainingCompletions === 0;
     },

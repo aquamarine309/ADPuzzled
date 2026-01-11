@@ -50,6 +50,9 @@ export default {
     pathClass() {
       switch (this.study.type) {
         case TIME_STUDY_TYPE.NORMAL:
+          if (this.study.isLogic) {
+            return "o-time-study-logic";
+          }
           switch (this.setup.path) {
             case TIME_STUDY_PATH.ANTIMATTER_DIM: return "o-time-study-antimatter-dim";
             case TIME_STUDY_PATH.INFINITY_DIM: return "o-time-study-infinity-dim";

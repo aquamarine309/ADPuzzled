@@ -219,6 +219,7 @@ window.player = {
     singularity: { isActive: false },
     ipMultBuyer: { isActive: false, },
     epMultBuyer: { isActive: false, },
+    levelUp: { isActive: false }
   },
   infinityPoints: DC.D0,
   infinities: DC.D0,
@@ -973,7 +974,8 @@ export const Player = {
   },
 
   get canEternity() {
-    return player.records.thisEternity.maxIP.gte(Player.eternityGoal);
+    return false;
+    //player.records.thisEternity.maxIP.gte(Player.eternityGoal);
   },
 
   get bestRunIPPM() {

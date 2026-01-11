@@ -4,25 +4,25 @@ export const logicChallenges = [
   {
     id: 1,
     description: () => `All Antimatter Dimensions produce less (${formatPow(0.4, 1, 1)}).
-      Dimension multiplier will effective dimension amount instead of dimension production, except for the highest dimension.
+      Dimension multiplier will affect dimension amount instead of dimension production, except for the highest dimension.
       Buy ten multiplier is reduced to ${formatX(0.2, 0, 1)}.`,
     goal: Decimal.NUMBER_MAX_VALUE,
     effect: 0.4,
     reward: {
-      description: `Galaxies can automatically adjust the required dimensions`
+      description: `Galaxy requirement can be automatically adjusted to the highest unlocked dimensions`
     },
   },
   {
     id: 2,
-    description: () => `Normal Challenges are broken. Dimension Boost multiplier is reduced to ${formatX(1)} and Galaxies are disabled.`,
+    description: () => `Normal Challenges are broken (like cel3). Dimension Boost multiplier is reduced to ${formatX(1)} and Galaxies are disabled.`,
     goal: DC.E1650,
     reward: {
-      description: "Decrease the requirement of Galaxies, and unlock exchange rate"
+      description: "Galaxy requirement is decreased. Unlock exchange rate"
     },
   },
   {
     id: 3,
-    description: () => `The multiplier from Logic Points is reduced or raised based on the difference between Dimension Boosts and Galaxies.`,
+    description: () => `The multiplier from Logic Points is affected based on the difference between Dimension Boosts and Galaxies.`,
     effect: () => Math.pow(Math.abs(player.galaxies - DimBoost.totalBoosts) + 1, -0.2) * 1.2,
     formatEffect: value => formatPow(value, 3, 3),
     goal: DC.E4000,
@@ -33,7 +33,7 @@ export const logicChallenges = [
   },
   {
     id: 4,
-    description: "Infinity Power provide a multiplier to game speed instead of Antimatter Dimensions.",
+    description: "Infinity Power provides a multiplier to game speed instead of Antimatter Dimensions.",
     goal: DC.E10000,
     effect: () => Math.clamp(Math.pow(Currency.infinityPower.value.plus(1).log10(), InfinityDimensions.powerConversionRate), 1, 1e30),
     formatEffect: value => format(value, 3, 3),
@@ -45,8 +45,8 @@ export const logicChallenges = [
   },
   {
     id: 5,
-    description: `Infinity Dimensions multiplier based on Galaxies.
-      Tickspeed cannot affect Antimatter Dimensions production.
+    description: `Infinity Dimension multiplier based on Galaxies.
+      Tickspeed cannot affect Antimatter Dimension production.
       Disable the multiplier from Logic Points and Exchange Level.
       Decrease conversion rate of Infinity Power.`,
     goal: DC.E5000,
@@ -62,7 +62,7 @@ export const logicChallenges = [
     goal: DC.E20000,
     effect: 0.3,
     reward: {
-      description: "Galaxies are stronger based on highest Antimatter Dimension",
+      description: "Galaxies are stronger based on the highest Antimatter Dimension",
       effect: () => Math.pow(2 - Puzzles.maxTier / 8, 0.25),
       formatEffect: value => `+${formatPercents(value - 1, 3, 3)}`
     }

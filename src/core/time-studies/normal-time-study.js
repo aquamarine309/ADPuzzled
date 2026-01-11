@@ -30,6 +30,10 @@ export class NormalTimeStudyState extends TimeStudyState {
   get isTriad() {
     return this.id > 300;
   }
+  
+  get isLogic() {
+    return this.config.logic ?? false;
+  }
 
   get isBought() {
     return GameCache.timeStudies.value[this.id];
@@ -68,7 +72,11 @@ export class NormalTimeStudyState extends TimeStudyState {
   }
 
   get canBeBought() {
-    return this.checkRequirement() && this.checkSetRequirement();
+    return this.checkRequirement() && this.checkSetRequirement() && this.checkLogic();
+  }
+  
+  checkLogic() {
+    return !this.isLogic || getLogicPoints() > this.config.LPCost;
   }
 
   get isEffectActive() {
@@ -83,6 +91,7 @@ export class NormalTimeStudyState extends TimeStudyState {
       return false;
     }
     if (this.costsST()) player.celestials.v.STSpent += this.STCost;
+    if (this.logic) player.logic.spentPoints = player.logic.spentPoints.add(this.config.LPCost);
     player.timestudy.studies.push(this.id);
     player.requirementChecks.reality.maxStudies = Math.clampMin(player.requirementChecks.reality.maxStudies,
       player.timestudy.studies.length);

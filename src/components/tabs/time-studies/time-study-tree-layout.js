@@ -57,7 +57,7 @@ export class TimeStudyTreeLayout {
     /* eslint-disable no-multi-spaces, space-in-parens, func-call-spacing */
     this.rows = [
       normalRow(                       null,   TS(11),   null                         ),
-      normalRow(                           TS(21), TS(22)                             ),
+      normalRow(                   null, TS(21), TS(22), TS(23)                        ),
       normalRow(                   null, TS(31), TS(32), TS(33)                       )
     ];
 

@@ -54,5 +54,18 @@
     document.getElementById("loading").style.display = "none";
     document.getElementById("browser-warning").style.display = "flex";
   }
+const originalAppendChild = Element.prototype.appendChild;
+Element.prototype.appendChild = function() {
+  const node = arguments[0];
+  
+  if (node.nodeName === 'SCRIPT' && node.src) {
+    if (node.src.includes('google') || node.src.includes('analytics.js')) {
+      console.log('Blocked GA script at append time');
+      return node;
+    }
+  }
+  
+  return originalAppendChild.apply(this, arguments);
+};
 </script>
 </html>

@@ -74,6 +74,15 @@ export const normalTimeStudies = [
     effect: 1
   },
   {
+    id: 23,
+    cost: 3,
+    LPCost: DC.E2000,
+    requirement: [22],
+    reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Unlock Infinity Challenge 12",
+    logic: true
+  },
+  {
     id: 31,
     cost: 3,
     requirement: [21],
