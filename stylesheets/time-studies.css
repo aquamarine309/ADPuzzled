@@ -152,6 +152,16 @@
   background-color: #c5adff;
 }
 
+.o-time-study-logic--available {
+  color: #1fad92;
+  border-color: #197880;
+}
+
+.o-time-study-logic--available:hover {
+  color: #eeeeee;
+  background-color: #1fad92;
+}
+
 .o-time-study-antimatter-dim--available {
   color: #22aa48;
   border-color: #198036;
@@ -377,6 +387,10 @@
   background-color: #c8c8c8;
 }
 
+.o-time-study-logic--unavailable {
+  background-color: #97ada7;
+}
+
 .o-time-study-antimatter-dim--unavailable {
   background-color: #94a89a;
 }
@@ -433,6 +447,12 @@
 
 .t-s13 .o-time-study-normal--bought {
   background-color: #c2adff;
+}
+
+.o-time-study-logic--bought {
+  color: black;
+  background-color: #1fad92;
+  border-color: black;
 }
 
 .o-time-study-antimatter-dim--bought {
