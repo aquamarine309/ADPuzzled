@@ -76,7 +76,7 @@ export class NormalTimeStudyState extends TimeStudyState {
   }
   
   checkLogic() {
-    return !this.isLogic || getLogicPoints() > this.config.LPCost;
+    return !this.isLogic || getLogicPoints().gte(this.config.LPCost);
   }
 
   get isEffectActive() {
