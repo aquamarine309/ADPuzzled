@@ -106,8 +106,8 @@ export default {
   },
   methods: {
     update() {
-      this.isVisible = Player.canEternity ||
-        EternityMilestone.autoUnlockID.isReached || InfinityDimension(8).isUnlocked;
+      this.isVisible = PlayerProgress.eternityUnlocked() && (Player.canEternity ||
+        EternityMilestone.autoUnlockID.isReached || InfinityDimension(8).isUnlocked);
       this.isDilation = player.dilation.active;
       if (!this.isVisible) return;
       this.canEternity = Player.canEternity;

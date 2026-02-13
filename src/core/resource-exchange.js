@@ -11,6 +11,7 @@ class ResourceExchangeState extends GameMechanicState {
   }
 
   get exchangeRate() {
+    if (!LogicChallenge(2).isCompleted) return 1;
     return this.data.rate;
   }
 
@@ -85,7 +86,6 @@ class ResourceExchangeState extends GameMechanicState {
 
   reset() {
     this.data.value = DC.D0;
-    this.exchangeRate = 1;
     player.logic.resourceExchange.lastSelected = 0;
   }
 }
@@ -102,7 +102,17 @@ Object.defineProperty(ResourceExchange, "selected", {
 });
 
 export function getLogicPoints() {
-  return ResourceExchange.all.map(r => r.value).reduce(Decimal.prodReducer);
+  return ResourceExchange.all.map(r => r.value).reduce(Decimal.prodReducer, DC.D1);
+}
+
+export function getSpentLogicPoints() {
+  const fromLU = LogicUpgrades.all.filter(x => x.isBought).map(x => x.cost).reduce(Decimal.sumReducer, DC.D0);
+  
+  const levelUpg = ResourceExchangeUpgrade;
+  const fromLevel = Array.range(0, levelUpg.boughtAmount)
+    .reduce((a, b) => a.add(levelUpg.costAfterCount(b)), DC.D0);
+  const fromTS = TimeStudy.boughtLogicTS().map(x => x.config.LPCost).reduce(Decimal.sumReducer, DC.D0);
+  return fromLU.add(fromTS).add(fromLevel);
 }
 
 class ResourceExchangeUpgradeState extends GameMechanicState {
@@ -146,8 +156,8 @@ class ResourceExchangeUpgradeState extends GameMechanicState {
 
   purchase() {
     if (!this.isAffordable) return;
-    this.currency.subtract(this.cost);
     ++this.boughtAmount;
+    GameCache.spentLogicPoints.invalidate();
     EventHub.dispatch(GAME_EVENT.EXCHANGE_LEVEL_UP);
   }
 
@@ -169,6 +179,8 @@ class ResourceExchangeUpgradeState extends GameMechanicState {
 
   reset() {
     this.boughtAmount = 0;
+    GameCache.spentLogicPoints.invalidate();
+    GameCache.logicPoints.invalidate();
   }
 }
 

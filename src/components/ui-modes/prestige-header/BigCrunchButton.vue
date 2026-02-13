@@ -19,7 +19,8 @@ export default {
       showIPRate: false,
       inLogicChallenge: false,
       lcGoal: new Decimal(),
-      canCompleteLC: false
+      canCompleteLC: false,
+      eternityBtn: false
     };
   },
   computed: {
@@ -79,6 +80,7 @@ export default {
       this.tesseractAffordable = Tesseracts.canBuyTesseract;
       if (!this.isVisible) return;
       this.canCrunch = Player.canCrunch;
+      this.eternityBtn = !PlayerProgress.eternityUnlocked() && Player.canEternity;
       this.infinityGoal.copyFrom(Player.infinityGoal);
       this.inAntimatterChallenge = Player.isInAntimatterChallenge;
       this.headerTextColored = player.options.headerTextColored;
@@ -103,6 +105,10 @@ export default {
     },
     crunch() {
       if (!Player.canCrunch) return;
+      if (this.eternityBtn) {
+        eternityResetRequest();
+        return;
+      }
       manualBigCrunchResetRequest();
     }
   },
@@ -144,7 +150,7 @@ export default {
     <template v-else>
       <div v-if="!showIPRate" />
       <b>
-        Big Crunch for
+        {{ eternityBtn ? "Eternity" : "Big Crunch" }} for
         <span :style="amountStyle">{{ format(gainedIP, 2) }}</span>
         <span v-if="showIPRate"> IP</span>
         <span v-else> Infinity {{ pluralize("Point", gainedIP) }}</span>

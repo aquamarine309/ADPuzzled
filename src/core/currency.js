@@ -275,6 +275,7 @@ Currency.infinityPoints = new class extends DecimalCurrency {
     player.infinityPoints = value;
     player.records.thisEternity.maxIP = player.records.thisEternity.maxIP.max(value);
     player.records.thisReality.maxIP = player.records.thisReality.maxIP.max(value);
+    
 
     if (Pelle.isDoomed) {
       player.celestials.pelle.records.totalInfinityPoints =
@@ -482,11 +483,10 @@ Currency.galaxyGeneratorGalaxies = new class extends NumberCurrency {
 
 Currency.logicPoints = new class extends DecimalCurrency {
   get value() {
-    return GameCache.logicPoints.value.minus(player.logic.spentPoints);
+    return GameCache.logicPoints.value.minus(    GameCache.spentLogicPoints.value);
   }
 
   set value(value) {
-    const spent = GameCache.logicPoints.value.minus(value);
-    player.logic.spentPoints = player.logic.spentPoints.add(spent);
+    throw new Error("Cannot set Logic Points which depend on calculating.");
   }
 }();

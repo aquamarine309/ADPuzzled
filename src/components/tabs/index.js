@@ -1,5 +1,6 @@
 // Temporarily aggregate tab components here until GameUI is migrated to SFC
 import AlchemyTab from "./alchemy/AlchemyTab";
+import AntiatomsTab from "./antiatoms/AntiatomsTab";
 import AntimatterDimensionsTab from "./antimatter-dimensions/AntimatterDimensionsTab";
 import AutobuyersTab from "./autobuyers/AutobuyersTab";
 import AutomatorTab from "./automator/AutomatorTab";
@@ -88,7 +89,8 @@ const TabComponents = {
   CelestialNavigationTab,
   ShopTab,
   MultiplierBreakdownTab,
-  ResourceExchangeTab
+  ResourceExchangeTab,
+  AntiatomsTab
 };
 
 export default TabComponents;

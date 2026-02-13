@@ -171,5 +171,13 @@ export const infinityChallenges = [
       effect: 0.1
     },
     unlockAM: DC.E50505
+  },
+  {
+    id: 12,
+    description: () => "Infinity with the increasing goal based on current IP. (this goal is also for Eternity before completing it)",
+    goal: () => DC.E60000.pow(Currency.infinityPoints.value.add(1).log10() / 125).times(DC.E25),
+    reward: {
+      description: "Unlock antiatoms"
+    }
   }
 ];

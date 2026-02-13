@@ -75,8 +75,8 @@ export const normalTimeStudies = [
   },
   {
     id: 23,
-    cost: 3,
-    LPCost: DC.E2000,
+    cost: 5,
+    LPCost: DC.E2187,
     requirement: [22],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Unlock Infinity Challenge 12",
@@ -84,7 +84,7 @@ export const normalTimeStudies = [
   },
   {
     id: 31,
-    cost: 3,
+    cost: 15,
     requirement: [21],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Powers up multipliers that are based on your Infinities (Bonuses${formatPow(4)})`,
@@ -92,7 +92,7 @@ export const normalTimeStudies = [
   },
   {
     id: 32,
-    cost: 2,
+    cost: 20,
     requirement: [22],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: `You gain more Infinities based on Dimension Boosts`,
@@ -102,7 +102,7 @@ export const normalTimeStudies = [
   {
     id: 33,
     cost: 2,
-    requirement: [22],
+    requirement: [23],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "You keep half of your Replicanti Galaxies on Infinity"
   },
@@ -118,7 +118,7 @@ export const normalTimeStudies = [
   {
     id: 42,
     cost: 6,
-    requirement: [32],
+    requirement: [32, 33],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Antimatter Galaxy requirement increases by ${formatInt(52)}
       8th Dimensions instead of ${formatInt(60)}`,

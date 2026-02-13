@@ -20,7 +20,8 @@ export default {
     return {
       isUnlocked: false,
       isRunning: false,
-      isCompleted: false
+      isCompleted: false,
+      goal: new Decimal()
     };
   },
   computed: {
@@ -37,6 +38,7 @@ export default {
       this.isUnlocked = challenge.isUnlocked;
       this.isRunning = challenge.isRunning;
       this.isCompleted = challenge.isCompleted;
+      this.goal = challenge.goal;
     }
   }
 };
@@ -60,7 +62,7 @@ export default {
     </template>
     <template #bottom>
       <div class="l-challenge-box__bottom--infinity">
-        <span>Goal: {{ format(config.goal) }} antimatter</span>
+        <span>Goal: {{ format(goal) }} antimatter</span>
         <DescriptionDisplay
           :config="config.reward"
           title="Reward:"

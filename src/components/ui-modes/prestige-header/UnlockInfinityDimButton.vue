@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     update() {
-      this.isVisible = player.break && !InfinityDimension(8).isUnlocked && !Player.canEternity &&
+      this.isVisible = player.break && !InfinityDimension(8).isUnlocked && (!Player.canEternity || !PlayerProgress.eternityUnlocked()) &&
         !EternityMilestone.autoUnlockID.isReached;
       if (!this.isVisible) return;
       const nextDimension = InfinityDimensions.next();

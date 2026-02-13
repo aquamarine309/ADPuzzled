@@ -178,7 +178,7 @@ export function animateAndEternity(callback) {
 
 export function initializeChallengeCompletions(isReality) {
   NormalChallenges.clearCompletions();
-  if (!PelleUpgrade.keepInfinityChallenges.canBeApplied) InfinityChallenges.clearCompletions();
+  if (!PelleUpgrade.keepInfinityChallenges.canBeApplied) InfinityChallenges.clearCompletions(false);
   if (!isReality && EternityMilestone.keepAutobuyers.isReached || Pelle.isDoomed) {
     NormalChallenges.completeAll();
   }

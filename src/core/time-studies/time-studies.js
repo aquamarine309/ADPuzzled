@@ -140,7 +140,7 @@ export function respecTimeStudies(auto) {
   for (const study of TimeStudy.boughtNormalTS()) {
     study.refund();
   }
-  player.timestudy.studies = [];
+  player.timestudy.studies = TimeStudy.boughtLogicTS().map(x => x.id);
   GameCache.timeStudies.invalidate();
   player.celestials.v.STSpent = 0;
   const ecStudy = TimeStudy.eternityChallenge.current();

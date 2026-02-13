@@ -439,6 +439,13 @@ export const migrations = {
         player.logic.upgradeBits = 0;
         player.logic.spentPoints = new Decimal(0);
       }
+    },
+    36: player => {
+      const times = player.challenge.infinity.bestTimes;
+      while (times.length < 12) {
+        times.push(Number.MAX_VALUE);
+      }
+      delete player.logic.spentPoints;
     }
   },
 

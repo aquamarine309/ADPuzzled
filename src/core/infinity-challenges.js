@@ -2,7 +2,7 @@ import { GameMechanicState } from "./game-mechanics";
 
 export function tryCompleteInfinityChallenges() {
   if (EternityMilestone.autoIC.isReached) {
-    const toComplete = InfinityChallenges.all.filter(x => x.isUnlocked && !x.isCompleted);
+    const toComplete = InfinityChallenges.all.filter(x => x.isUnlocked && !x.isCompleted && x.id !== 12);
     for (const challenge of toComplete) challenge.complete();
   }
 }
@@ -31,6 +31,10 @@ class InfinityChallengeState extends GameMechanicState {
   get isUnlocked() {
     return player.records.thisEternity.maxAM.gte(this.unlockAM) || (Achievement(133).isUnlocked && !Pelle.isDoomed) ||
       (PelleUpgrade.keepInfinityChallenges.canBeApplied && Pelle.cel.records.totalAntimatter.gte(this.unlockAM));
+  }
+  
+  get canBeUnlocked() {
+    return this.id !== 12 || InfinityChallenges.isIC12Unlocked;
   }
 
   get isRunning() {
@@ -85,7 +89,11 @@ class InfinityChallengeState extends GameMechanicState {
   }
 
   get goal() {
-    return this.config.goal;
+    const goal = this.config.goal;
+    if (typeof goal === "function") {
+      return goal();
+    }
+    return goal;
   }
 
   updateChallengeTime() {
@@ -132,11 +140,15 @@ export const InfinityChallenges = {
   completeAll() {
     for (const challenge of InfinityChallenges.all) challenge.complete();
   },
-  clearCompletions() {
+  clearCompletions(clearIC12 = true) {
+    const ic12Completed = InfinityChallenge(12).isCompleted;
     player.challenge.infinity.completedBits = 0;
+    if (!clearIC12 && ic12Completed) {
+      InfinityChallenge(12).complete();
+    }
   },
   get nextIC() {
-    return InfinityChallenges.all.find(x => !x.isUnlocked);
+    return InfinityChallenges.all.find(x => !x.isUnlocked && x.canBeUnlocked);
   },
   get nextICUnlockAM() {
     return this.nextIC?.unlockAM;
@@ -164,5 +176,8 @@ export const InfinityChallenges = {
    */
   get completed() {
     return InfinityChallenges.all.filter(ic => ic.isCompleted);
+  },
+  get isIC12Unlocked() {
+    return TimeStudy(23).isBought;
   }
 };

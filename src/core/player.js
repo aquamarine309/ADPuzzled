@@ -48,7 +48,11 @@ window.player = {
     },
     spentPoints: DC.D0,
     upgradeBits: 0,
-    upgReqs: 0
+    upgReqs: 0,
+    antiatoms: Array.range(0, 8).map(() => ({
+      level: 0,
+      amount: 0
+    }))
   },
   challenge: {
     normal: {
@@ -58,7 +62,7 @@ window.player = {
     },
     infinity: {
       current: 0,
-      bestTimes: Array.repeat(Number.MAX_VALUE, 11),
+      bestTimes: Array.repeat(Number.MAX_VALUE, 12),
       completedBits: 0,
     },
     eternity: {
@@ -381,7 +385,7 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: 0,
-  version: 35,
+  version: 36,
   infinityPower: DC.D1,
   postC4Tier: 0,
   extraBonusTimeLeft: 0,
@@ -974,8 +978,7 @@ export const Player = {
   },
 
   get canEternity() {
-    return false;
-    //player.records.thisEternity.maxIP.gte(Player.eternityGoal);
+    return player.records.thisEternity.maxIP.gte(Player.eternityGoal);
   },
 
   get bestRunIPPM() {
@@ -1008,9 +1011,13 @@ export const Player = {
   },
 
   get eternityGoal() {
-    return EternityChallenge.isRunning
+    const baseGoal = EternityChallenge.isRunning
       ? EternityChallenge.current.currentGoal
       : requiredIPForEP(1);
+    if (InfinityChallenges.isIC12Unlocked && !InfinityChallenge(12).isCompleted) {
+      return baseGoal.max(InfinityChallenge(12).goal);
+    }
+    return baseGoal;
   },
 
   get automatorUnlocked() {

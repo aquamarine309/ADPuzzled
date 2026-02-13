@@ -24,7 +24,7 @@ export default {
     update() {
       this.isAffordable = this.upgrade.isAffordable;
       this.level = this.upgrade.level;
-      this.cost = this.upgrade.cost;
+      this.cost.copyFrom(this.upgrade.cost);
     }
   }
 };

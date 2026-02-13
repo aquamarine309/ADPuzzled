@@ -1,13 +1,10 @@
 import TWEEN from "tween.js";
 
-import eruda from "eruda";
-
 import { ElectronRuntime, SteamRuntime } from "@/steam";
 
 import { DC } from "./core/constants";
 import { deepmergeAll } from "@/utility/deepmerge";
 import { DEV } from "@/env";
-import { isLocalEnvironment } from "./core/devtools";
 import { SpeedrunMilestones } from "./core/speedrun";
 import { Cloud } from "./core/storage";
 import { supportedBrowsers } from "./supported-browsers";
@@ -1107,9 +1104,6 @@ export function init() {
   if (DEV) {
     // eslint-disable-next-line no-console
     console.log("👨‍💻 Development Mode 👩‍💻");
-  }
-  if (isLocalEnvironment()) {
-    eruda.init();
   }
   ElectronRuntime.initialize();
   SteamRuntime.initialize();

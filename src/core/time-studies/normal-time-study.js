@@ -91,7 +91,6 @@ export class NormalTimeStudyState extends TimeStudyState {
       return false;
     }
     if (this.costsST()) player.celestials.v.STSpent += this.STCost;
-    if (this.logic) player.logic.spentPoints = player.logic.spentPoints.add(this.config.LPCost);
     player.timestudy.studies.push(this.id);
     player.requirementChecks.reality.maxStudies = Math.clampMin(player.requirementChecks.reality.maxStudies,
       player.timestudy.studies.length);
@@ -109,6 +108,11 @@ export class NormalTimeStudyState extends TimeStudyState {
 
   get path() {
     return this._path;
+  }
+  
+  refund() {
+    if (this.isLogic) return;
+    super.refund();
   }
 }
 
@@ -130,8 +134,16 @@ export function TimeStudy(id) {
  * @returns {NormalTimeStudyState[]}
  */
 TimeStudy.boughtNormalTS = function() {
-  return player.timestudy.studies.map(id => TimeStudy(id));
+  return player.timestudy.studies.map(id => TimeStudy(id)).filter(x => !x.isLogic);
 };
+
+/**
+ * @returns {NormalTimeStudyState[]}
+ */
+TimeStudy.boughtLogicTS = function() {
+  return player.timestudy.studies.map(id => TimeStudy(id)).filter(x => x.isLogic);
+};
+
 
 TimeStudy.preferredPaths = {
   dimension: {

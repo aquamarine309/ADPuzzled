@@ -521,6 +521,15 @@ export const tabs = [
         component: "ResourceExchangeTab",
         id: 0,
         hidable: true
+      },
+      {
+        key: "antiatoms",
+        name: "Antiatoms",
+        symbol: "<i class='fas fa-atom'></i>",
+        component: "AntiatomsTab",
+        condition: () => Antiatoms.isUnlocked,
+        id: 1,
+        hidable: true
       }
     ]
   }
