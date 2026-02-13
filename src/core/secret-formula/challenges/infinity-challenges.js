@@ -178,6 +178,7 @@ export const infinityChallenges = [
     goal: () => DC.E60000.pow(Currency.infinityPoints.value.add(1).log10() / 125).times(DC.E25),
     reward: {
       description: "Unlock antiatoms"
-    }
+    },
+    unlockAM: DC.E65000
   }
 ];
