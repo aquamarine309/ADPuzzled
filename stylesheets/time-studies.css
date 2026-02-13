@@ -455,6 +455,10 @@
   border-color: black;
 }
 
+.t-s13 .o-time-study-logic--bought {
+  background-color: #5ff9dc;
+}
+
 .o-time-study-antimatter-dim--bought {
   color: black;
   background-color: #22aa48;
