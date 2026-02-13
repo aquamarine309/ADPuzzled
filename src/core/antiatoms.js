@@ -119,6 +119,6 @@ export const Antiatoms = {
   all: Antiatom.index.compact(),
   
   get isUnlocked() {
-    return InfinityChallenge(12).isUnlocked;
+    return InfinityChallenge(12).isCompleted;
   }
 }

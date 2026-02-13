@@ -68,7 +68,7 @@ export const normalTimeStudies = [
   {
     id: 22,
     cost: 2,
-    requirement: [11],
+    requirement: [11, 23],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Base Replicanti interval limit ${formatInt(50)}ms ➜ ${formatInt(1)}ms`,
     effect: 1
@@ -84,8 +84,8 @@ export const normalTimeStudies = [
   },
   {
     id: 31,
-    cost: 15,
-    requirement: [21],
+    cost: 4,
+    requirement: [41],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Powers up multipliers that are based on your Infinities (Bonuses${formatPow(4)})`,
     effect: 4

@@ -15,8 +15,18 @@ export const antiatoms = [
     milestones: [
       {
         id: 0,
-        description: "Unlock Logic Dimensions.",
+        description: "Unlock 1st Logic Dimension.",
         requirement: 1
+      },
+      {
+        id: 1,
+        description: "You can switch extra bonus between you have unlocked.",
+        requirement: 2
+      },
+      {
+        id: 2,
+        description: "Unlock antihelium",
+        requirement: 5
       }
     ]
   }

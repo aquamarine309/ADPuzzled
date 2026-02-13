@@ -179,6 +179,7 @@ export function replicantiLoop(diff, auto = true) {
   // This gets the pre-cap interval (above the cap we recalculate the interval).
   const interval = getReplicantiInterval(false);
   const canReplicate = Replicanti.canReplicate;
+  if (isNaN(diff)) return;
   if (diff && !canReplicate) {
     Replicanti.cooldown -= diff;
   }

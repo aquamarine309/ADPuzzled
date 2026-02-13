@@ -37,7 +37,7 @@ export default {
       this.showAllChallenges = player.options.showAllChallenges;
     },
     isChallengeVisible(challenge) {
-      return (challenge.isUnlocked || (this.showAllChallenges && PlayerProgress.eternityUnlocked())) && (challenge.id !== 12 || InfinityChallenges.isIC12Unlocked);
+      return (challenge.isUnlocked || (this.showAllChallenges && PlayerProgress.eternityUnlocked())) && (challenge.id !== 12 || InfinityChallenge(12).isUnlocked);
     }
   }
 };
