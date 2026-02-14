@@ -1020,7 +1020,7 @@ export const Player = {
       ? EternityChallenge.current.currentGoal
       : requiredIPForEP(1);
     if (InfinityChallenges.isIC12Unlocked && !InfinityChallenge(12).isCompleted) {
-      return baseGoal.max(InfinityChallenge(12).goal);
+      return baseGoal.max(InfinityChallenge(12).goal).max(DC.E1000);
     }
     return baseGoal;
   },
