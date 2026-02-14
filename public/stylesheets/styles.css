@@ -9826,4 +9826,6 @@ input.o-automator-block-input {
 .o-antiatom-box--effect-value {
   font-weight: bold;
   color: var(--color-logic);
+  display: inline-block;
+  margin: 0 6px;
 }

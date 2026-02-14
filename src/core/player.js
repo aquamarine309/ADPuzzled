@@ -27,6 +27,10 @@ window.player = {
       cost: [DC.D1, DC.D5, DC.E2, DC.E3, DC.E2350, DC.E2650, DC.E3000, DC.E3350][tier],
       amount: DC.D0,
       bought: 0
+    })),
+    logic: Array.range(0, 8).map(tier => ({
+      amount: DC.D0,
+      bought: 0
     }))
   },
   buyUntil10: true,
@@ -37,6 +41,7 @@ window.player = {
   infinityRebuyables: [0, 0, 0],
   hasDLC: false,
   gotSTD: false,
+  axioms: DC.D0,
   logic: {
     resourceExchange: {
       all: Array.range(0, 6).map(() => ({

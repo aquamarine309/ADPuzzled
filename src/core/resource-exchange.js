@@ -106,7 +106,8 @@ export function getLogicPoints() {
 }
 
 export function getSpentLogicPoints() {
-  const fromLU = LogicUpgrades.all.filter(x => x.isBought).map(x => x.cost).reduce(Decimal.sumReducer, DC.D0);
+  const freeLU = Antiatom(1).milestones[0].isEffectActive;
+  const fromLU = freeLU ? DC.D0 : LogicUpgrades.all.filter(x => x.isBought).map(x => x.cost).reduce(Decimal.sumReducer, DC.D0);
   
   const levelUpg = ResourceExchangeUpgrade;
   const fromLevel = Array.range(0, levelUpg.boughtAmount)
@@ -167,7 +168,7 @@ class ResourceExchangeUpgradeState extends GameMechanicState {
     if (effectivePoints.gte(DC.E50)) effectivePoints = DC.E45.times(effectivePoints.pow(0.1));
     return DC.E5.pow(
       Decimal.pow(
-        this.boughtAmount + 1,
+        this.boughtAmount + Antiatom(1).effectOrDefault(0) + 1,
         Math.log10(effectivePoints.add(1).log10() + 1) + 1
       ).timesEffectOf(LogicChallenge(3))
     );
@@ -181,6 +182,7 @@ class ResourceExchangeUpgradeState extends GameMechanicState {
     this.boughtAmount = 0;
     GameCache.spentLogicPoints.invalidate();
     GameCache.logicPoints.invalidate();
+    EventHub.dispatch(GAME_EVENT.EXCHANGE_LEVEL_UP);
   }
 }
 

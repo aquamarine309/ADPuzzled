@@ -534,6 +534,8 @@ export const Replicanti = {
       boughtGalaxyCap: 0,
       galaxies: 0,
       galCost: DC.E170,
+      boosts: 0,
+      cooldown: 1000
     };
   },
   unlock(freeUnlock = false) {

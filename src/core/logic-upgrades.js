@@ -14,6 +14,11 @@ class LogicUpgradeState extends BitPurchasableMechanicState {
   get currency() {
     return Currency.logicPoints;
   }
+  
+  get isAffordable() {
+    if (Antiatom(1).milestones[0].isEffectActive) return true;
+    return super.isAffordable;
+  }
 
   get name() {
     return this.config.name;

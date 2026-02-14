@@ -200,7 +200,7 @@ Currency.antimatter = new class extends DecimalCurrency {
   get value() { return player.antimatter; }
 
   set value(value) {
-    const gainedAM = value.clampMax(Player.infinityLimit);
+    const gainedAM = Decimal.fromDecimal(value.clampMax(Player.infinityLimit));
     if (InfinityChallenges.nextIC) InfinityChallenges.notifyICUnlock(gainedAM);
     if (GameCache.cheapestAntimatterAutobuyer.value && gainedAM.gte(GameCache.cheapestAntimatterAutobuyer.value)) {
       // Clicking into the automation tab clears the trigger and prevents it from retriggering as long as the player
@@ -490,3 +490,10 @@ Currency.logicPoints = new class extends DecimalCurrency {
     throw new Error("Cannot set Logic Points which depend on calculating.");
   }
 }();
+
+Currency.axioms = new class extends DecimalCurrency {
+  get value() { return player.axioms; }
+  set value(value) {
+    player.axioms = value;
+  }
+}

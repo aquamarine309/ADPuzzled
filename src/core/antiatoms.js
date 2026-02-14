@@ -31,6 +31,10 @@ class AntiatomState extends GameMechanicState {
     );
   }
   
+  get symbol() {
+    return this.config.symbol;
+  }
+  
   get data() {
     return player.logic.antiatoms[this.id - 1];
   }
