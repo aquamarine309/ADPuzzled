@@ -9,7 +9,7 @@ export const antiatoms = [
     currency: () => Currency.antimatter,
     amountCost: x => DC.E20000.pow(x * 3 + 2 ** (x - 6.365)),
     levelCost: x => DC.E100000.pow(x ** 2 + 3 ** (x - 6)),
-    effect: (amount, level) => 1 + 0.1451 * Math.pow(amount, level + 1),
+    effect: (amount, level) => Math.log(1 + 0.03 * Math.pow(amount, level + 1)) + 1,
     formatEffect: value => format(value - 1, 2, 3),
     description: "Add {value} free exchange level",
     formatCost: value => `${format(value, 1)} AM`,
