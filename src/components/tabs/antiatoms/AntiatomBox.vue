@@ -40,6 +40,12 @@ export default {
     },
     milestones() {
       return this.antiatom.milestones;
+    },
+    stateStyle() {
+      return {
+        "antiatom-state": true,
+        "antiatom-state--excited": this.level > 0
+      }
     }
   },
   methods: {
@@ -72,7 +78,7 @@ export default {
       <span class="antiatom-name">{{ name }} [{{ formatInt(amount) }}]</span>
       <span>
         <span class="antiatom-level">Level {{ formatInt(level) }}</span>
-        <span class="antiatom-state">({{ state }})</span>
+        <span :class="stateStyle">({{ state }})</span>
       </span>
     </div>
     
@@ -181,12 +187,12 @@ export default {
   padding: 5px 10px;
 }
 
-.antiatom-box:has(.antiatom-state:contains("Excited")) {
+.antiatom-box:has(.antiatom-state--excited) {
   border-color: #8ab0ff;
   background: linear-gradient(145deg, rgba(30, 40, 60, 0.9), rgba(40, 60, 90, 0.8));
 }
 
-.antiatom-box:has(.antiatom-state:contains("Excited")) .antiatom-name {
+.antiatom-box:has(.antiatom-state--excited) .antiatom-name {
   color: #ffe09c;
   text-shadow: 0 0 8px rgba(255, 200, 100, 0.3);
 }

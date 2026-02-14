@@ -179,6 +179,6 @@ export const infinityChallenges = [
     reward: {
       description: "Unlock antiatoms"
     },
-    unlockAM: DC.E65000
+    unlockAM: DC.E66686
   }
 ];

@@ -446,6 +446,18 @@ export const migrations = {
         times.push(Number.MAX_VALUE);
       }
       delete player.logic.spentPoints;
+    },
+    37: player => {
+      const antiatoms = player.logic.antiatoms;
+      if (antiatoms !== undefined) {
+        for (const a of antiatoms) {
+          a.amount = 0;
+          a.level = 0;
+        }
+      }
+      if ((player.challenge.infinity.completedBits & (1 << 12)) !== 0) {
+        player.challenge.infinity.completedBits &= ~(1 << 12);
+      }
     }
   },
 

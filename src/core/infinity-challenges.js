@@ -68,10 +68,16 @@ class InfinityChallengeState extends GameMechanicState {
     return (player.challenge.infinity.completedBits & (1 << this.id)) !== 0;
   }
 
-  complete() {
+  complete(manual = true) {
     if (this.id === 10) GameCache.dimensionMultDecrease.invalidate();
+    const ic12Completed = this.isCompleted;
     player.challenge.infinity.completedBits |= 1 << this.id;
     EventHub.dispatch(GAME_EVENT.INFINITY_CHALLENGE_COMPLETED);
+    if (!ic12Completed && this.id === 12 && manual) {
+      animateAndEternity(() => {
+        Modal.message.show("Infinity Challenge 12 is not stable. It forces to an Eternity.");
+      });
+    }
   }
 
   get isEffectActive() {
@@ -145,7 +151,7 @@ export const InfinityChallenges = {
     const ic12Completed = InfinityChallenge(12).isCompleted;
     player.challenge.infinity.completedBits = 0;
     if (!clearIC12 && ic12Completed) {
-      InfinityChallenge(12).complete();
+      InfinityChallenge(12).complete(false);
     }
   },
   get nextIC() {
