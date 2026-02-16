@@ -12,6 +12,7 @@
   --color-antimatter--bg: #df50504d;
   --color-infinity--bg: #b67f334d;
   --color-eternity--bg: #b341e04d;
+  --color-logic-bg: #7fffd44d;
 }
 
 :root .t-s12 {
@@ -692,6 +693,10 @@ body.t-s12 {
 
 .l-dimension-row-time-dim:nth-child(even) {
   background-color: var(--color-eternity--bg);
+}
+
+.l-dimension-row-logic-dim:nth-child(even) {
+  background-color: var(--color-logic--bg);
 }
 
 .c-infinity-dim-description__accent {
