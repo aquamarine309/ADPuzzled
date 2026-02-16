@@ -1849,7 +1849,7 @@ br {
 }
 
 .o-primary-btn--replicanti-galaxy-toggle {
-  width: 22rem;
+  width: 18rem;
   font-size: 1.2rem;
 }
 
@@ -2771,7 +2771,7 @@ br {
 
 /* #region l-time-dim-tab */
 
-.l-time-dim-tab {
+.l-time-dim-tab, .l-logic-dim-tab {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2810,7 +2810,38 @@ br {
 
 /* #endregion c-time-dim-description__accent */
 
-/* #endregion Time Dimensions */
+/* #endregion Logic Dimensions */
+
+
+/* #region c-logic-dim-description__accent */
+
+.c-logic-dim-description__accent {
+  font-size: 3.5rem;
+  color: black;
+}
+
+.t-metro .c-logic-dim-description__accent,
+.t-s8 .c-logic-dim-description__accent {
+  text-shadow: 0 0 0.1rem rgba(0, 0, 0, 50%), -0.1rem 0.1rem 0.1rem black;
+}
+
+.t-dark .c-logic-dim-description__accent,
+.t-amoled .c-logic-dim-description__accent,
+.t-amoled-metro .c-logic-dim-description__accent,
+.t-s6 .c-logic-dim-description__accent,
+.t-s10 .c-logic-dim-description__accent,
+.t-s11 .c-logic-dim-description__accent {
+  color: var(--color-logic);
+  text-shadow: 0 0 0.7rem var(--color-logic);
+}
+
+.t-metro .c-logic-dim-description__accent,
+.t-dark-metro .c-logic-dim-description__accent,
+.t-s8 .c-logic-dim-description__accent {
+  color: #15b58a;
+}
+
+/* #endregion c-logic-dim-description__accent */
 
 /* #region Options */
 
@@ -9828,4 +9859,56 @@ input.o-automator-block-input {
   color: var(--color-logic);
   display: inline-block;
   margin: 0 6px;
+}
+
+@keyframes a-crisis-intense {
+  0% {
+    background-color: transparent;
+    filter: brightness(1);
+  }
+  15% {
+    background-color: #000000;
+    filter: brightness(2);
+  }
+  30% {
+    background-color: #330000;
+    filter: brightness(1.5);
+  }
+  45% {
+    background-color: #000000;
+    filter: brightness(0.5);
+  }
+  60% {
+    background-color: #660000;
+    filter: brightness(2);
+  }
+  80% {
+    background-color: #000000;
+    filter: brightness(0.8);
+  }
+  100% {
+    background-color: transparent;
+    filter: brightness(1);
+  }
+}
+
+@keyframes a-crisis-border {
+  0% {
+    box-shadow: inset 0 0 0px rgba(255, 255, 255, 0);
+  }
+  20% {
+    box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.3);
+  }
+  40% {
+    box-shadow: inset 0 0 0px rgba(255, 255, 255, 0);
+  }
+  60% {
+    box-shadow: inset 0 0 150px rgba(255, 0, 0, 0.2);
+  }
+  80% {
+    box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    box-shadow: inset 0 0 0px rgba(255, 255, 255, 0);
+  }
 }

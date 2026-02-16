@@ -43,7 +43,7 @@ export const tabs = [
         hideAt: 2.5,
         symbol: "<i class='fas fa-atom'></i>",
         component: "LogicDimensionsTab",
-        condition: () => false,
+        condition: () => Antiatom(1).milestones[0].isEffectActive || Crisis.crises > 0,
         id: 3,
         hidable: true
       }

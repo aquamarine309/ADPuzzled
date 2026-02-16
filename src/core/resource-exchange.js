@@ -40,7 +40,7 @@ class ResourceExchangeState extends GameMechanicState {
     const leave = this.willLeave;
     this.data.value = this.newExchanged;
     this.currency.value = leave;
-    GameCache.logicPoints.invalidate();
+    ResourceExchange.chachedPoints.invalidate();
     return true;
   }
 
@@ -69,7 +69,7 @@ class ResourceExchangeState extends GameMechanicState {
   }
 
   get isUnlocked() {
-    return player.logic.resourceExchange.level >= this.id;
+    return ResourceExchangeUpgrade.level - 1 >= this.id;
   }
 
   get symbol() {
@@ -101,8 +101,12 @@ Object.defineProperty(ResourceExchange, "selected", {
   }
 });
 
+ResourceExchange.chachedPoints = new Lazy(() => ResourceExchange.all.map(r => r.value).reduce(Decimal.prodReducer, DC.D1));
+
 export function getLogicPoints() {
-  return ResourceExchange.all.map(r => r.value).reduce(Decimal.prodReducer, DC.D1);
+  const fromExchange = ResourceExchange.chachedPoints.value;
+  const fromLD = getAxiomBonus();
+  return fromExchange.times(fromLD);
 }
 
 export function getSpentLogicPoints() {
@@ -140,7 +144,7 @@ class ResourceExchangeUpgradeState extends GameMechanicState {
   }
 
   get level() {
-    return this.boughtAmount + 1;
+    return Math.max(this.boughtAmount, Antiatom(1).effectOrDefault(0)) + 1;
   }
 
   get currency() {
@@ -158,17 +162,17 @@ class ResourceExchangeUpgradeState extends GameMechanicState {
   purchase() {
     if (!this.isAffordable) return;
     ++this.boughtAmount;
-    GameCache.spentLogicPoints.invalidate();
+    ResourceExchange.chachedPoints.invalidate();
     EventHub.dispatch(GAME_EVENT.EXCHANGE_LEVEL_UP);
   }
 
   get effectValue() {
     if (LogicChallenge(5).isRunning) return DC.D1;
-    let effectivePoints = GameCache.logicPoints.value;
+    let effectivePoints = getLogicPoints();
     if (effectivePoints.gte(DC.E50)) effectivePoints = DC.E45.times(effectivePoints.pow(0.1));
     return DC.E5.pow(
       Decimal.pow(
-        this.boughtAmount + Antiatom(1).effectOrDefault(0) + 1,
+        this.level,
         Math.log10(effectivePoints.add(1).log10() + 1) + 1
       ).timesEffectOf(LogicChallenge(3))
     );
@@ -181,7 +185,6 @@ class ResourceExchangeUpgradeState extends GameMechanicState {
   reset() {
     this.boughtAmount = 0;
     GameCache.spentLogicPoints.invalidate();
-    GameCache.logicPoints.invalidate();
     EventHub.dispatch(GAME_EVENT.EXCHANGE_LEVEL_UP);
   }
 }
@@ -190,5 +193,5 @@ export const ResourceExchangeUpgrade = new ResourceExchangeUpgradeState();
 
 export function resetAllResourceExchange() {
   ResourceExchange.all.forEach(r => r.reset());
-  GameCache.logicPoints.invalidate();
+  ResourceExchange.chachedPoints.invalidate();
 }

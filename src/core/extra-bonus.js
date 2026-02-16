@@ -9,7 +9,7 @@ class ExtraBonusState extends GameMechanicState {
     return ExtraBonus.current.id === this.id &&
       ExtraBonus.isEffectActive &&
       !Pelle.isDoomed &&
-      LogicChallenge(5).isCompleted;
+      ExtraBonus.isUnlocked;
   }
 
   get description() {
@@ -23,11 +23,18 @@ export const ExtraBonus = mapGameDataToObject(
 );
 
 Object.defineProperty(ExtraBonus, "current", {
-  get() { return GameCache.currentBonus.value; }
+  get() {
+    if (Antiatom(1).milestones[1].isEffectActive) return ExtraBonus[player.switchBonus];
+    return GameCache.currentBonus.value;
+  }
 });
 
 Object.defineProperty(ExtraBonus, "isEffectActive", {
   get() { return player.extraBonusTimeLeft > 0; }
+});
+
+Object.defineProperty(ExtraBonus, "isUnlocked", {
+  get() { return LogicChallenge(5).isCompleted || Antiatom(1).milestones[1].isEffectActive; }
 });
 
 Object.defineProperty(ExtraBonus, "tick", {

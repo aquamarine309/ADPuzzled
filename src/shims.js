@@ -15,7 +15,7 @@ window.Vue = Vue;
 
 function isLocalEnvironment() {
   const href = window.location.href;
-  return href.includes("file") || href.includes("127.0.0.1") || href.includes("localhost");
+  return href.includes("8080") || href.includes("127.0.0.1") || href.includes("localhost");
 }
 
 if (isLocalEnvironment()) {

@@ -7,11 +7,15 @@ export const antiatoms = [
     symbol: "H",
     requirement: DC.D0,
     currency: () => Currency.antimatter,
-    amountCost: x => DC.E20000.pow(x * 3 + 2 ** (x - 6.365)),
-    levelCost: x => DC.E100000.pow(1.5 * x ** 2 + 3 ** (x - 6)),
-    effect: (amount, level) => Math.log(1 + 0.05 * Math.pow(amount, level + 1)),
+    amountCost: x => Decimal.pow10((2 ** x + x * 0.05) * 195),
+    levelCost: x => Decimal.pow10((5 * x + Math.pow(30, Math.sqrt(x))) * 280),
+    effect: (amount, level, energy) => {
+      const eff = Math.pow(Math.log2(1 + Math.pow(amount, 2) * Math.sqrt(Math.max(1, level))) * (0.125 * energy.add(1).log10() + 1), 0.85);
+      if (eff >= 3) return 3 + (eff + Math.pow(1.5, eff - 6)) / 45;
+      return eff;
+    },
     formatEffect: value => format(value, 2, 3),
-    description: "Add {value} free exchange level",
+    description: "Provide Exchange Level a minimum of {value}",
     formatCost: value => `${format(value, 1)} AM`,
     milestones: [
       {
@@ -21,12 +25,17 @@ export const antiatoms = [
       },
       {
         id: 1,
-        description: "You can switch extra bonus between you have unlocked.",
-        requirement: 2
+        description: "Extra Bonus is always unlocked. You can switch extra bonus between you have unlocked.",
+        requirement: 2,
       },
       {
         id: 2,
-        description: "Unlock antihelium",
+        description: "Unlock Antihydrogen Energy.",
+        requirement: 3
+      },
+      {
+        id: 3,
+        description: "Unlock antihelium.",
         requirement: 5
       }
     ]

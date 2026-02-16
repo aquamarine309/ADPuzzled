@@ -20,7 +20,10 @@ export default {
       bought: 0,
       multiplier: new Decimal(0),
       rate: new Decimal(0),
-      cost: 0
+      cost: 0,
+      isUnlocked: false,
+      canRespec: false,
+      isAffordable: false
     }
   },
   computed: {
@@ -34,7 +37,7 @@ export default {
       return this.antiatom.symbol;
     },
     name() {
-      return `${this.dimension.displayNameShort} Logic Dimension`;
+      return `${this.dimension.shortDisplayName} Logic Dimension`;
     }
   },
   methods: {
@@ -45,23 +48,48 @@ export default {
       this.multiplier.copyFrom(dim.multiplier);
       this.rate.copyFrom(dim.rateOfChange);
       this.cost = dim.cost;
+      this.isUnlocked = dim.isUnlocked;
+      this.isAffordable = dim.isAffordable;
+      this.canRespec = dim.canRespec;
+    },
+    buyOne() {
+      this.dimension.buyOne();
+    },
+    respec() {
+      this.dimension.respec();
     }
   }
 }
 </script>
 
 <template>
-  <div>
+  <div
+    class="c-dimension-row l-dimension-row-logic-dim l-dimension-single-row"
+    :class="{ 'c-dim-row--not-reached': !isUnlocked }"
+  >
     <GenericDimensionRowText
       :tier="tier"
       :name="name"
       :amount-text="format(amount, 2)"
-      :multiplier-text="format(multiplier, 2, 3)"
+      :multiplier-text="formatX(multiplier, 2, 3)"
       :rate="rate"
     />
-    <PrimaryButton>
-      Cost: {{ format(cost, 2) }} <sub>-{{ tier }}</sub>{{ symbol }}
-    </PrimaryButton>
+    <div class="l-dim-row-multi-button-container c-modern-dim-tooltip-container">
+      <PrimaryButton
+        class="o-primary-btn--buy-td o-primary-btn o-primary-btn--new o-primary-btn--buy-dim"
+        :enabled="isAffordable"
+        @click="buyOne"
+      >
+        Cost: {{ format(cost, 2) }} <sub>-{{ tier }}</sub>{{ symbol }}
+      </PrimaryButton>
+      <PrimaryButton
+        class="o-primary-btn--buy-td o-primary-btn o-primary-btn--new o-primary-btn--buy-dim"
+        :enabled="canRespec"
+        @click="respec"
+      >
+        Respec
+      </PrimaryButton>
+    </div>
   </div>
 </template>
 

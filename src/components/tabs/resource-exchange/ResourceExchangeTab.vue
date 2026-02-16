@@ -65,7 +65,7 @@ export default {
     update() {
       this.resourceId = player.logic.resourceExchange.lastSelected;
       this.logicPoints = Currency.logicPoints.value;
-      this.totalLogicPoints = GameCache.logicPoints.value;
+      this.totalLogicPoints = getLogicPoints();
       this.multiplier = ResourceExchangeUpgrade.effectValue;
       this.rateUnlocked = LogicChallenge(2).isCompleted;
       this.sliderInterval = this.currentResource.exchangeRate * 100;

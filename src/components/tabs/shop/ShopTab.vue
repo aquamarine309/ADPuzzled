@@ -15,7 +15,8 @@ export default {
       hasDLC: false,
       gotSTD: false,
       extraBonusUnlocked: false,
-      extraBonusTimeLeft: 0
+      extraBonusTimeLeft: 0,
+      switchUnlocked: false
     };
   },
   computed: {
@@ -39,7 +40,7 @@ export default {
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.hasDLC = player.hasDLC;
       this.gotSTD = player.gotSTD;
-      this.extraBonusUnlocked = LogicChallenge(5).isCompleted;
+      this.extraBonusUnlocked = ExtraBonus.isUnlocked;
       if (this.extraBonusUnlocked) {
         if (this.isDoomed) {
           this.description = wordShift.wordCycle(["Destroyed", "Annihilated", "Nullified"]);
@@ -51,6 +52,7 @@ export default {
         } else {
           this.description = ExtraBonus.current.description;
         }
+        this.switchUnlocked = Antiatom(1).milestones[1].isEffectActive;
       }
     },
     showStore() {
@@ -76,6 +78,9 @@ export default {
       // 5 hours
       player.extraBonusTimeLeft += 1.8e7;
       GameUI.update();
+    },
+    switchBonus() {
+      Modal.switchBonus.show();
     }
   },
 };
@@ -121,6 +126,12 @@ export default {
         {{ leftTime }} left
       </div>
     </button>
+    <PrimaryButton
+      v-if="switchUnlocked"
+      @click="switchBonus"
+    >
+       Switch Bonus
+    </PrimaryButton>
     <div class="c-shop-header">
       <span>You have {{ gotSTD && !hasDLC ? "1" : "0" }}</span>
       <img

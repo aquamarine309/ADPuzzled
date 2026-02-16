@@ -10,7 +10,7 @@ export default {
   },
   computed: {
     buttonTexts() {
-      return ["Big Crunch", "Infinity", "Big Lunch", "Big Chunch", "Big Church", "Eternity", "Reality", "Bit Crunch"];
+      return ["Big Crunch", "Infinity", "Big Lunch", "Big Chunch", "Big Church", "Eternity", "Reality", "Bit Crunch", "大脆"];
     },
     buttonIds() {
       const len = this.buttonTexts.length;

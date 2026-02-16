@@ -85,7 +85,6 @@ export const LogicUpgrades = {
     player.logic.upgradeBits = 0;
     player.logic.upgReqs = 0;
     GameCache.spentLogicPoints.invalidate();
-    GameCache.logicPoints.invalidate();
     GameCache.maxTier.invalidate();
   }
 };

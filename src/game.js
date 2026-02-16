@@ -576,11 +576,13 @@ export function gameLoop(passDiff, options = {}) {
   EternityChallenge(12).tryFail();
   Achievements._power.invalidate();
 
+  LogicDimensions.tick(diff);
   TimeDimensions.tick(diff);
   InfinityDimensions.tick(diff);
   AntimatterDimensions.tick(diff);
 
   ExtraBonus.tick(realDiff);
+  Antiatoms.tick(diff);
 
   const gain = Math.clampMin(FreeTickspeed.fromShards(Currency.timeShards.value).newAmount - player.totalTickGained, 0);
   player.totalTickGained += gain;

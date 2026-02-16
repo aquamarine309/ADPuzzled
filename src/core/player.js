@@ -42,6 +42,8 @@ window.player = {
   hasDLC: false,
   gotSTD: false,
   axioms: DC.D0,
+  crises: 0,
+  switchBonus: "extraBonusToAD",
   logic: {
     resourceExchange: {
       all: Array.range(0, 6).map(() => ({
@@ -56,7 +58,8 @@ window.player = {
     upgReqs: 0,
     antiatoms: Array.range(0, 8).map(() => ({
       level: 0,
-      amount: 0
+      amount: 0,
+      energy: DC.D0
     }))
   },
   challenge: {

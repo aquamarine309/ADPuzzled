@@ -117,7 +117,7 @@ export const normalTimeStudies = [
   },
   {
     id: 42,
-    cost: 6,
+    cost: 60,
     requirement: [32, 33],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Antimatter Galaxy requirement increases by ${formatInt(52)}

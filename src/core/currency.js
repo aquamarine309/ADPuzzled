@@ -483,7 +483,7 @@ Currency.galaxyGeneratorGalaxies = new class extends NumberCurrency {
 
 Currency.logicPoints = new class extends DecimalCurrency {
   get value() {
-    return GameCache.logicPoints.value.minus(    GameCache.spentLogicPoints.value);
+    return getLogicPoints().minus(GameCache.spentLogicPoints.value);
   }
 
   set value(value) {

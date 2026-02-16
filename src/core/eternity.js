@@ -125,6 +125,7 @@ export function eternity(force, auto, specialConditions = {}) {
 
   Currency.infinityPoints.reset();
   InfinityDimensions.resetAmount();
+  Antiatoms.reset();
   player.records.thisInfinity.bestIPmin = DC.D0;
   player.records.bestInfinity.bestIPminEternity = DC.D0;
   player.records.thisEternity.bestEPmin = DC.D0;

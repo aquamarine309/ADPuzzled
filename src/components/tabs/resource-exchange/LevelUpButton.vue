@@ -5,7 +5,8 @@ export default {
     return {
       isAffordable: false,
       cost: new Decimal(0),
-      level: 0
+      level: 0,
+      bonusLevel: 0
     };
   },
   computed: {
@@ -18,6 +19,9 @@ export default {
     },
     config() {
       return this.upgrade.config;
+    },
+    nextLevel() {
+      return Math.max(this.bonusLevel, player.logic.resourceExchange.level + 1);
     }
   },
   methods: {
@@ -25,6 +29,11 @@ export default {
       this.isAffordable = this.upgrade.isAffordable;
       this.level = this.upgrade.level;
       this.cost.copyFrom(this.upgrade.cost);
+      this.bonusLevel = Antiatom(1).effectOrDefault(0) + 1;
+    },
+    formatLevel(value) {
+      if (value % 1 === 0) return formatInt(value);
+      return format(value, 2, 1);
     }
   }
 };
@@ -37,6 +46,6 @@ export default {
   >
     <div>Level Up</div>
     <div>Cost: {{ format(cost, 2, 2) }} LP</div>
-    <div>Exchange Lv. {{ formatInt(level) }} ➜ {{ formatInt(level + 1) }}</div>
+    <div>Exchange Lv. {{ formatLevel(level) }} ➜ {{ formatLevel(nextLevel) }}</div>
   </div>
 </template>

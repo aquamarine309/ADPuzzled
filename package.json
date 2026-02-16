@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --watch-poll",
+    "serve": "vue-cli-service serve",
+    "serve:lan": "vue-cli-service serve --host $(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' | grep -v '127.0.0.1') --port 8080",
     "build:master": "node build/pre-build.js && vue-cli-service build --mode master && node build/post-build.js",
     "build:release": "node build/pre-build.js && vue-cli-service build && node build/post-build.js",
     "build:steam-development": "node build/pre-build.js && vue-cli-service build --mode steam-development",
