@@ -21,7 +21,7 @@ export default {
       return this.upgrade.config;
     },
     nextLevel() {
-      return Math.max(this.bonusLevel, player.logic.resourceExchange.level + 1);
+      return Math.max(this.bonusLevel, player.logic.resourceExchange.level + 2);
     }
   },
   methods: {
