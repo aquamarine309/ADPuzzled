@@ -27,10 +27,6 @@ window.player = {
       cost: [DC.D1, DC.D5, DC.E2, DC.E3, DC.E2350, DC.E2650, DC.E3000, DC.E3350][tier],
       amount: DC.D0,
       bought: 0
-    })),
-    logic: Array.range(0, 8).map(tier => ({
-      amount: DC.D0,
-      bought: 0
     }))
   },
   buyUntil10: true,
@@ -41,9 +37,6 @@ window.player = {
   infinityRebuyables: [0, 0, 0],
   hasDLC: false,
   gotSTD: false,
-  axioms: DC.D0,
-  crises: 0,
-  switchBonus: "extraBonusToAD",
   logic: {
     resourceExchange: {
       all: Array.range(0, 6).map(() => ({
@@ -55,12 +48,7 @@ window.player = {
     },
     spentPoints: DC.D0,
     upgradeBits: 0,
-    upgReqs: 0,
-    antiatoms: Array.range(0, 8).map(() => ({
-      level: 0,
-      amount: 0,
-      energy: DC.D0
-    }))
+    upgReqs: 0
   },
   challenge: {
     normal: {
@@ -70,7 +58,7 @@ window.player = {
     },
     infinity: {
       current: 0,
-      bestTimes: Array.repeat(Number.MAX_VALUE, 12),
+      bestTimes: Array.repeat(Number.MAX_VALUE, 11),
       completedBits: 0,
     },
     eternity: {
@@ -231,7 +219,6 @@ window.player = {
     singularity: { isActive: false },
     ipMultBuyer: { isActive: false, },
     epMultBuyer: { isActive: false, },
-    levelUp: { isActive: false }
   },
   infinityPoints: DC.D0,
   infinities: DC.D0,
@@ -393,7 +380,7 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: 0,
-  version: 37,
+  version: 35,
   infinityPower: DC.D1,
   postC4Tier: 0,
   extraBonusTimeLeft: 0,
@@ -1019,13 +1006,9 @@ export const Player = {
   },
 
   get eternityGoal() {
-    const baseGoal = EternityChallenge.isRunning
+    return EternityChallenge.isRunning
       ? EternityChallenge.current.currentGoal
       : requiredIPForEP(1);
-    if (InfinityChallenges.isIC12Unlocked && !InfinityChallenge(12).isCompleted) {
-      return baseGoal.max(InfinityChallenge(12).goal).max(DC.E1000);
-    }
-    return baseGoal;
   },
 
   get automatorUnlocked() {

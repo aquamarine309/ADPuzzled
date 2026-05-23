@@ -22,7 +22,7 @@ import { GameKeyboard } from "./keyboard";
 // for the other modifier keys (#3093).
 
 // Free keys:
-// i, l, o, p, q, v, w
+// i, j, k, l, n, o, p, q, v, w
 
 
 export const shortcuts = [
@@ -94,7 +94,7 @@ export const shortcuts = [
     visible: () => PlayerProgress.infinityUnlocked()
   }, {
     name: "Continuous Replicate",
-    keys: ["n"],
+    keys: ["o"],
     type: "bindRepeatableHotkey",
     function: () => {
       if (Replicanti.canReplicate) {
@@ -304,34 +304,6 @@ export const shortcuts = [
     type: "bind",
     function: () => {
       EventHub.dispatch(GAME_EVENT.ARROW_KEY_PRESSED, "right");
-      return false;
-    },
-    visible: false
-  }, {
-    name: "Switch Extra Bonus",
-    keys: ["alt", "k"],
-    type: "bind",
-    function: () => {
-      if (!Antiatom(1).milestones[1].isEffectActive) return;
-      const bonus = ExtraBonus.all[ExtraBonus.all.map(x => x.id).indexOf(player.switchBonus) + 1];
-      if (bonus && bonus.isUnlocked) {
-        player.switchBonus = bonus.id;
-        GameUI.notify.info(`You have switched extra bonus to ${bonus.config.name}`);
-      }
-      return false;
-    },
-    visible: false
-  }, {
-    name: "Switch Extra Bonus",
-    keys: ["alt", "j"],
-    type: "bind",
-    function: () => {
-      if (!Antiatom(1).milestones[1].isEffectActive) return;
-      const bonus = ExtraBonus.all[ExtraBonus.all.map(x => x.id).indexOf(player.switchBonus) - 1];
-      if (bonus && bonus.isUnlocked) {
-        player.switchBonus = bonus.id;
-        GameUI.notify.info(`You have switched extra bonus to ${bonus.config.name}`);
-      }
       return false;
     },
     visible: false

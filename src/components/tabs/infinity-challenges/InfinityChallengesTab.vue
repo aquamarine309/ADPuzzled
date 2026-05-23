@@ -23,11 +23,10 @@ export default {
     nextAtDisplay() {
       const first = this.nextIC?.id === 1;
       const next = InfinityChallenges.nextICUnlockAM;
-      const ic12Info = InfinityChallenges.isIC12Unlocked ? "" : "(?)";
 
       if (first) return `The first Infinity Challenge unlocks at ${format(next)} antimatter.`;
       return next === undefined
-        ? `All Infinity Challenges unlocked${ic12Info}`
+        ? "All Infinity Challenges unlocked"
         : `Next Infinity Challenge unlocks at ${format(next)} antimatter.`;
     }
   },
@@ -37,7 +36,7 @@ export default {
       this.showAllChallenges = player.options.showAllChallenges;
     },
     isChallengeVisible(challenge) {
-      return (challenge.isUnlocked || (this.showAllChallenges && PlayerProgress.eternityUnlocked())) && (challenge.id !== 12 || InfinityChallenge(12).isUnlocked);
+      return challenge.isUnlocked || (this.showAllChallenges && PlayerProgress.eternityUnlocked());
     }
   }
 };

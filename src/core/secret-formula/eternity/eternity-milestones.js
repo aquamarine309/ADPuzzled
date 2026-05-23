@@ -1,7 +1,7 @@
 export const eternityMilestones = {
   autobuyerIPMult: {
     eternities: 1,
-    reward: "Unlock the Infinity Point multiplier autobuyer and the auto level-up exchange",
+    reward: "Unlock the Infinity Point multiplier autobuyer",
     pelleUseless: true
   },
   keepAutobuyers: {
@@ -43,7 +43,7 @@ export const eternityMilestones = {
   },
   autoIC: {
     eternities: 7,
-    reward: `You complete Infinity Challenges as soon as you unlock them (except IC12),
+    reward: `You complete Infinity Challenges as soon as you unlock them,
       and keep the Dimensional Sacrifice Autobuyer`,
     pelleUseless: true
   },

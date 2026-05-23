@@ -22,11 +22,6 @@ export default {
       type: String,
       default: "Cost:",
       required: false
-    },
-    free: {
-      type: Boolean,
-      required: false,
-      default: false
     }
   },
   data() {
@@ -93,11 +88,6 @@ export default {
 <template>
   <span v-if="isVisible">
     <br v-if="br">
-    <template v-if="free">
-      <b>FREE!</b>
-    </template>
-    <template v-else>
-      {{ label }} {{ quantify(name, cost, 0, 0, formatCost) }}
-    </template>
+    {{ label }} {{ quantify(name, cost, 0, 0, formatCost) }}
   </span>
 </template>

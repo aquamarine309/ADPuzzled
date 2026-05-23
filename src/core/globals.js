@@ -61,7 +61,6 @@ export * from "./tickspeed";
 export * from "./dimensions/antimatter-dimension";
 export * from "./dimensions/infinity-dimension";
 export * from "./dimensions/time-dimension";
-export * from "./dimensions/logic-dimension";
 
 export * from "./time-studies";
 
@@ -97,5 +96,3 @@ export * from "./resource-exchange";
 export * from "./logic-upgrades";
 export * from "./logic-challenges";
 export * from "./extra-bonus";
-
-export * from "./antiatoms";

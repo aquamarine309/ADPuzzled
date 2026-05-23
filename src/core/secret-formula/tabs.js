@@ -37,16 +37,6 @@ export const tabs = [
         id: 2,
         hidable: true,
       },
-      {
-        key: "logic",
-        name: "Logic Dimensions",
-        hideAt: 2.5,
-        symbol: "<i class='fas fa-atom'></i>",
-        component: "LogicDimensionsTab",
-        condition: () => Antiatom(1).milestones[0].isEffectActive || Crisis.crises > 0,
-        id: 3,
-        hidable: true
-      }
     ]
   },
   {
@@ -253,7 +243,7 @@ export const tabs = [
         name: "Logic Challenges",
         symbol: "<i class='fas fa-puzzle-piece'></i>",
         component: "LogicChallengesTab",
-        condition: () => LogicUpgrade(10).isBought || PlayerProgress.eternityUnlocked(),
+        condition: () => LogicUpgrade(10).isBought,
         id: 3,
         hidable: true
       }
@@ -530,15 +520,6 @@ export const tabs = [
         symbol: "<i class='fas fa-exchange'></i>",
         component: "ResourceExchangeTab",
         id: 0,
-        hidable: true
-      },
-      {
-        key: "antiatoms",
-        name: "Antiatoms",
-        symbol: "<i class='fas fa-atom'></i>",
-        component: "AntiatomsTab",
-        condition: () => Antiatoms.isUnlocked,
-        id: 1,
         hidable: true
       }
     ]

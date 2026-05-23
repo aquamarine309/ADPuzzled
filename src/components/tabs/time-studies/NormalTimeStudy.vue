@@ -20,8 +20,7 @@ export default {
   },
   data: () => ({
     showCost: true,
-    showSTCost: false,
-    showLPCost: false
+    showSTCost: false
   }),
   computed: {
     study() {
@@ -46,7 +45,6 @@ export default {
       // appear more expensive simply due to buy order.
       this.showSTCost = VUnlocks.vAchievementUnlock.isUnlocked && !TimeStudy(this.study.id).isBought &&
         TimeStudy(this.study.id).costsST() && !Pelle.isDoomed;
-      this.showLPCost = TimeStudy(this.study.id).isLogic;
     },
   }
 };
@@ -57,7 +55,6 @@ export default {
     :setup="setup"
     :show-cost="showCost"
     :show-st-cost="showSTCost"
-    :show-lp-cost="showLPCost"
   >
     <HintText
       type="studies"

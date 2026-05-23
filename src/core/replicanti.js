@@ -179,7 +179,6 @@ export function replicantiLoop(diff, auto = true) {
   // This gets the pre-cap interval (above the cap we recalculate the interval).
   const interval = getReplicantiInterval(false);
   const canReplicate = Replicanti.canReplicate;
-  if (isNaN(diff)) return;
   if (diff && !canReplicate) {
     Replicanti.cooldown -= diff;
   }
@@ -534,8 +533,6 @@ export const Replicanti = {
       boughtGalaxyCap: 0,
       galaxies: 0,
       galCost: DC.E170,
-      boosts: 0,
-      cooldown: 1000
     };
   },
   unlock(freeUnlock = false) {

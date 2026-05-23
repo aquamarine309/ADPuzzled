@@ -1,6 +1,5 @@
 // Temporarily aggregate tab components here until GameUI is migrated to SFC
 import AlchemyTab from "./alchemy/AlchemyTab";
-import AntiatomsTab from "./antiatoms/AntiatomsTab";
 import AntimatterDimensionsTab from "./antimatter-dimensions/AntimatterDimensionsTab";
 import AutobuyersTab from "./autobuyers/AutobuyersTab";
 import AutomatorTab from "./automator/AutomatorTab";
@@ -21,7 +20,6 @@ import InfinityDimensionsTab from "./infinity-dimensions/InfinityDimensionsTab";
 import InfinityUpgradesTab from "./infinity-upgrades/InfinityUpgradesTab";
 import LaitelaTab from "./celestial-laitela/LaitelaTab";
 import LogicChallengesTab from "./logic-challenges/LogicChallengesTab";
-import LogicDimensionsTab from "./logic-dimensions/LogicDimensionsTab";
 import MultiplierBreakdownTab from "./statistics/MultiplierBreakdownTab";
 import NormalAchievementsTab from "./normal-achievements/NormalAchievementsTab";
 import NormalChallengesTab from "./normal-challenges/NormalChallengesTab";
@@ -50,7 +48,6 @@ const TabComponents = {
   AntimatterDimensionsTab,
   InfinityDimensionsTab,
   TimeDimensionsTab,
-  LogicDimensionsTab,
   OptionsSavingTab,
   OptionsVisualTab,
   OptionsGameplayTab,
@@ -91,8 +88,7 @@ const TabComponents = {
   CelestialNavigationTab,
   ShopTab,
   MultiplierBreakdownTab,
-  ResourceExchangeTab,
-  AntiatomsTab
+  ResourceExchangeTab
 };
 
 export default TabComponents;

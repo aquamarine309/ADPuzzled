@@ -30,10 +30,6 @@ export class NormalTimeStudyState extends TimeStudyState {
   get isTriad() {
     return this.id > 300;
   }
-  
-  get isLogic() {
-    return this.config.logic ?? false;
-  }
 
   get isBought() {
     return GameCache.timeStudies.value[this.id];
@@ -72,11 +68,7 @@ export class NormalTimeStudyState extends TimeStudyState {
   }
 
   get canBeBought() {
-    return this.checkRequirement() && this.checkSetRequirement() && this.checkLogic();
-  }
-  
-  checkLogic() {
-    return !this.isLogic || getLogicPoints().gte(this.config.LPCost);
+    return this.checkRequirement() && this.checkSetRequirement();
   }
 
   get isEffectActive() {
@@ -109,11 +101,6 @@ export class NormalTimeStudyState extends TimeStudyState {
   get path() {
     return this._path;
   }
-  
-  refund() {
-    if (this.isLogic) return;
-    super.refund();
-  }
 }
 
 NormalTimeStudyState.studies = mapGameData(
@@ -134,16 +121,8 @@ export function TimeStudy(id) {
  * @returns {NormalTimeStudyState[]}
  */
 TimeStudy.boughtNormalTS = function() {
-  return player.timestudy.studies.map(id => TimeStudy(id)).filter(x => !x.isLogic);
+  return player.timestudy.studies.map(id => TimeStudy(id));
 };
-
-/**
- * @returns {NormalTimeStudyState[]}
- */
-TimeStudy.boughtLogicTS = function() {
-  return player.timestudy.studies.map(id => TimeStudy(id)).filter(x => x.isLogic);
-};
-
 
 TimeStudy.preferredPaths = {
   dimension: {

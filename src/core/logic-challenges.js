@@ -109,7 +109,6 @@ export const LogicChallenges = {
   },
   clearCompletions() {
     player.challenge.logic.completedBits = 0;
-    player.challenge.logic.current = 0;
     LogicChallenges._completions.invalidate();
   },
   /**

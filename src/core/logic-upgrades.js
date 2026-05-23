@@ -14,11 +14,6 @@ class LogicUpgradeState extends BitPurchasableMechanicState {
   get currency() {
     return Currency.logicPoints;
   }
-  
-  get isAffordable() {
-    if (Antiatom(1).milestones[0].isEffectActive) return true;
-    return super.isAffordable;
-  }
 
   get name() {
     return this.config.name;
@@ -50,15 +45,6 @@ class LogicUpgradeState extends BitPurchasableMechanicState {
     player.logic.upgReqs |= (1 << this.id);
     GameUI.notify.logic(`You've unlocked a Logic Upgrade: ${this.config.name}`);
   }
-  
-  purchase() {
-    if (!this.canBeBought) return false;
-    this.isBought = true;
-    this.onPurchased();
-    GameCache.spentLogicPoints.invalidate();
-    GameUI.update();
-    return true;
-  }
 
   onPurchased() {
     const id = this.id;
@@ -84,7 +70,7 @@ export const LogicUpgrades = {
   reset() {
     player.logic.upgradeBits = 0;
     player.logic.upgReqs = 0;
-    GameCache.spentLogicPoints.invalidate();
+    player.logic.spentPoints = DC.D0;
     GameCache.maxTier.invalidate();
   }
 };

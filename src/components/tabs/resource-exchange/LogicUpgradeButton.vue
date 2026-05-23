@@ -23,8 +23,7 @@ export default {
       isAvailableForPurchase: false,
       canBeBought: false,
       isBought: false,
-      isPossible: false,
-      isFree: false
+      isPossible: false
     };
   },
   computed: {
@@ -55,7 +54,6 @@ export default {
       this.canBeBought = upgrade.canBeBought;
       this.isBought = !upgrade.isRebuyable && upgrade.isBought;
       this.isPossible = upgrade.isPossible;
-      this.isFree = Antiatom(1).milestones[0].isEffectActive;
     }
   }
 };
@@ -94,7 +92,6 @@ export default {
             :config="config"
             br
             name="Logic Point"
-            :free="isFree"
           />
         </template>
       </span>

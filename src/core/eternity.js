@@ -125,7 +125,6 @@ export function eternity(force, auto, specialConditions = {}) {
 
   Currency.infinityPoints.reset();
   InfinityDimensions.resetAmount();
-  Antiatoms.reset();
   player.records.thisInfinity.bestIPmin = DC.D0;
   player.records.bestInfinity.bestIPminEternity = DC.D0;
   player.records.thisEternity.bestEPmin = DC.D0;
@@ -179,7 +178,7 @@ export function animateAndEternity(callback) {
 
 export function initializeChallengeCompletions(isReality) {
   NormalChallenges.clearCompletions();
-  if (!PelleUpgrade.keepInfinityChallenges.canBeApplied) InfinityChallenges.clearCompletions(false);
+  if (!PelleUpgrade.keepInfinityChallenges.canBeApplied) InfinityChallenges.clearCompletions();
   if (!isReality && EternityMilestone.keepAutobuyers.isReached || Pelle.isDoomed) {
     NormalChallenges.completeAll();
   }

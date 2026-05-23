@@ -1,10 +1,13 @@
 import TWEEN from "tween.js";
 
+import eruda from "eruda";
+
 import { ElectronRuntime, SteamRuntime } from "@/steam";
 
 import { DC } from "./core/constants";
 import { deepmergeAll } from "@/utility/deepmerge";
 import { DEV } from "@/env";
+import { isDevEnvironment } from "./core/devtools";
 import { SpeedrunMilestones } from "./core/speedrun";
 import { Cloud } from "./core/storage";
 import { supportedBrowsers } from "./supported-browsers";
@@ -576,13 +579,11 @@ export function gameLoop(passDiff, options = {}) {
   EternityChallenge(12).tryFail();
   Achievements._power.invalidate();
 
-  LogicDimensions.tick(diff);
   TimeDimensions.tick(diff);
   InfinityDimensions.tick(diff);
   AntimatterDimensions.tick(diff);
 
   ExtraBonus.tick(realDiff);
-  Antiatoms.tick(diff);
 
   const gain = Math.clampMin(FreeTickspeed.fromShards(Currency.timeShards.value).newAmount - player.totalTickGained, 0);
   player.totalTickGained += gain;
@@ -1106,6 +1107,9 @@ export function init() {
   if (DEV) {
     // eslint-disable-next-line no-console
     console.log("👨‍💻 Development Mode 👩‍💻");
+  }
+  if (isDevEnvironment()) {
+    eruda.init();
   }
   ElectronRuntime.initialize();
   SteamRuntime.initialize();
