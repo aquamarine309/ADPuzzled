@@ -404,7 +404,7 @@ class AntimatterDimensionState extends DimensionState {
   }
 
   get hasDLC() {
-    return player.hasDLC;
+    return player.hasDLC || this.tier === 1;
   }
 
   get isHighest() {
