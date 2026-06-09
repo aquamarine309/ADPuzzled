@@ -118,6 +118,15 @@ export const Autobuyers = (function() {
         Autobuyer.eternity,
         Autobuyer.reality].some(autobuyer => autobuyer.isUnlocked);
     },
+    
+    upgradeAll() {
+      const autobuyers = Autobuyers.upgradeable;
+      for (const autobuyer of autobuyers) {
+        while (true) {
+          if (!autobuyer.upgradeInterval(false)) break;
+        }
+      }
+    },
 
     toggle() {
       player.auto.autobuyersOn = !player.auto.autobuyersOn;

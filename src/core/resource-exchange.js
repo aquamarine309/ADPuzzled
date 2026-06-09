@@ -44,7 +44,7 @@ class ResourceExchangeState extends GameMechanicState {
   }
 
   get willLeave() {
-    return this.currency.value.times(1 - this.exchangeRate);
+    return this.currency.value.times(1 - this.exchangeRate).clampMin(this.min);
   }
 
   get newExchanged() {

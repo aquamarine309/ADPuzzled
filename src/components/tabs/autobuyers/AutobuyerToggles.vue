@@ -41,6 +41,9 @@ export default {
       for (const autobuyer of Autobuyers.unlocked) {
         autobuyer.isActive = this.allAutobuyersDisabled;
       }
+    },
+    upgradeAll() {
+      Autobuyers.upgradeAll();
     }
   }
 };
@@ -59,6 +62,12 @@ export default {
       @click="toggleAllAutobuyers()"
     >
       {{ allAutobuyersDisabled ? "Enable" : "Disable" }} all autobuyers
+    </PrimaryButton>
+    <PrimaryButton
+      class="o-primary-btn--subtab-option"
+      @click="upgradeAll()"
+    >
+      Upgrade All
     </PrimaryButton>
     <span v-if="isDoomed">
       <PrimaryButton

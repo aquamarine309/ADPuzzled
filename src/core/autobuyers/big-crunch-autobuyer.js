@@ -81,8 +81,9 @@ export class BigCrunchAutobuyerState extends UpgradeableAutobuyerState {
   }
 
   upgradeInterval(free) {
-    super.upgradeInterval(free);
+    const res = super.upgradeInterval(free);
     TabNotification.breakInfinity.tryTrigger();
+    return res;
   }
 
   bumpAmount(mult) {
