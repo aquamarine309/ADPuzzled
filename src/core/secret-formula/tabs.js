@@ -243,7 +243,7 @@ export const tabs = [
         name: "Logic Challenges",
         symbol: "<i class='fas fa-puzzle-piece'></i>",
         component: "LogicChallengesTab",
-        condition: () => LogicUpgrade(10).isBought,
+        condition: () => LogicUpgrade(10).isBought || PlayerProgress.eternityUnlocked(),
         id: 3,
         hidable: true
       }
