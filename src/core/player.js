@@ -37,6 +37,8 @@ window.player = {
   infinityRebuyables: [0, 0, 0],
   hasDLC: false,
   gotSTD: false,
+  mazeAM: DC.D0,
+  mazeIngressing: false,
   logic: {
     resourceExchange: {
       all: Array.range(0, 6).map(() => ({

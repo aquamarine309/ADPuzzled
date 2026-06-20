@@ -28,7 +28,8 @@ export function updateNormalAndInfinityChallenges(diff) {
     const chall3PowMaxValue = NormalChallenges.chall3PowMaxValue;
     if (player.chall3Pow.lt(chall3PowMaxValue)) {
       const multiplier = Math.pow(Math.log(
-        Currency.infinities.value.add(1).ln() *
+        Currency.infinities.value
+        .add(Currency.eternities.value).add(1).ln() *
         DimBoost.purchasedBoosts + 1
       ), 1.3) + 1;
       player.chall3Pow = player.chall3Pow.times(DC.D1_0025.pow(multiplier * diff)).clampMax(chall3PowMaxValue);

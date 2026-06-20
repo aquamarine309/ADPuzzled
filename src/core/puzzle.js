@@ -5,5 +5,9 @@ export const Puzzles = {
     return GameCache.maxTier.value;
   },
   
-  fakeAchievements: [23, 43]
+  fakeAchievements: [23, 43],
+  
+  mazeUnlocked() {
+    return EternityMilestone.keepAutobuyers.isReached;
+  }
 };

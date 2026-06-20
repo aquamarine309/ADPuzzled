@@ -121,7 +121,9 @@ export class Currency {
   get operations() { throw new NotImplementedError(); }
 
   add(amount) {
-    this.value = this.operations.add(this.value, amount);
+    if (amount.__ob__) throw new Error("Cannot add a value with __ob__ property");
+    const value = this.operations.add(this.value, amount);
+    this.value = value;
   }
 
   subtract(amount) {
@@ -200,6 +202,7 @@ Currency.antimatter = new class extends DecimalCurrency {
   get value() { return player.antimatter; }
 
   set value(value) {
+    if (value.__ob__) throw new Error("Cannot set a value with __ob__ property");
     const gainedAM = value.clampMax(Player.infinityLimit);
     if (InfinityChallenges.nextIC) InfinityChallenges.notifyICUnlock(gainedAM);
     if (GameCache.cheapestAntimatterAutobuyer.value && gainedAM.gte(GameCache.cheapestAntimatterAutobuyer.value)) {
@@ -220,6 +223,10 @@ Currency.antimatter = new class extends DecimalCurrency {
 
   add(amount) {
     const gainedAM = amount.clampMax(Player.infinityLimit);
+    if (player.mazeIngressing) {
+      player.mazeAM = player.mazeAM.add(gainedAM);
+      return;
+    }
     super.add(gainedAM);
     if (gainedAM.gt(0)) {
       player.records.totalAntimatter = player.records.totalAntimatter.add(gainedAM);

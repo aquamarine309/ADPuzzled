@@ -94,7 +94,7 @@ export default {
       const currentLC = LogicChallenge.current;
       this.inLogicChallenge = currentLC !== undefined;
       if (this.inLogicChallenge) {
-        this.lcGoal = currentLC.goal;
+        this.lcGoal.copyFrom(currentLC.goal);
       }
       this.canCompleteLC = this.inLogicChallenge && currentLC.canBeCompleted;
     },

@@ -5,6 +5,7 @@ import AntimatterGalaxyRow from "@/components/tabs/antimatter-dimensions/ModernA
 import DimensionBoostRow from "@/components/tabs/antimatter-dimensions/ModernDimensionBoostRow";
 import PrimaryButton from "@/components/PrimaryButton";
 import TickspeedRow from "@/components/tabs/antimatter-dimensions/TickspeedRow";
+import MazeRow from "./MazeRow";
 
 export default {
   name: "ModernAntimatterDimensionsTab",
@@ -14,7 +15,8 @@ export default {
     AntimatterDimensionRow,
     AntimatterGalaxyRow,
     DimensionBoostRow,
-    TickspeedRow
+    TickspeedRow,
+    MazeRow
   },
   data() {
     return {
@@ -153,6 +155,7 @@ export default {
       </PrimaryButton>
       <AntimatterGalaxyRow />
     </div>
+    <MazeRow />
     <AntimatterDimensionProgressBar />
   </div>
 </template>

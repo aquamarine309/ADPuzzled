@@ -19,6 +19,9 @@ export default {
   computed: {
     challenges() {
       return LogicChallenges.all;
+    },
+    inf() {
+      return Decimal.NUMBER_MAX_VALUE;
     }
   },
   methods: {
