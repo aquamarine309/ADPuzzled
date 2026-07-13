@@ -521,6 +521,14 @@ export const tabs = [
         component: "ResourceExchangeTab",
         id: 0,
         hidable: true
+      },
+      {
+        key: "tense-logic",
+        name: "Tense Logic",
+        symbol: "<i class='fas fa-hourglass-half'></i>",
+        component: "TenseLogicTab",
+        id: 1,
+        hiddable: true
       }
     ]
   }

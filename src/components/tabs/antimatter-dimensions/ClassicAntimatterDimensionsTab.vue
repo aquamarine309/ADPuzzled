@@ -6,7 +6,6 @@ import AntimatterGalaxyRow from "./ClassicAntimatterGalaxyRow";
 import DimensionBoostRow from "./ClassicDimensionBoostRow";
 import PrimaryButton from "@/components/PrimaryButton";
 import TickspeedRow from "./TickspeedRow";
-import MazeRow from "./MazeRow";
 
 export default {
   name: "ClassicAntimatterDimensionsTab",
@@ -17,8 +16,7 @@ export default {
     AntimatterGalaxyRow,
     DimensionBoostRow,
     AntimatterDimensionProgressBar,
-    TickspeedRow,
-    MazeRow
+    TickspeedRow
   },
   data() {
     return {
@@ -76,7 +74,6 @@ export default {
       <DimensionBoostRow />
       <AntimatterGalaxyRow />
     </div>
-    <MazeRow />
     <PrimaryButton
       v-if="isQuickResetAvailable"
       class="o-primary-btn--quick-reset"

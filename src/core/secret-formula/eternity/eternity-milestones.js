@@ -6,7 +6,7 @@ export const eternityMilestones = {
   },
   keepAutobuyers: {
     eternities: 2,
-    reward: "You start Eternity with all Normal Challenges complete, all normal autobuyers, and infinity broken. Unlock antimatter maze"
+    reward: "You start Eternity with all Normal Challenges complete, all normal autobuyers, and infinity broken"
   },
   autobuyerReplicantiGalaxy: {
     eternities: 3,

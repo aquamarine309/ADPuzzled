@@ -223,10 +223,6 @@ Currency.antimatter = new class extends DecimalCurrency {
 
   add(amount) {
     const gainedAM = amount.clampMax(Player.infinityLimit);
-    if (player.mazeIngressing) {
-      player.mazeAM = player.mazeAM.add(gainedAM);
-      return;
-    }
     super.add(gainedAM);
     if (gainedAM.gt(0)) {
       player.records.totalAntimatter = player.records.totalAntimatter.add(gainedAM);

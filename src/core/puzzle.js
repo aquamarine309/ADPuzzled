@@ -6,8 +6,4 @@ export const Puzzles = {
   },
   
   fakeAchievements: [23, 43],
-  
-  mazeUnlocked() {
-    return EternityMilestone.keepAutobuyers.isReached;
-  }
 };
