@@ -14,7 +14,7 @@ export const resourceExchange = {
       const capped = cappedValue.pow(0.005);
       return baseValue.times(capped);
     },
-    min: DC.E1
+    min: DC.E2
   },
   infinityPoints: {
     id: 1,

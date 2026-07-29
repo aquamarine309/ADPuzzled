@@ -54,7 +54,7 @@ export default {
       class="c-resource-info-values"
     >
       <span>Exchanged Amount: {{ format(exchanged, 2, 1) }} ➜ {{ format(newExchanged, 2, 1) }}</span>
-      <span>Points Multiplier: {{ formatX(value, 2, 2) }} ➜ {{ formatX(newValue, 2, 2) }}</span>
+      <span>Point Multiplier: {{ formatX(value, 2, 2) }} ➜ {{ formatX(newValue, 2, 2) }}</span>
     </div>
     <div v-else>
       (Unlock at Exchange Level {{ formatInt(requiredLevel) }})
