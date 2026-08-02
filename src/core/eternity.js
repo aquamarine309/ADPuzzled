@@ -3,6 +3,7 @@ import { DC } from "./constants";
 import FullScreenAnimationHandler from "./full-screen-animation-handler";
 
 function giveEternityRewards(auto) {
+  player.tense.pastScore = TenseLogic.score;
   player.records.bestEternity.time = Math.min(player.records.thisEternity.time, player.records.bestEternity.time);
   Currency.eternityPoints.add(gainedEternityPoints());
 
@@ -137,6 +138,7 @@ export function eternity(force, auto, specialConditions = {}) {
   ResourceExchangeUpgrade.reset();
   resetAllResourceExchange();
   LogicChallenges.clearCompletions();
+  player.challenge.logic.current = 0;
   LogicUpgrades.reset();
   applyEU1();
   player.records.thisInfinity.maxAM = DC.D0;

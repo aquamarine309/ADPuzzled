@@ -50,6 +50,10 @@ window.player = {
     upgradeBits: 0,
     upgReqs: 0
   },
+  tense: {
+    pastScore: 0,
+    upgradeWeights: Array.repeat(0, 6)
+  },
   challenge: {
     normal: {
       current: 0,
@@ -219,6 +223,7 @@ window.player = {
     singularity: { isActive: false },
     ipMultBuyer: { isActive: false, },
     epMultBuyer: { isActive: false, },
+    levelUp: { isActive: false, },
   },
   infinityPoints: DC.D0,
   infinities: DC.D0,

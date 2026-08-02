@@ -1,8 +1,7 @@
 <script>
 import PrimaryButton from "../../PrimaryButton";
-
+import PrimaryToggleButton from "../../PrimaryToggleButton";
 import SliderComponent from "../../SliderComponent";
-
 import ExchangeButton from "./ExchangeButton";
 import LevelUpButton from "./LevelUpButton";
 import ResourceExchangeLayout from "./ResourceExchangeLayout";
@@ -19,6 +18,7 @@ export default {
     LevelUpButton,
     SliderComponent,
     PrimaryButton,
+    PrimaryToggleButton,
     LogicUpgradeButton
   },
   data() {
@@ -31,6 +31,8 @@ export default {
       sliderInterval: 1,
       showIPMultiplier: false,
       ipMult: new Decimal(0),
+      autoLevelUpUnlocked: false,
+      autoLevelUp: false
     };
   },
   computed: {
@@ -54,6 +56,9 @@ export default {
   watch: {
     resourceId(value) {
       player.logic.resourceExchange.lastSelected = value;
+    },
+    autoLevelUp(value) {
+      Autobuyer.levelUp.isActive = value;
     }
   },
   methods: {
@@ -67,6 +72,10 @@ export default {
       this.showIPMultiplier = LogicChallenge(7).reward.canBeApplied;
       if (this.showIPMultiplier) {
         this.ipMult = LogicChallenge(7).reward.effectValue;
+      }
+      this.autoLevelUpUnlocked = Autobuyer.levelUp.isUnlocked;
+      if (this.autoLevelUpUnlocked) {
+        this.autoLevelUp = Autobuyer.levelUp.isActive;
       }
     },
     handleToggle(index) {
@@ -98,6 +107,13 @@ export default {
       >
         Click for Logic info
       </PrimaryButton>
+      <PrimaryToggleButton
+        class="o-primary-btn--subtab-option"
+        v-if="autoLevelUpUnlocked"
+        v-model="autoLevelUp"
+        label="Auto Level-Up: "
+      />
+      </PrimaryToggleButton>
     </div>
     <ResourceInfo :resource="currentResource" />
     <div class="c-resource-exchange-layout-container">

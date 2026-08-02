@@ -35,7 +35,7 @@ export const logicChallenges = [
     id: 4,
     description: "Infinity Power provide a multiplier to game speed instead of Antimatter Dimensions.",
     goal: DC.E10000,
-    effect: () => Math.clamp(Math.pow(Currency.infinityPower.value.plus(1).log10(), InfinityDimensions.powerConversionRate), 1, 1e30),
+    effect: () => Math.clamp(Math.pow(Currency.infinityPower.value.plus(1).log10(), InfinityDimensions.powerConversionRate), 1, 1e6),
     formatEffect: value => format(value, 3, 3),
     reward: {
       description: "Decrease the cost of Replicanti Upgrade based on current Infinity Points",

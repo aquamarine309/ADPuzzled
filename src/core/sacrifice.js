@@ -119,7 +119,7 @@ export class Sacrifice {
     }
 
     const multiplier = prePowerBoost.clampMin(1).pow(this.sacrificeExponent);
-    if (NormalChallenge(8).isRunning) return multiplier.clampMin(this.c8SoftcappedMultiplier);
+    if (NormalChallenge(8).isRunning) return multiplier.clamp(this.c8SoftcappedMultiplier, DC.E50000);
     return multiplier;
   }
 

@@ -18,7 +18,7 @@ class LogicChallengeState extends GameMechanicState {
   }
 
   get isUnlocked() {
-    if (this.id === 1) return LogicUpgrade(10).isBought;
+    if (this.id === 1) return LogicUpgrade(10).isBought || EternityMilestone.autobuyerID1.isReached;
     return LogicChallenge(this.id - 1).isCompleted;
   }
 
@@ -107,8 +107,15 @@ export const LogicChallenges = {
   completeAll() {
     for (const challenge of LogicChallenges.all) challenge.complete();
   },
-  clearCompletions() {
+  clearCompletions(force = false) {
+    if (!force && EternityMilestone.autobuyerID8.isReached) return;
     player.challenge.logic.completedBits = 0;
+    if (!force) {
+      for (let i = 1; i <= 8; i++) {
+        if (!EternityMilestone[`autobuyerID${i}`].isReached) break;
+        LogicChallenge(i).complete();
+      }
+    }
     LogicChallenges._completions.invalidate();
   },
   /**

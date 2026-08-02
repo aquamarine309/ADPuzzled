@@ -176,6 +176,7 @@ export function replicantiCap() {
 // eslint-disable-next-line complexity
 export function replicantiLoop(diff, auto = true) {
   if (!player.replicanti.unl) return;
+  if (!isFinite(diff)) return;
   // This gets the pre-cap interval (above the cap we recalculate the interval).
   const interval = getReplicantiInterval(false);
   const canReplicate = Replicanti.canReplicate;
@@ -533,6 +534,8 @@ export const Replicanti = {
       boughtGalaxyCap: 0,
       galaxies: 0,
       galCost: DC.E170,
+      cooldown: 0,
+      boosts: unlocked ? player.replicanti.boosts : 0
     };
   },
   unlock(freeUnlock = false) {
@@ -540,6 +543,7 @@ export const Replicanti = {
     if (freeUnlock || LogicChallenge(3).isCompleted) {
       player.replicanti.unl = true;
       player.replicanti.timer = 0;
+      player.replicanti.boosts = 0;
       Replicanti.amount = DC.D1;
     }
   },

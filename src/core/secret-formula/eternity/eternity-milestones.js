@@ -32,8 +32,8 @@ export const eternityMilestones = {
         EternityMilestone.autoInfinities.isReached).gt(0);
       if (!player.options.offlineProgress) return `This milestone would give offline EP generation, but offline progress
         is currently disabled`;
-      const effectText = (em200 || em1000) ? "Inactive" : `Currently ${format(EPmin, 2, 2)} EP/min`;
-      return `While offline, gain ${formatPercents(0.25)} of your best Eternity Points per minute from previous
+      const effectText = (em200 || em1000) ? "Inactive" : `Currently ${format(EPmin, 2, EPmin.lt(0.01) ? 4 : 2)} EP/min in game time`;
+      return `While offline, gain ${formatPercents(0.0025, 4)} of your best Eternity Points per minute from previous
         Eternities (${effectText})`;
     },
     activeCondition: () => (player.options.offlineProgress
@@ -59,56 +59,61 @@ export const eternityMilestones = {
   },
   unlockReplicanti: {
     eternities: 10,
-    reward: "You start with Replicanti unlocked",
+    reward: "You start with Replicanti unlocked, and keep Replicanti Boost.",
     givenByPelle: () => PelleUpgrade.replicantiStayUnlocked.isBought,
     pelleUseless: true
   },
   autobuyerID1: {
     eternities: 11,
-    reward: "Unlock the 1st Infinity Dimension Autobuyer",
+    reward: "Unlock the 1st Infinity Dimension Autobuyer and complete Logic Challenge 1",
     givenByPelle: () => PelleUpgrade.IDAutobuyers.isBought,
     pelleUseless: true
   },
   autobuyerID2: {
     eternities: 12,
-    reward: "Unlock the 2nd Infinity Dimension Autobuyer",
+    reward: "Unlock the 2nd Infinity Dimension Autobuyer and complete Logic Challenge 2",
     givenByPelle: () => PelleUpgrade.IDAutobuyers.isBought,
     pelleUseless: true
   },
   autobuyerID3: {
     eternities: 13,
-    reward: "Unlock the 3rd Infinity Dimension Autobuyer",
+    reward: "Unlock the 3rd Infinity Dimension Autobuyer and complete Logic Challenge 3",
     givenByPelle: () => PelleUpgrade.IDAutobuyers.isBought,
     pelleUseless: true
   },
   autobuyerID4: {
     eternities: 14,
-    reward: "Unlock the 4th Infinity Dimension Autobuyer",
+    reward: "Unlock the 4th Infinity Dimension Autobuyer and complete Logic Challenge 4",
     givenByPelle: () => PelleUpgrade.IDAutobuyers.isBought,
     pelleUseless: true
   },
   autobuyerID5: {
     eternities: 15,
-    reward: "Unlock the 5th Infinity Dimension Autobuyer",
+    reward: "Unlock the 5th Infinity Dimension Autobuyer and complete Logic Challenge 5",
     givenByPelle: () => PelleUpgrade.IDAutobuyers.isBought,
     pelleUseless: true
   },
   autobuyerID6: {
     eternities: 16,
-    reward: "Unlock the 6th Infinity Dimension Autobuyer",
+    reward: "Unlock the 6th Infinity Dimension Autobuyer and complete Logic Challenge 6",
     givenByPelle: () => PelleUpgrade.IDAutobuyers.isBought,
     pelleUseless: true
   },
   autobuyerID7: {
     eternities: 17,
-    reward: "Unlock the 7th Infinity Dimension Autobuyer",
+    reward: "Unlock the 7th Infinity Dimension Autobuyer and complete Logic Challenge 7",
     givenByPelle: () => PelleUpgrade.IDAutobuyers.isBought,
     pelleUseless: true
   },
   autobuyerID8: {
     eternities: 18,
-    reward: "Unlock the 8th Infinity Dimension Autobuyer",
+    reward: "Unlock the 8th Infinity Dimension Autobuyer and complete Logic Challenge 8",
     givenByPelle: () => PelleUpgrade.IDAutobuyers.isBought,
+    pelleUseless: true
+  },
+  autoLevelUp: {
+    eternities: 20,
+    reward: "Unlock Level Up Autobuyer",
     pelleUseless: true
   },
   autoUnlockID: {
