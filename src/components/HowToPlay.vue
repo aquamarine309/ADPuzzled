@@ -91,7 +91,7 @@ export default {
   width: 2rem;
   height: 2rem;
   border-radius: var(--var-border-radius, 50%);
-  background: gold;
+  background: red;
   animation: a-opacity 3s infinite;
   z-index: 2;
 }
