@@ -45,6 +45,7 @@ export default {
   },
   methods: {
     update() {
+      if (!this.milestone) return;
       this.isLocked = this.isDoomed && this.config.givenByPelle !== undefined;
       this.isReached = this.milestone.isReached;
     }
@@ -54,7 +55,7 @@ export default {
 
 <template>
   <div
-    v-if="!config.invisible"
+    v-if="milestone && !config.invisible"
     class="l-eternity-milestone"
   >
     <span class="o-eternity-milestone__goal">
