@@ -135,7 +135,7 @@ export default {
         </div>
         <div
           v-if="currentResource.isUnlocked && rateUnlocked"
-          class="c-exchange-rate-conatiner"
+          class="c-exchange-rate-container"
         >
           <div>
             <b>Exchange rate: {{ formatInt(sliderInterval) }}%</b>

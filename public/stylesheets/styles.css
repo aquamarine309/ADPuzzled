@@ -9606,7 +9606,7 @@ input.o-automator-block-input {
   font-size: 1.4rem;
 }
 
-.c-exchange-rate-conatiner {
+.c-exchange-rate-container {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -9614,7 +9614,7 @@ input.o-automator-block-input {
   margin: 1rem 0;
 }
 
-.c-exchange-rate-conatiner > *  {
+.c-exchange-rate-container > *  {
   flex: 1;
   display: flex;
   justify-content: center;

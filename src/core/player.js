@@ -52,7 +52,7 @@ window.player = {
   },
   tense: {
     pastScore: 0,
-    upgradeWeights: Array.repeat(0, 6)
+    boostWeights: Array.repeat(0, 6)
   },
   challenge: {
     normal: {
