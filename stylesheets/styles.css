@@ -61,6 +61,7 @@ html {
 :root {
   /* Don't change this instance of --color-text or any of its values in other themes to not be hex; it's parsed as hex
     elsewhere to provide theme-dependent color gradients */
+  --color-tense: #fa9fe2;
   --color-text: #000000;
   --color-text-inverted: white;
   --color-base: #f2f2f2;
