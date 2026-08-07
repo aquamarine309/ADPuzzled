@@ -1,12 +1,20 @@
 <script>
+import TenseBoostRow from "./TenseBoostRow";
+
 export default {
   name: "TenseLogicTab",
+  components: {
+    TenseBoostRow
+  },
   data() {
     return {
       isUnlocked: false,
       past: 0,
       current: 0
     }
+  },
+  computed: {
+    boosts() { return TenseBoost.all; }
   },
   methods: {
     update() {
@@ -17,7 +25,7 @@ export default {
     },
     formatScore(score) {
       if (score >= 1e6) return format(score, 3);
-      return format(score);
+      return formatInt(score);
     }
   }
 }
@@ -28,6 +36,7 @@ export default {
     <div v-if="isUnlocked">
       <div class="c-tense-description">
         The score for each Eternity is based on your IP, highest dimension, and time. You can distribute your current score into the boosts below, which will apply in the next Eternity.
+        <i>Your present actions shape the future.</i>
       </div>
       
       <div class="l-tense-scores">
@@ -43,7 +52,11 @@ export default {
 
       <div class="c-tense-boosts-title">Available Boosts</div>
       <div class="l-tense-boosts-container">
-        <!-- TODO -->
+        <TenseBoostRow
+          v-for="boost in boosts"
+          :key="boost.id"
+          :boost="boost"
+        />
       </div>
     </div>
 
@@ -56,7 +69,6 @@ export default {
 
 <style scoped>
 .c-tense-tab {
-  --color-tense: #FA9FE2;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -81,7 +93,7 @@ export default {
 .c-tense-score-card {
   background-color: var(--color-base);
   border: 1px solid var(--color-tense);
-  border-radius: 0.6rem;
+  border-radius: var(--var-border-radius, 0.6rem);
   padding: 0.8rem 2rem 0.8rem 2rem;
   display: flex;
   align-items: center;
@@ -120,12 +132,13 @@ export default {
   width: 100%;
   justify-content: flex-start;
   padding-top: 0.5rem;
+  flex-direction: column;
 }
 
 .c-tense-locked-container {
   border: 1px solid var(--color-bad);
   background-color: rgba(255, 0, 0, 0.08);
-  border-radius: 1rem;
+  border-radius: var(--var-border-radius, 1rem);
   padding: 2.5rem 2rem;
   text-align: center;
   font-size: 1.5rem;

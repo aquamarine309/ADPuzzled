@@ -5,7 +5,6 @@ export function updateNormalAndInfinityChallenges(diff) {
   if (NormalChallenge(11).isRunning || InfinityChallenge(6).isRunning) {
     if (AntimatterDimension(2).amount.neq(0)) {
       Currency.matter.bumpTo(1);
-      // These caps are values which occur at approximately e308 IP
       const boosts = DimBoost.totalBoosts;
       let cappedBase = 1.03 +
         (Math.clampMax(boosts * (1 + boosts / 500), 400) +
