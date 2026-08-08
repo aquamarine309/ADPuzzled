@@ -103,7 +103,9 @@ Object.defineProperty(ResourceExchange, "selected", {
 });
 
 export function getLogicPoints() {
-  return ResourceExchange.all.map(r => r.value).reduce(Decimal.prodReducer);
+  let points = ResourceExchange.all.map(r => r.value).reduce(Decimal.prodReducer);
+  points = points.timesEffectOf(TenseBoost.logicBoost);
+  return points;
 }
 
 class ResourceExchangeUpgradeState extends GameMechanicState {

@@ -136,7 +136,8 @@ function totalEPMult() {
         TimeStudy(123),
         RealityUpgrade(12),
         GlyphEffect.epMult,
-        ExtraBonus.extraBonusToEP
+        ExtraBonus.extraBonusToEP,
+        TenseBoost.timeBoost
       );
 }
 

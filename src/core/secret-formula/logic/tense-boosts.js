@@ -19,7 +19,7 @@ export const tenseBoosts = {
     id: 2,
     symbol: "Δ",
     color: "var(--color-eternity)",
-    description: "Eternity Point and Eternity Dimension multiplier.",
+    description: "Eternity Point and Time Dimension multiplier.",
     effect: score => Decimal.sqrt(score).times(0.2).add(1),
     formatEffect: value => formatX(value, 2, 2)
   },
@@ -39,7 +39,7 @@ export const tenseBoosts = {
     effect: score => Decimal.pow(score, 30).add(1),
     formatEffect: value => formatX(value, 2, 2)
   },
-  scoreBoost: {
+  tenseBoost: {
     id: 5,
     symbol: "<i class='fas fa-hourglass-half'></i>",
     color: "var(--color-tense)",

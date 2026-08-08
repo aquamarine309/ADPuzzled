@@ -11,6 +11,7 @@ export const TenseLogic = {
       Currency.infinityPoints.value.add(1).log10() * 0.1
       * 3e3 / Math.sqrt(player.records.thisEternity.time || 1)
       * Math.pow(10, Math.pow(1.5, 5 - GameCache.maxTier.value) - 1)
+      * TenseBoost.tenseBoost.effectOrDefault(1)
     );
   },
   
@@ -33,9 +34,11 @@ class TenseBoostState extends GameMechanicState {
   set weight(value) {
     player.tense.boostWeights[this.id] = Math.clampMin(value, 0);
     TenseLogic.totalWeight.invalidate();
+    GameCache.logicPoints.invalidate();
   }
   
   scoreAt(totalScore) {
+    if (this.weight === 0) return 0;
     const total = TenseLogic.totalWeight.value;
     if (total === 0) return 0;
     return this.weight * totalScore / total;

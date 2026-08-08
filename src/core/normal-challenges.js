@@ -6,13 +6,14 @@ export function updateNormalAndInfinityChallenges(diff) {
     if (AntimatterDimension(2).amount.neq(0)) {
       Currency.matter.bumpTo(1);
       const boosts = DimBoost.totalBoosts;
-      let cappedBase = 1.03 +
+      let cappedBase = new Decimal(1.03 +
         (Math.clampMax(boosts * (1 + boosts / 500), 400) +
-        Math.clampMax(player.galaxies, 100)) / 80;
+        Math.clampMax(player.galaxies, 100)) / 80);
       const antimatter = Currency.antimatter.value;
       if (antimatter.gte(Decimal.NUMBER_MAX_VALUE)) {
-        cappedBase *= antimatter.log10();
+        cappedBase = cappedBase.mul(antimatter.log10());
       }
+      cappedBase = cappedBase.timesEffectOf(TenseBoost.challengeBoost);
       Currency.matter.multiply(Decimal.pow(cappedBase, diff / 20));
     }
     if (Currency.matter.gte(Currency.antimatter.value) && NormalChallenge(11).isRunning && !Player.canCrunch && !NormalChallenge(11).isBroken) {

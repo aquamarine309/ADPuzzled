@@ -18,7 +18,8 @@ export default {
   },
   data() {
     return {
-      weight: 0
+      weight: 0,
+      score: 0
     }
   },
   computed: {
@@ -49,6 +50,7 @@ export default {
   methods: {
     update() {
       this.weight = this.boost.weight;
+      this.score = this.boost.score;
     }
   }
 }
@@ -99,6 +101,7 @@ export default {
         >
           Reset
         </PrimaryButton>
+        <span>Current Score: {{ format(score) }}</span>
       </div>
     </div>
   </div>

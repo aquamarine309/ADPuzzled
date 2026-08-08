@@ -19,7 +19,8 @@ export function infinityDimensionCommonMultiplier() {
       AlchemyResource.dimensionality,
       ImaginaryUpgrade(8),
       PelleRifts.recursion.milestones[1],
-      LogicChallenge(5)
+      LogicChallenge(5),
+      TenseBoost.infinityBoost
     );
 
   if (Replicanti.areUnlocked && Replicanti.amount.gt(1)) {
