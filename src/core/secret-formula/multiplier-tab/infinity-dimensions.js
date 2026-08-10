@@ -300,5 +300,11 @@ export const ID = {
     multValue: () => DC.D1.timesEffectOf(LogicChallenge(5)),
     isActive: () => LogicChallenge.isRunning,
     icon: MultiplierTabIcons.CHALLENGE("logic")
+  },
+  tenseBoost: {
+    name: "Tense Boost",
+    multValue: dim => TenseBoost.infinityBoost.effectValue.pow(dim ? 1 : MultiplierTabHelper.activeDimCount("ID")),
+    isActive: () => TenseLogic.isUnlocked,
+    icon: MultiplierTabIcons.TENSE,
   }
 };

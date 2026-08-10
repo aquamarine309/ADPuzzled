@@ -488,5 +488,11 @@ export const AD = {
     ),
     isActive: () => LogicChallenge.isRunning,
     icon: MultiplierTabIcons.CHALLENGE("logic")
+  },
+  tenseBoost: {
+    name: "Tense Boost",
+    multValue: dim => TenseBoost.antimatterBoost.effectValue.pow(dim ? 1 : MultiplierTabHelper.activeDimCount("AD")),
+    isActive: () => TenseLogic.isUnlocked,
+    icon: MultiplierTabIcons.TENSE,
   }
 };

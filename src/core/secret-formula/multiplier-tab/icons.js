@@ -222,5 +222,9 @@ export const MultiplierTabIcons = {
   EXCHANGE: {
     symbol: '<i class="fas fa-exchange" />',
     color: "var(--color-logic)"
+  },
+  TENSE: {
+    symbol: '<i class="fas fa-hourglass-half" />',
+    color: "var(--color-tense)"
   }
 };

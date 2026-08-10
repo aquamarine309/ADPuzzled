@@ -264,4 +264,10 @@ export const TD = {
     isActive: () => getAdjustedGlyphEffect("curseddimensions") !== 1,
     icon: MultiplierTabIcons.SPECIFIC_GLYPH("cursed"),
   },
+  tenseBoost: {
+    name: "Tense Boost",
+    multValue: dim => TenseBoost.eternityBoost.effectValue.pow(dim ? 1 : MultiplierTabHelper.activeDimCount("TD")),
+    isActive: () => TenseLogic.isUnlocked,
+    icon: MultiplierTabIcons.TENSE,
+  }
 };

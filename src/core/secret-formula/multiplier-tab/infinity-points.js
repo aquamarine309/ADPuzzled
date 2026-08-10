@@ -121,4 +121,10 @@ export const IP = {
     isActive: () => V.isRunning,
     icon: MultiplierTabIcons.GENERIC_V,
   },
+  tenseBoost: {
+    name: "Tense Boost",
+    multValue: dim => TenseBoost.infinityBoost.effectValue,
+    isActive: () => TenseLogic.isUnlocked,
+    icon: MultiplierTabIcons.TENSE,
+  }
 };

@@ -119,6 +119,10 @@ export default {
   transition: all 0.2s;
 }
 
+.l-tense-boost-row:hover {
+  border-color: var(--color-boost);
+}
+
 .t-dark .l-tense-boost-row,
 .t-amoled .l-tense-boost-row,
 .t-s6 .l-tense-boost-row,
@@ -127,6 +131,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.15);
   border: 1px solid transparent;
 }
+
 .t-dark .l-tense-boost-row:hover,
 .t-amoled .l-tense-boost-row:hover,
 .t-s6 .l-tense-boost-row:hover,
@@ -143,6 +148,7 @@ export default {
   background-color: rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
+
 .t-metro .l-tense-boost-row:hover,
 .t-s1 .l-tense-boost-row:hover,
 .t-s13 .l-tense-boost-row:hover,

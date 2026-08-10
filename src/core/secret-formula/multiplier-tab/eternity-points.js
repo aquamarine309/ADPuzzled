@@ -101,4 +101,10 @@ export const EP = {
     isActive: () => V.isRunning,
     icon: MultiplierTabIcons.GENERIC_V,
   },
+  tenseBoost: {
+    name: "Tense Boost",
+    multValue: dim => TenseBoost.eternityBoost.effectValue,
+    isActive: () => TenseLogic.isUnlocked,
+    icon: MultiplierTabIcons.TENSE,
+  }
 };
