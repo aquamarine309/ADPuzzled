@@ -61,7 +61,6 @@ html {
 :root {
   /* Don't change this instance of --color-text or any of its values in other themes to not be hex; it's parsed as hex
     elsewhere to provide theme-dependent color gradients */
-  --color-tense: #fa9fe2;
   --color-text: #000000;
   --color-text-inverted: white;
   --color-base: #f2f2f2;
@@ -108,6 +107,7 @@ html {
   --color-pelle--secondary: #00bcd4;
 
   --color-logic: #1e959c;
+  --color-tense: #fa9fe2;
 }
 
 :root .t-metro,
@@ -9822,4 +9822,159 @@ input.o-automator-block-input {
   background-color: black;
   color: var(--color-extra);
   border-color: var(--color-extra);
+}
+
+.c-logic-tree-layout {
+  width: 80rem;
+  height: 80rem;
+  border: 0.3rem solid var(--color-logic);
+  border-radius: var(--var-border-radius, 1rem);
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+}
+
+.c-logic-node {
+  --size: 6rem;
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  margin-top: calc(0rem - var(--size) / 2);
+  margin-left: calc(0rem - var(--size) / 2);
+  border: 0.2rem solid var(--color-node--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+  background-color: var(--color-node--bg);
+  color: #181818;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+}
+
+.c-logic-node--locked {
+  color: var(--color-node--base);
+  background-color: var(--color-base);
+}
+
+.c-logic-tree-connection {
+  stroke: #5CC793;
+  /* This one should be px, because it rem svg behaves weirdly under scale */
+  stroke-width: 8px;
+  transition: stroke 0.3s;
+}
+
+.c-logic-tree-svg, .c-logic-node-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: var(--var-border-radius, 1rem);
+}
+
+.c-logic-tree-svg {
+  background-color: #252338;
+  box-sizing: 0 0 1.5rem 0.2rem #252338 inset;
+}
+
+.c-logic-node-container {
+  z-index: 1;
+}
+
+.c-logic-node-symbol, .c-logic-node-symbol--blob {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+}
+
+.c-logic-node-symbol--blob {
+  font-size: 3rem;
+}
+
+.c-logic-tree-connection--locked {
+  stroke: #37805C;
+}
+
+.c-logic-tree-bg-text {
+  fill: var(--color-eternity);
+  opacity: 50%;
+}
+
+.c-logic-node-tooltip {
+  position: absolute;
+  left: 70%;
+  bottom: 60%;
+  width: 22rem;
+  background-color: var(--color-base);
+  border: 0.2rem solid var(--color-node--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+  padding: 0.2rem 1rem;
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition-duration: 0.2s;
+  z-index: 2;
+  color: var(--color-node--base);
+}
+
+.c-logic-node:hover .c-logic-node-tooltip {
+  transform: scale(1);
+}
+
+.c-logic-tree-bg__gear {
+  position: absolute;
+  color: var(--color-eternity);
+  font-size: 15rem;
+  opacity: 50%;
+  width: 22.5rem;
+  height: 22.5rem;
+}
+
+.c-logic-tree-bg__gear--top-left {
+  top: 15%;
+  left: 10%;
+  animation: a-logic-tree-bg__gearing 2.5s ease-in-out forwards;
+}
+
+.c-logic-tree-bg__gear--bottom-right {
+  bottom: 15%;
+  right: 10%;
+  animation: a-logic-tree-bg__gearing 2.5s ease-in-out forwards;
+}
+
+@keyframes a-logic-tree-bg__gearing {
+  0% {
+    transform: rotate(0);
+  }
+  
+  40% {
+    transform: rotate(360deg);
+  }
+  
+  50% {
+    transform: translateY(0);
+  }
+  
+  60% {
+    transform: translateY(-10rem);
+  }
+  
+  100% {
+    transform: translateY(80rem);
+  }
+}
+
+.c-logic-node-tooltip__name {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.c-logic-node-tooltip__requirement {
+  font-weight: bold;
+  color: var(--color-good);
+}
+
+.c-logic-node-tooltip__requirement--bad {
+  color: var(--color-bad);
 }
