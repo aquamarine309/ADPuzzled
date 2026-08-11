@@ -65,7 +65,7 @@ export default {
       />
       <InformationModalButton
         name="Got a Free STD"
-        icon="fa-solid fa-shop"
+        icon="fa-solid fa-shop o-std"
       />
     </div>
   </div>

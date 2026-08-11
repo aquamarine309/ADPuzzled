@@ -38,8 +38,11 @@ class ResourceExchangeState extends GameMechanicState {
     if (!this.canExchange) return false;
     const leave = this.willLeave;
     this.data.value = this.newExchanged;
-    this.currency.value = leave;
+    if (!LogicNode.freeExchange.isUnlocked) {
+      this.currency.value = leave;
+    }
     GameCache.logicPoints.invalidate();
+    player.requirementChecks.eternity.noExchange = false;
     return true;
   }
 

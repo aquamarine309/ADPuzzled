@@ -67,6 +67,10 @@ export default {
   transform: scale(1.1);
 }
 
+.o-std {
+  color: #ffca57;
+}
+
 [ach-tooltip]:before {
   width: 20rem;
   font-size: 1.5rem;

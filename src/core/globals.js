@@ -98,3 +98,4 @@ export * from "./logic-challenges";
 export * from "./extra-bonus";
 
 export * from "./tense-logic";
+export * from "./logic-tree";

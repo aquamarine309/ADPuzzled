@@ -527,7 +527,17 @@ export const tabs = [
         name: "Tense Logic",
         symbol: "<i class='fas fa-hourglass-half'></i>",
         component: "TenseLogicTab",
+        condition: () => PlayerProgress.eternityUnlocked(),
         id: 1,
+        hiddable: true
+      },
+      {
+        key: "logic-achievement",
+        name: "Logic Achievement",
+        symbol: "<i class='fas fa-flask'></i>",
+        component: "LogicTreeTab",
+        condition: () => player.tense.logicAchievementUnlocked,
+        id: 2,
         hiddable: true
       }
     ]

@@ -1,20 +1,25 @@
 <script>
 import TenseBoostRow from "./TenseBoostRow";
+import PrimaryButton from "@/components/PrimaryButton";
 
 export default {
   name: "TenseLogicTab",
   components: {
-    TenseBoostRow
+    TenseBoostRow,
+    PrimaryButton
   },
   data() {
     return {
       isUnlocked: false,
       past: 0,
-      current: 0
+      current: 0,
+      achUnlocked: false,
+      canUnlockAch: false
     }
   },
   computed: {
-    boosts() { return TenseBoost.all; }
+    boosts() { return TenseBoost.all; },
+    requirement() { return TenseLogic.achevementRequirement; }
   },
   methods: {
     update() {
@@ -22,10 +27,22 @@ export default {
       if (!this.isUnlocked) return;
       this.past = player.tense.pastScore;
       this.current = TenseLogic.score;
+      this.achUnlocked = player.tense.logicAchievementUnlocked;
+      if (!this.achUnlocked) {
+        this.canUnlockAch = Currency.logicPoints.value.gte(this.requirement);
+      }
     },
     formatScore(score) {
       if (score >= 1e6) return format(score, 3);
       return formatInt(score);
+    },
+    unlockAchievement() {
+      if (this.canUnlockAch) {
+        // TODO: Remove the "return" below
+        return;
+        player.tense.logicAchievementUnlocked = true;
+        GameUI.update();
+      }
     }
   }
 }
@@ -58,6 +75,14 @@ export default {
           :boost="boost"
         />
       </div>
+      <PrimaryButton
+        v-if="!achUnlocked"
+        class="o-unlock-logic-achievement-btn"
+        :enabled="canUnlockAch"
+        @click="unlockAchievement"
+      >
+        Reach {{ format(requirement) }} Logic Points
+      </PrimaryButton>
     </div>
 
     <div v-else class="c-tense-locked-container">
@@ -153,5 +178,13 @@ export default {
   color: var(--color-bad);
   font-weight: bold;
   text-shadow: 0 0 10px var(--color-bad);
+}
+
+.o-unlock-logic-achievement-btn {
+  width: 25rem;
+  height: 10rem;
+  margin: 3rem 0;
+  padding: 2.5rem 2rem;
+  font-size: 1.5rem;
 }
 </style>

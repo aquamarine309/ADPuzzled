@@ -52,8 +52,10 @@ window.player = {
   },
   tense: {
     pastScore: 0,
-    boostWeights: Array.repeat(0, 6)
+    boostWeights: Array.repeat(0, 6),
+    logicAchievementUnlocked: false
   },
+  logicNodes: new Set(),
   challenge: {
     normal: {
       current: 0,
@@ -257,6 +259,8 @@ window.player = {
     themes: new Set(),
     viewSecretTS: false,
     cancerAchievements: false,
+    logicNodeBlobShow: false,
+    logicNodeBlobUnlocked: false
   },
   shownRuns: {
     Reality: true,
@@ -274,6 +278,7 @@ window.player = {
       onlyAD8: true,
       noAD1: true,
       noRG: true,
+      noExchange: true
     },
     reality: {
       noAM: true,
@@ -1049,6 +1054,7 @@ export const Player = {
           onlyAD8: true,
           noAD1: true,
           noRG: true,
+          noExchange: true
         };
       // eslint-disable-next-line no-fallthrough
       case "infinity":

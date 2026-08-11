@@ -40,7 +40,7 @@ export default {
         effect: () => this.config.effectAt(this.boost.scoreAt(TenseLogic.score)),
         formatEffect: this.config.formatEffect
       };
-    },
+    }
   },
   watch: {
     weight(newValue) {
@@ -51,6 +51,10 @@ export default {
     update() {
       this.weight = this.boost.weight;
       this.score = this.boost.score;
+    },
+    formatScore(score) {
+      if (score >= 1e6) return format(score, 3);
+      return formatInt(score);
     }
   }
 }
@@ -101,7 +105,7 @@ export default {
         >
           Reset
         </PrimaryButton>
-        <span>Current Score: {{ format(score) }}</span>
+        <span>Current Score: {{ formatScore(score) }}</span>
       </div>
     </div>
   </div>

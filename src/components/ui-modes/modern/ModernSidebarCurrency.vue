@@ -148,6 +148,10 @@ export default {
   color: var(--color-infinity);
 }
 
+.o-sidebar-currency--logic {
+  color: var(--color-logic);
+}
+
 .o-sidebar-currency--replicanti {
   /* Taken from glyph-types.js */
   color: #03a9f4;

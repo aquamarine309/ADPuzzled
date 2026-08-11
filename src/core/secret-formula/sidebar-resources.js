@@ -131,4 +131,12 @@ export const sidebarResources = [
     formatValue: x => format(x, 2),
     formatClass: "o-sidebar-currency--pelle",
   },
+  {
+    id: 17,
+    optionName: "Logic Points",
+    isAvailable: () => PlayerProgress.infinityUnlocked(),
+    value: () => Currency.logicPoints.value.floor(),
+    formatValue: x => format(x, 2, 2),
+    formatClass: "o-sidebar-currency--logic",
+  },
 ];

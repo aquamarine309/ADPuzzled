@@ -1,5 +1,6 @@
 import { GameMechanicState } from "./game-mechanics";
 import { deepmergeAll } from "../utility/deepmerge";
+import { DC } from "./constants";
 
 export const TenseLogic = {
   get isUnlocked() {
@@ -7,15 +8,26 @@ export const TenseLogic = {
   },
   
   get score() {
+    const maxTime = Effects.min(
+      Infinity,
+      LogicNode.maxTime1
+    );
     return Math.floor(
       Currency.infinityPoints.value.add(1).log10() * 0.1
-      * 3e3 / Math.sqrt(player.records.thisEternity.time || 1)
+      * 3e3 / Math.sqrt(Math.min(player.records.thisEternity.time, maxTime) || 1)
       * Math.pow(10, Math.pow(1.5, 5 - GameCache.maxTier.value) - 1)
-      * TenseBoost.tenseBoost.effectOrDefault(1)
+      * Effects.product(
+        TenseBoost.tenseBoost,
+        LogicNode.start
+      )
     );
   },
   
-  totalWeight: new Lazy(() => player.tense.boostWeights.sum())
+  totalWeight: new Lazy(() => player.tense.boostWeights.sum()),
+  
+  get achevementRequirement() {
+    return DC.E3000;
+  }
 };
 
 class TenseBoostState extends GameMechanicState {
