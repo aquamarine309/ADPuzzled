@@ -9904,8 +9904,6 @@ input.o-automator-block-input {
 
 .c-logic-node-tooltip {
   position: absolute;
-  left: 70%;
-  bottom: 60%;
   width: 22rem;
   background-color: var(--color-base);
   border: 0.2rem solid var(--color-node--base);
