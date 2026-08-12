@@ -33,7 +33,7 @@ export const eternityMilestones = {
       if (!player.options.offlineProgress) return `This milestone would give offline EP generation, but offline progress
         is currently disabled`;
       const effectText = (em200 || em1000) ? "Inactive" : `Currently ${format(EPmin, 2, EPmin.lt(0.01) ? 4 : 2)} EP/min in game time`;
-      return `While offline, gain ${formatPercents(0.0025, 4)} of your best Eternity Points per minute from previous
+      return `While offline, gain ${formatPercents(0.001, 1)} of your best Eternity Points per minute from previous
         Eternities (${effectText})`;
     },
     activeCondition: () => (player.options.offlineProgress

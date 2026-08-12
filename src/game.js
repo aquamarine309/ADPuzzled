@@ -254,7 +254,7 @@ function isOfflineEPGainEnabled() {
 
 export function getOfflineEPGain(ms) {
   if (!EternityMilestone.autoEP.isReached || !isOfflineEPGainEnabled()) return DC.D0;
-  return player.records.bestEternity.bestEPminReality.times(TimeSpan.fromMilliseconds(ms).totalMinutes / 400);
+  return player.records.bestEternity.bestEPminReality.times(TimeSpan.fromMilliseconds(ms).totalMinutes / 1000);
 }
 
 // Note: realities and ampFactor must be distinct because there are a few things farther up which only multiply
@@ -562,6 +562,7 @@ export function gameLoop(passDiff, options = {}) {
   // IP generation is broken into a couple of places in gameLoop; changing that might change the
   // behavior of eternity farming.
   preProductionGenerateIP(diff);
+  logicNodeGenerateEP(diff);
 
   if (!Pelle.isDoomed) {
     passivePrestigeGen();
@@ -663,6 +664,11 @@ export function gameLoop(passDiff, options = {}) {
   GameUI.update();
   player.lastUpdate = thisUpdate;
   PerformanceStats.end("Game Update");
+}
+
+function logicNodeGenerateEP(diff) {
+  if (!LogicNode.onlineEM6.isUnlocked) return;
+  Currency.eternityPoints.add(LogicNode.onlineEM6.effectValue.times(diff / 60e3));
 }
 
 function updatePrestigeRates() {

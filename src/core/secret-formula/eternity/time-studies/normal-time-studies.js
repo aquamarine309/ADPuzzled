@@ -257,7 +257,7 @@ export const normalTimeStudies = [
   },
   {
     id: 111,
-    cost: 999,
+    cost: 12,
     requirement: [101, 102, 103],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => (Achievement(103).canBeApplied
@@ -391,7 +391,7 @@ export const normalTimeStudies = [
   },
   {
     id: 151,
-    cost: 8,
+    cost: 10,
     requirement: [141, 142, 143],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `${formatX(1e4)} multiplier on all Time Dimensions`,
@@ -399,7 +399,7 @@ export const normalTimeStudies = [
   },
   {
     id: 161,
-    cost: 7,
+    cost: 10,
     requirement: [151],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `${formatX(DC.E616)} multiplier on all Antimatter Dimensions`,
@@ -407,7 +407,7 @@ export const normalTimeStudies = [
   },
   {
     id: 162,
-    cost: 7,
+    cost: 10,
     requirement: [151],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `${formatX(1e11)} multiplier on all Infinity Dimensions`,

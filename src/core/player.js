@@ -397,6 +397,7 @@ window.player = {
   },
   IPMultPurchases: 0,
   version: 35,
+  testVersion: false,
   infinityPower: DC.D1,
   postC4Tier: 0,
   extraBonusTimeLeft: 0,

@@ -20,7 +20,7 @@ export const tenseBoosts = {
     symbol: "Δ",
     color: "var(--color-eternity)",
     description: "Eternity Point and Time Dimension multiplier.",
-    effect: score => Decimal.sqrt(score).times(0.2).add(1),
+    effect: score => Decimal.cbrt(score).times(0.2).add(1),
     formatEffect: value => formatX(value, 2, 2)
   },
   challengeBoost: {

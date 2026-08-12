@@ -9,7 +9,7 @@ export const ecTimeStudies = [
     secondary: {
       resource: "Eternities",
       current: () => Currency.eternities.value,
-      required: completions => new Decimal(20000 + Math.min(completions, Enslaved.isRunning ? 999 : 4) * 20000),
+      required: completions => new Decimal(20000000 + Math.min(completions, Enslaved.isRunning ? 999 : 4) * 20000000),
       formatValue: formatInt
     }
   },
@@ -21,7 +21,7 @@ export const ecTimeStudies = [
     secondary: {
       resource: "Tickspeed upgrades from Time Dimensions",
       current: () => player.totalTickGained,
-      required: completions => 1300 + Math.min(completions, 4) * 150,
+      required: completions => 2000 + Math.min(completions, 4) * 300,
       formatValue: formatInt
     }
   },

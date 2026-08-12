@@ -1,4 +1,6 @@
-import { DC } from "../../constants.js";
+import {
+  DC
+} from "../../constants.js";
 
 const nodeColors = {
   normal: {
@@ -43,7 +45,7 @@ export const logicTree = {
   },
   freeExchange: {
     id: 23,
-    req: [33],
+    reqNodes: [33],
     name: "Rosebud",
     description: "Resource Exchange no longer spends your resources",
     requirement: "Eternity without exchanging resource",
@@ -55,7 +57,7 @@ export const logicTree = {
   },
   logicUpgradeAutobuyer: {
     id: 12,
-    reqNode: [32],
+    reqNodes: [32],
     name: "The Loneliest Number",
     description: "Eternity no longer reset the unlocked Logic Upgrades. Unlock Logic Upgrade autobuyer",
     requirement: () => `Reach ${format(DC.E180000)} antimatter with ${formatInt(1)} total Logic Point`,
@@ -67,7 +69,7 @@ export const logicTree = {
   },
   galaxyMult: {
     id: 43,
-    reqNode: [33],
+    reqNodes: [33],
     name: "One Forty Two",
     description: () => `Galaxies are ${formatPercents(0.042, 1)} stronger`,
     requirement: () => `Eternity with ${formatInt(142)} Antimatter Galaxies`,
@@ -80,9 +82,9 @@ export const logicTree = {
   },
   ts73Pow: {
     id: 52,
-    reqNode: [43],
+    reqNodes: [43],
     name: "The Hermit",
-    description: () => `TS 73 is raised to ${formatPow(3.65, 0, 2)}`,
+    description: () => `TS 73 is raised to ${format(3.65, 0, 2)}th power`,
     requirement: () => `Reach ${format(DC.E365)} Infinity Points without entering the Logic tab or using X hotkey`,
     symbol: "<i class='fas fa-tree'></i>",
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -90,5 +92,23 @@ export const logicTree = {
     position: [2, -1],
     color: nodeColors.eternity,
     effect: 3.65
+  },
+  onlineEM6: {
+    id: 54,
+    reqNodes: [43],
+    name: "First Sacrifice?",
+    description: "Eternity Milestone 6 can work online",
+    requirement: () => `Reach ${format(DC.E150000)} antimatter with ${formatX(1)} scarifice miltiplier and ${formatInt(2)} galaxies this infinity`,
+    symbol: "<i class='fas fa-skull'></i>",
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    checkRequirement: () => (
+      Currency.antimatter.gte(DC.E150000) &&
+      player.requirementChecks.infinity.noSacrifice &&
+      player.galaxies + Replicanti.galaxies.total === 2
+    ),
+    position: [2, 1],
+    color: nodeColors.eternity,
+    effect: () => player.records.bestEternity.bestEPminReality.times(0.001),
+    formatEffect: value => `${format(value, 2, 2)} EP/min`
   }
 };

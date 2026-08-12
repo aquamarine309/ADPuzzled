@@ -39,7 +39,7 @@ export default {
       return {
         "c-logic-node": true,
         "c-logic-node--locked": !this.node.isUnlocked
-      }
+      };
     },
     styleObject() {
       return {
@@ -47,13 +47,21 @@ export default {
         left: `${50 + this.divisor * this.position[0]}%`,
         "--color-node--base": this.color.baseColor,
         "--color-node--bg": this.color.bgColor
-      }
+      };
+    },
+    tooltipStyle() {
+      const x = this.position[0];
+      const left = x < 2 ? "70%" : `${40 - 370 * (x - 2)}%`;
+      return {
+        left,
+        bottom: "60%"
+      };
     },
     reqClass() {
       return {
         "c-logic-node-tooltip__requirement": true,
         "c-logic-node-tooltip__requirement--bad": !this.node.isUnlocked
-      }
+      };
     },
     symbol() {
       return this.config.symbol;
@@ -79,7 +87,10 @@ export default {
       class="c-logic-node-symbol"
       v-html="symbol"
     />
-    <div class="c-logic-node-tooltip">
+    <div
+      class="c-logic-node-tooltip"
+      :style="tooltipStyle"
+    >
       <div class="c-logic-node-tooltip__name">{{ name }}</div>
       <DescriptionDisplay :config="config" />
       <EffectDisplay
