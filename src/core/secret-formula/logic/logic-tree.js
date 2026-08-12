@@ -29,7 +29,7 @@ export const logicTree = {
     effect: 2
   },
   maxTime1: {
-    id: 23,
+    id: 32,
     reqNodes: [33],
     name: "Sub-Minute Sprint",
     description: () => `The time in the score formula has a cap of ${formatInt(7)} minutes`,
@@ -42,7 +42,7 @@ export const logicTree = {
     effect: 7 * 60e3
   },
   freeExchange: {
-    id: 32,
+    id: 23,
     req: [33],
     name: "Rosebud",
     description: "Resource Exchange no longer spends your resources",
@@ -53,8 +53,20 @@ export const logicTree = {
     position: [-1, 0],
     color: nodeColors.logic
   },
+  logicUpgradeAutobuyer: {
+    id: 12,
+    reqNode: [32],
+    name: "The Loneliest Number",
+    description: "Eternity no longer reset the unlocked Logic Upgrades. Unlock Logic Upgrade autobuyer",
+    requirement: () => `Reach ${format(DC.E180000)} antimatter with ${formatInt(1)} total Logic Point`,
+    symbol: "<i class='fas fa-gears'></i>",
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    checkRequirement: () => Currency.antimatter.gte(DC.E180000) && GameCache.logicPoints.value.eq(1),
+    position: [-2, -1],
+    color: nodeColors.logic
+  },
   galaxyMult: {
-    id: 34,
+    id: 43,
     reqNode: [33],
     name: "One Forty Two",
     description: () => `Galaxies are ${formatPercents(0.042, 1)} stronger`,
@@ -65,5 +77,18 @@ export const logicTree = {
     position: [1, 0],
     color: nodeColors.eternity,
     effect: 1.042
+  },
+  ts73Pow: {
+    id: 52,
+    reqNode: [43],
+    name: "The Hermit",
+    description: () => `TS 73 is raised to ${formatPow(3.65, 0, 2)}`,
+    requirement: () => `Reach ${format(DC.E365)} Infinity Points without entering the Logic tab or using X hotkey`,
+    symbol: "<i class='fas fa-tree'></i>",
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    checkRequirement: () => player.requirementChecks.eternity.noLogicTab && Currency.infinityPoints.gte(DC.E365),
+    position: [2, -1],
+    color: nodeColors.eternity,
+    effect: 3.65
   }
-}
+};

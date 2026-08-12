@@ -14,12 +14,29 @@ export default {
       past: 0,
       current: 0,
       achUnlocked: false,
-      canUnlockAch: false
+      canUnlockAch: false,
+      weightAdjustment: WEIGHT_ADJUSTMENT_TYPE.ONE
     }
   },
   computed: {
     boosts() { return TenseBoost.all; },
-    requirement() { return TenseLogic.achevementRequirement; }
+    requirement() { return TenseLogic.achevementRequirement; },
+    weightText() {
+      switch (this.weightAdjustment) {
+        case WEIGHT_ADJUSTMENT_TYPE.ONE:
+          return formatInt(1);
+        case WEIGHT_ADJUSTMENT_TYPE.TEN:
+          return formatInt(10);
+        case WEIGHT_ADJUSTMENT_TYPE.HUNDRED:
+          return formatInt(100);
+      }
+      return "Unknown";
+    }
+  },
+  watch: {
+    weightAdjustment(newValue) {
+      player.tense.weightAdjustmentType = newValue;
+    }
   },
   methods: {
     update() {
@@ -28,6 +45,7 @@ export default {
       this.past = player.tense.pastScore;
       this.current = TenseLogic.score;
       this.achUnlocked = player.tense.logicAchievementUnlocked;
+      this.weightAdjustment = player.tense.weightAdjustmentType;
       if (!this.achUnlocked) {
         this.canUnlockAch = Currency.logicPoints.value.gte(this.requirement);
       }
@@ -43,6 +61,19 @@ export default {
         player.tense.logicAchievementUnlocked = true;
         GameUI.update();
       }
+    },
+    toggleAdjustment() {
+      switch (this.weightAdjustment) {
+        case WEIGHT_ADJUSTMENT_TYPE.ONE:
+          this.weightAdjustment = WEIGHT_ADJUSTMENT_TYPE.TEN;
+          break;
+        case WEIGHT_ADJUSTMENT_TYPE.TEN:
+          this.weightAdjustment = WEIGHT_ADJUSTMENT_TYPE.HUNDRED;
+          break;
+        case WEIGHT_ADJUSTMENT_TYPE.HUNDRED:
+          this.weightAdjustment = WEIGHT_ADJUSTMENT_TYPE.ONE;
+          break;
+      }
     }
   }
 }
@@ -51,9 +82,17 @@ export default {
 <template>
   <div class="c-tense-tab">
     <div v-if="isUnlocked">
+      <div class="c-subtab-option-container">
+        <PrimaryButton
+          class="o-primary-btn--subtab-option"
+          @click="toggleAdjustment()"
+        >
+          Adjust Weight: ±{{ weightText }}
+        </PrimaryButton>
+      </div>
       <div class="c-tense-description">
-        The score for each Eternity is based on your IP, highest dimension, and time. You can distribute your current score into the boosts below, which will apply in the next Eternity.
-        <i>Your present actions shape the future.</i>
+        <span>The score for each Eternity is based on your IP, highest dimension, and time.</span>
+        <span>You can distribute your current score into the boosts below, which will apply in the next Eternity.</span>
       </div>
       
       <div class="l-tense-scores">
@@ -101,11 +140,13 @@ export default {
 }
 
 .c-tense-description {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: var(--color-text);
   line-height: 1.6;
-  width: 100%;
-  margin-bottom: 0.5rem;
+  max-width: 80%;
+  margin: 0.5rem auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .l-tense-scores {

@@ -9,6 +9,7 @@ import { DimBoostAutobuyerState } from "./dimboost-autobuyer";
 import { EternityAutobuyerState } from "./eternity-autobuyer";
 import { GalaxyAutobuyerState } from "./galaxy-autobuyer";
 import { LevelUpAutobuyerState } from "./level-up-autobuyer";
+import { LogicUpgradeAutobuyerState } from "./logic-upgrade-autobuyer";
 import { ImaginaryUpgradeAutobuyerState } from "./imaginary-upgrade-autobuyer";
 import { InfinityDimensionAutobuyerState } from "./infinity-dimension-autobuyer";
 import { EPMultAutobuyerState, IPMultAutobuyerState } from "./prestige-currency-multiplier-autobuyer";
@@ -34,6 +35,7 @@ export const Autobuyer = {
   eternity: new EternityAutobuyerState(),
   galaxy: new GalaxyAutobuyerState(),
   levelUp: new LevelUpAutobuyerState(),
+  logicUpgrade: new LogicUpgradeAutobuyerState(),
   imaginaryUpgrade: ImaginaryUpgradeAutobuyerState.createAccessor(),
   infinityDimension: InfinityDimensionAutobuyerState.createAccessor(),
   ipMult: new IPMultAutobuyerState(),
@@ -72,7 +74,8 @@ export const Autobuyers = (function() {
     Autobuyer.darkMatterDimsAscension,
     Autobuyer.singularity,
     Autobuyer.annihilation,
-    Autobuyer.levelUp
+    Autobuyer.levelUp,
+    Autobuyer.logicUpgrade
   ];
 
   const singleComplex = [

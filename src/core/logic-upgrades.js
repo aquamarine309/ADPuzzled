@@ -67,10 +67,12 @@ export const LogicUpgrades = {
    */
   all: LogicUpgradeState.index.compact(),
 
-  reset() {
+  reset(resetReq = true) {
     player.logic.upgradeBits = 0;
-    player.logic.upgReqs = 0;
     player.logic.spentPoints = DC.D0;
+    if (resetReq) {
+      player.logic.upgReqs = 0;
+    }
     GameCache.maxTier.invalidate();
   }
 };

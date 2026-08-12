@@ -139,7 +139,7 @@ export function eternity(force, auto, specialConditions = {}) {
   resetAllResourceExchange();
   LogicChallenges.clearCompletions();
   player.challenge.logic.current = 0;
-  LogicUpgrades.reset();
+  LogicUpgrades.reset(!LogicNode.logicUpgradeAutobuyer.isUnlocked);
   applyEU1();
   player.records.thisInfinity.maxAM = DC.D0;
   player.records.thisEternity.maxAM = DC.D0;

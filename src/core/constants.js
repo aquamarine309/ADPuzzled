@@ -117,6 +117,7 @@ export const DC = deepFreeze({
   E320:                 new Decimal("1e320"),
   E340:                 new Decimal("1e340"),
   E349:                 new Decimal("1e349"),
+  E365:                 new Decimal("1e365"),
   E400:                 new Decimal("1e400"),
   E450:                 new Decimal("1e450"),
   E500:                 new Decimal("1e500"),
@@ -189,6 +190,7 @@ export const DC = deepFreeze({
   E100000:              new Decimal("1e100000"),
   E110000:              new Decimal("1e110000"),
   E164000:              new Decimal("1e164000"),
+  E180000:              new Decimal("1e180000"),
   E200000:              new Decimal("1e200000"),
   E201600:              new Decimal("1e201600"),
   E208000:              new Decimal("1e208000"),
@@ -519,4 +521,10 @@ window.SPEEDRUN_SEED_STATE = {
   FIXED: 1,
   RANDOM: 2,
   PLAYER: 3,
+};
+
+window.WEIGHT_ADJUSTMENT_TYPE = {
+  ONE: 1,
+  TEN: 2,
+  HUNDRED: 3
 };

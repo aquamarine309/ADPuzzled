@@ -53,7 +53,8 @@ window.player = {
   tense: {
     pastScore: 0,
     boostWeights: Array.repeat(0, 6),
-    logicAchievementUnlocked: false
+    logicAchievementUnlocked: false,
+    weightAdjustmentType: WEIGHT_ADJUSTMENT_TYPE.ONE
   },
   logicNodes: new Set(),
   challenge: {
@@ -222,6 +223,10 @@ window.player = {
       isActive: false,
       multiplier: 1.05,
     },
+    logicUpgrade: {
+      isActive: false,
+      selectedBits: 0
+    },
     singularity: { isActive: false },
     ipMultBuyer: { isActive: false, },
     epMultBuyer: { isActive: false, },
@@ -278,7 +283,8 @@ window.player = {
       onlyAD8: true,
       noAD1: true,
       noRG: true,
-      noExchange: true
+      noExchange: true,
+      noLogicTab: true
     },
     reality: {
       noAM: true,
@@ -1054,7 +1060,8 @@ export const Player = {
           onlyAD8: true,
           noAD1: true,
           noRG: true,
-          noExchange: true
+          noExchange: true,
+          noLogicTab: !Tab.logic.isOpen
         };
       // eslint-disable-next-line no-fallthrough
       case "infinity":

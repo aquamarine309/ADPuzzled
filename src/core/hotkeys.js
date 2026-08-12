@@ -90,7 +90,10 @@ export const shortcuts = [
     name: "Exchange",
     keys: ["x"],
     type: "bindRepeatableHotkey",
-    function: () => ResourceExchange.selected.exchange(),
+    function: () => {
+      ResourceExchange.selected.exchange();
+      player.requirementChecks.eternity.noLogicTab = false;
+    },
     visible: () => PlayerProgress.infinityUnlocked()
   }, {
     name: "Continuous Replicate",

@@ -32,7 +32,10 @@ export default {
       showIPMultiplier: false,
       ipMult: new Decimal(0),
       autoLevelUpUnlocked: false,
-      autoLevelUp: false
+      autoLevelUp: false,
+      autoLogicUpgradeUnlocked: false,
+      autoLogicUpgrade: false,
+      selecting: false
     };
   },
   computed: {
@@ -59,6 +62,9 @@ export default {
     },
     autoLevelUp(value) {
       Autobuyer.levelUp.isActive = value;
+    },
+    autoLogicUpgrade(value) {
+      Autobuyer.logicUpgrade.isActive = value;
     }
   },
   methods: {
@@ -77,6 +83,10 @@ export default {
       if (this.autoLevelUpUnlocked) {
         this.autoLevelUp = Autobuyer.levelUp.isActive;
       }
+      this.autoLogicUpgradeUnlocked = Autobuyer.logicUpgrade.isUnlocked;
+      if (this.autoLogicUpgradeUnlocked) {
+        this.autoLogicUpgrade = Autobuyer.logicUpgrade.isActive;
+      }
     },
     handleToggle(index) {
       if (this.resourceId === index) return;
@@ -93,7 +103,7 @@ export default {
     adjustSliderValue(value) {
       this.sliderInterval = value;
       this.currentResource.exchangeRate = this.sliderInterval / 100;
-    },
+    }
   }
 };
 </script>
@@ -113,7 +123,18 @@ export default {
         v-model="autoLevelUp"
         label="Auto Level-Up: "
       />
-      </PrimaryToggleButton>
+      <PrimaryToggleButton
+        class="o-primary-btn--subtab-option"
+        v-if="autoLogicUpgradeUnlocked"
+        v-model="autoLogicUpgrade"
+        label="Autobuy Logic Upgrades: "
+      />
+      <PrimaryToggleButton
+        class="o-primary-btn--subtab-option"
+        v-if="autoLogicUpgradeUnlocked"
+        v-model="selecting"
+        label="Select auto Upgrades: "
+      />
     </div>
     <ResourceInfo :resource="currentResource" />
     <div class="c-resource-exchange-layout-container">
@@ -162,6 +183,7 @@ export default {
         v-for="column in 5"
         :key="id(row, column)"
         :upgrade="upgrades[id(row, column)]"
+        :selecting="selecting"
       />
     </div>
   </div>

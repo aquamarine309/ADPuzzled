@@ -167,7 +167,7 @@ export const normalTimeStudies = [
     requirement: [61, () => Perk.studyECRequirement.isBought || !EternityChallenge(11).isUnlocked],
     reqType: TS_REQUIREMENT_TYPE.DIMENSION_PATH,
     description: "Dimensional Sacrifice affects 3rd Time Dimension with greatly reduced effect",
-    effect: () => Sacrifice.totalBoost.pow(0.005).clampMin(1),
+    effect: () => Sacrifice.totalBoost.pow(0.0005 * LogicNode.ts73Pow.effectOrDefault(1)).clampMin(1),
     cap: DC.E1300,
     formatEffect: value => formatX(value, 2, 1)
   },

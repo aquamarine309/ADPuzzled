@@ -1533,6 +1533,12 @@ export const devMigrations = {
     player => {
       player.options.lightGlyphs = !player.options.forceDarkGlyphs;
       delete player.options.forceDarkGlyphs;
+    },
+    player => {
+      if (player.logicNodes.has(34)) {
+        player.logicNodes.delete(34);
+        player.logicNodes.add(43);
+      }
     }
   ],
 

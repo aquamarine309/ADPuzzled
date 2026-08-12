@@ -19,7 +19,8 @@ export default {
   data() {
     return {
       weight: 0,
-      score: 0
+      score: 0,
+      weightAdjustment: WEIGHT_ADJUSTMENT_TYPE.ONE
     }
   },
   computed: {
@@ -40,6 +41,17 @@ export default {
         effect: () => this.config.effectAt(this.boost.scoreAt(TenseLogic.score)),
         formatEffect: this.config.formatEffect
       };
+    },
+    weightDiff() {
+      switch (this.weightAdjustment) {
+        case WEIGHT_ADJUSTMENT_TYPE.ONE:
+          return 1;
+        case WEIGHT_ADJUSTMENT_TYPE.TEN:
+          return 10;
+        case WEIGHT_ADJUSTMENT_TYPE.HUNDRED:
+          return 100;
+      }
+      return "Unknown";
     }
   },
   watch: {
@@ -51,6 +63,7 @@ export default {
     update() {
       this.weight = this.boost.weight;
       this.score = this.boost.score;
+      this.weightAdjustment = player.tense.weightAdjustmentType;
     },
     formatScore(score) {
       if (score >= 1e6) return format(score, 3);
@@ -87,15 +100,15 @@ export default {
       <div class="c-tense-weight-controls">
         <PrimaryButton
           class="c-tense-btn"
-          @click="weight--"
-          :enabled="weight > 0"
+          @click="weight -= weightDiff"
+          :enabled="weight >= weightDiff"
         >
           -
         </PrimaryButton>
         <span class="c-tense-weight-display">{{ formatInt(weight) }}</span>
         <PrimaryButton
           class="c-tense-btn"
-          @click="weight++"
+          @click="weight += weightDiff"
         >
           +
         </PrimaryButton>

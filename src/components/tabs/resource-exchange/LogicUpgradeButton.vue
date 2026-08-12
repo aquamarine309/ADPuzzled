@@ -16,6 +16,11 @@ export default {
     upgrade: {
       type: Object,
       required: true
+    },
+    selecting: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data() {
@@ -23,7 +28,8 @@ export default {
       isAvailableForPurchase: false,
       canBeBought: false,
       isBought: false,
-      isPossible: false
+      isPossible: false,
+      isSelected: false
     };
   },
   computed: {
@@ -47,6 +53,15 @@ export default {
       return this.config.canLock && !(this.isAvailableForPurchase || this.isBought);
     },
   },
+  watch: {
+    isSelected(newValue) {
+      if (newValue) {
+        Autobuyer.logicUpgrade.data.selectedBits |= (1 << this.upgrade.id);
+      } else {
+        Autobuyer.logicUpgrade.data.selectedBits &= ~(1 << this.upgrade.id);
+      }
+    }
+  },
   methods: {
     update() {
       const upgrade = this.upgrade;
@@ -54,6 +69,15 @@ export default {
       this.canBeBought = upgrade.canBeBought;
       this.isBought = !upgrade.isRebuyable && upgrade.isBought;
       this.isPossible = upgrade.isPossible;
+      this.isSelected = Autobuyer.logicUpgrade.purchaseSelected(upgrade.id);
+    },
+    handleClick() {
+      if (this.selecting) {
+        if (!this.isAvailableForPurchase && !this.isBought) return;
+        this.isSelected = !this.isSelected;
+      } else {
+        this.upgrade.purchase();
+      }
     }
   }
 };
@@ -64,7 +88,7 @@ export default {
     <button
       :class="classObject"
       class="l-logic-upgrade-btn c-logic-upgrade-btn"
-      @click="upgrade.purchase()"
+      @click="handleClick()"
     >
       <HintText
         type="logicUpgrades"
@@ -96,5 +120,18 @@ export default {
         </template>
       </span>
     </button>
+    <div
+      v-if="selecting && (isAvailableForPurchase || isBought)"
+      class="o-requirement-lock"
+    >
+      <i
+        v-if="isSelected"
+        class="fas fa-gears"
+      />
+      <i
+        v-else
+        class="fas fa-mouse-pointer"
+      />
+    </div>
   </div>
 </template>
