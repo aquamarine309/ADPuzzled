@@ -90,6 +90,7 @@ export function tryImportSecret(data) {
     case 4:
       player.testVersion = true;
       GameUI.notify.logic("You've entered test version! Please save your save frequently.");
+      return true;
     default:
       return false;
   }
