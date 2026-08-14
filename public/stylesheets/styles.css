@@ -4964,6 +4964,23 @@ properly on certain themes. */
   border-color: #691fa5;
 }
 
+.t-s14 .o-eternity-upgrade--bought {
+  position: relative;
+}
+
+.t-s14 .o-eternity-upgrade--bought::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-image: url("../images/sold-out.png"), url("../images/baixie.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+}
+
 /* #endregion Eternity Upgrades */
 
 /* #region Eternity Milestones */
