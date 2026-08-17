@@ -318,7 +318,7 @@ export const normalTimeStudies = [
     requiresST: [132, 133],
     description: () => (Achievement(138).isUnlocked
       ? `You can get ${formatPercents(0.5)} more Replicanti Galaxies`
-      : `Automatic Replicanti Galaxies are disabled, but you can get ${formatPercents(0.5)} more`),
+      : `Automatic Replicanti Galaxies are disabled while offline, but you can get ${formatPercents(0.5)} more`),
     effect: () => Math.floor(player.replicanti.boughtGalaxyCap / 2)
   },
   {

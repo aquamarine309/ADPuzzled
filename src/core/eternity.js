@@ -36,7 +36,8 @@ function giveEternityRewards(auto) {
     player.records.thisEternity.time,
     player.records.thisEternity.realTime,
     gainedEternityPoints(),
-    newEternities
+    newEternities,
+    player.tense.pastScore
   );
 
   player.records.thisReality.bestEternitiesPerMs = player.records.thisReality.bestEternitiesPerMs.clampMin(

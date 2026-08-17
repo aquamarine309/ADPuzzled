@@ -216,7 +216,7 @@ export function getInfinitiedMilestoneReward(ms, considerMilestoneReached) {
 }
 
 // eslint-disable-next-line max-params
-export function addEternityTime(time, realTime, ep, eternities) {
+export function addEternityTime(time, realTime, ep, eternities, score) {
   let challenge = "";
   if (player.challenge.eternity.current) {
     const currEC = player.challenge.eternity.current;
@@ -227,14 +227,14 @@ export function addEternityTime(time, realTime, ep, eternities) {
   // If we call this function outside of dilation, it uses the existing AM and produces an erroneous number
   const gainedTP = player.dilation.active ? getTachyonGain() : DC.D0;
   player.records.recentEternities.pop();
-  player.records.recentEternities.unshift([time, realTime, ep, eternities, challenge, gainedTP]);
+  player.records.recentEternities.unshift([time, realTime, ep, eternities, challenge, gainedTP, score]);
   GameCache.averageRealTimePerEternity.invalidate();
 }
 
 export function resetEternityRuns() {
   player.records.recentEternities = Array.from(
     { length: 10 },
-    () => [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0]
+    () => [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0, 0]
   );
   GameCache.averageRealTimePerEternity.invalidate();
 }

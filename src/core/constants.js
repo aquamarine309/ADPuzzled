@@ -227,7 +227,8 @@ window.AUTO_CRUNCH_MODE = {
 window.AUTO_ETERNITY_MODE = {
   AMOUNT: 0,
   TIME: 1,
-  X_HIGHEST: 2
+  X_HIGHEST: 2,
+  SCORE: 3
 };
 
 window.AUTO_REALITY_MODE = {

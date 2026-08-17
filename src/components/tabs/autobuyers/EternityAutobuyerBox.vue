@@ -25,15 +25,26 @@ export default {
       mode: AUTO_ETERNITY_MODE.AMOUNT,
       hasAdditionalModes: false,
       increaseWithMult: true,
+      hasScoreMode: false,
+      hasOriginAdvancedModes: false
     };
   },
   computed: {
     autobuyer: () => Autobuyer.eternity,
-    modes: () => [
-      AUTO_ETERNITY_MODE.AMOUNT,
-      AUTO_ETERNITY_MODE.TIME,
-      AUTO_ETERNITY_MODE.X_HIGHEST,
-    ],
+    modes() {
+      const origin = [
+        AUTO_ETERNITY_MODE.TIME,
+        AUTO_ETERNITY_MODE.X_HIGHEST
+      ];
+      const modes = [AUTO_ETERNITY_MODE.AMOUNT];
+      if (this.hasOriginAdvancedModes) {
+        modes.push(...origin);
+      }
+      if (this.hasScoreMode) {
+        modes.push(AUTO_ETERNITY_MODE.SCORE);
+      }
+      return modes;
+    },
     amountMode: () => AUTO_ETERNITY_MODE.AMOUNT
   },
   watch: {
@@ -47,6 +58,8 @@ export default {
       this.mode = this.autobuyer.mode;
       this.hasAdditionalModes = this.autobuyer.hasAdditionalModes;
       this.increaseWithMult = this.autobuyer.increaseWithMult;
+      this.hasOriginAdvancedModes = this.autobuyer.hasOriginAdvancedModes;
+      this.hasScoreMode = this.autobuyer.hasScoreMode;
     },
     modeProps(mode) {
       switch (mode) {
@@ -70,6 +83,13 @@ export default {
             property: "xHighest",
             type: "decimal"
           },
+        };
+        case AUTO_ETERNITY_MODE.SCORE: return {
+          title: "Eternity at X Tense Score",
+          input: {
+            property: "score",
+            type: "int"
+          }
         };
       }
       throw new Error("Unknown Auto Eternity mode");

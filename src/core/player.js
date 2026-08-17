@@ -98,6 +98,7 @@ window.player = {
       increaseWithMult: true,
       time: 1,
       xHighest: DC.D1,
+      score: 0,
       isActive: false
     },
     bigCrunch: {
@@ -316,7 +317,7 @@ window.player = {
     recentInfinities: Array.range(0, 10).map(() =>
       [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, ""]),
     recentEternities: Array.range(0, 10).map(() =>
-      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0]),
+      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0, 0]),
     recentRealities: Array.range(0, 10).map(() =>
       [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, 1, "", 0, 0]),
     thisInfinity: {
@@ -396,7 +397,7 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: 0,
-  version: 35,
+  version: 36,
   testVersion: false,
   infinityPower: DC.D1,
   postC4Tier: 0,

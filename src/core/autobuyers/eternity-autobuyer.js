@@ -52,9 +52,25 @@ export class EternityAutobuyerState extends AutobuyerState {
   set xHighest(value) {
     this.data.xHighest = value;
   }
+  
+  get score() {
+    return this.data.score;
+  }
 
-  get hasAdditionalModes() {
+  set score(value) {
+    this.data.score = value;
+  }
+
+  get hasOriginAdvancedModes() {
     return RealityUpgrade(13).isBought;
+  }
+  
+  get hasScoreMode() {
+    return LogicNode.eternityScore.isUnlocked;
+  }
+  
+  get hasAdditionalModes() {
+    return this.hasOriginAdvancedModes || this.hasScoreMode;
   }
 
   autoEternitiesAvailable(considerMilestoneReached) {
@@ -93,8 +109,10 @@ export class EternityAutobuyerState extends AutobuyerState {
       case AUTO_ETERNITY_MODE.TIME:
         return Time.thisEternityRealTime.totalSeconds > this.time;
       case AUTO_ETERNITY_MODE.X_HIGHEST:
-      default:
         return gainedEternityPoints().gte(this.highestPrevPrestige.times(this.xHighest));
+      case AUTO_ETERNITY_MODE.SCORE:
+      default:
+        return TenseLogic.score >= this.score;
     }
   }
 

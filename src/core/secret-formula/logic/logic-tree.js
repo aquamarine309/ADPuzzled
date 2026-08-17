@@ -20,6 +20,7 @@ const nodeColors = {
 export const logicTree = {
   start: {
     id: 33,
+    reqNodes: [],
     name: "Good Luck",
     description: "Double score gain",
     requirement: () => `Eternity with a score of at least ${formatInt(2000)}`,
@@ -43,13 +44,32 @@ export const logicTree = {
     color: nodeColors.normal,
     effect: 7 * 60e3
   },
+  eternityScore: {
+    id: 41,
+    reNodes: [32],
+    name: "Yo dawg, I heard you like scores.",
+    description: "Unlock score-based reset option in Eternity Autobuyer",
+    requirement: () => `Have all your Eternities in your past ${formatInt(10)} Eternities be at least ${formatInt(1000)} higher score than the previous one`,
+    symbol: "<i class='fas fa-chart-line'></i>",
+    checkEvent: GAME_EVENT.ETERNITY_RESET_AFTER,
+    checkRequirement: () => {
+      if (player.records.recentEternities.some(i => i[0] === Number.MAX_VALUE)) return false;
+      const scores = player.records.recentEternities.map(run => run[6]);
+      for (let i = 0; i < scores.length - 1; i++) {
+        if (scores[i] < scores[i + 1] + 1000) return false;
+      }
+      return true;
+    },
+    position: [1, -2],
+    color: nodeColors.normal
+  },
   freeExchange: {
     id: 23,
     reqNodes: [33],
-    name: "Rosebud",
+    name: "The First One Is Free",
     description: "Resource Exchange no longer spends your resources",
     requirement: "Eternity without exchanging resource",
-    symbol: "<i class='fas fa-seedling'></i>",
+    symbol: "<i class='fas fa-coins'></i> <i class='fas fa-ban'></i>",
     checkEvent: GAME_EVENT.ETERNITY_RESET_BEFORE,
     checkRequirement: () => player.requirementChecks.eternity.noExchange,
     position: [-1, 0],
