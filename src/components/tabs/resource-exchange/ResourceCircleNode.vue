@@ -22,8 +22,7 @@ export default {
     classObject() {
       return {
         "o-resource-circle-node": true,
-        "o-resource-circle-node--locked": !this.isUnlocked && !this.hasUnlocked,
-        "o-resource-circle-node--seen": !this.isUnlocked && this.hasUnlocked,
+        "o-resource-circle-node--locked": !this.isUnlocked,
         "o-resource-circle-node--open": this.isOpen,
         "o-resource-circle-node--locked-open": !this.isUnlocked && !this.hasUnlocked && this.isOpen
       };

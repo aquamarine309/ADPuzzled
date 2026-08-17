@@ -9993,3 +9993,13 @@ input.o-automator-block-input {
 .c-logic-node-tooltip__requirement--bad {
   color: var(--color-bad);
 }
+
+.c-achievement-hint {
+  border: 0.2rem solid var(--color-logic);
+  background-color: var(--color-base);
+  padding: 0.2rem;
+  margin: 0.1rem;
+  color: var(--color-accent);
+  border-radius: var(--var-border-radius, 0.5rem);
+  font-family: Typewriter, serif;
+}

@@ -102,7 +102,7 @@ export const normalAchievements = [
     checkRequirement: () => true,
     checkEvent: GAME_EVENT.GALAXY_RESET_BEFORE,
     hint: "What is AG?",
-    hintCondition: () => player.galaxies === 0 && Galaxy.canBeBought && !PlayerProgress.infinityUnlocked(),
+    hintCondition: () => player.galaxies === 0 && Galaxy.requirement.isSatisfied && !PlayerProgress.infinityUnlocked(),
     onHintClick() {
       GameUI.notify.info("Maybe you need HELP.");
     },
