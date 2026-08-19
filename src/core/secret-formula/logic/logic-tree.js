@@ -90,15 +90,15 @@ export const logicTree = {
   galaxyMult: {
     id: 43,
     reqNodes: [33],
-    name: "One Forty Two",
-    description: () => `Galaxies are ${formatPercents(0.042, 1)} stronger`,
-    requirement: () => `Eternity with ${formatInt(142)} Antimatter Galaxies`,
+    name: "One Forty Seven",
+    description: () => `Galaxies are ${formatPercents(0.047, 1)} stronger`,
+    requirement: () => `Eternity with ${formatInt(147)} Antimatter Galaxies`,
     symbol: "<i class='fas fa-mountain'></i>",
     checkEvent: GAME_EVENT.ETERNITY_RESET_BEFORE,
-    checkRequirement: () => player.galaxies >= 142,
+    checkRequirement: () => player.galaxies >= 147,
     position: [1, 0],
     color: nodeColors.eternity,
-    effect: 1.042
+    effect: 1.047
   },
   ts73Pow: {
     id: 52,
