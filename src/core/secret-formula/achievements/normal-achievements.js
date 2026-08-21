@@ -691,6 +691,8 @@ export const normalAchievements = [
     name: "Time is relative",
     description: "Go Eternal.",
     checkRequirement: () => true,
+    get reward() { return `Gain ${formatX(2)} more Eternities.`; },
+    effect: 2,
     checkEvent: GAME_EVENT.ETERNITY_RESET_BEFORE
   },
   {
