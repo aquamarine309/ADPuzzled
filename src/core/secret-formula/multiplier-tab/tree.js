@@ -114,7 +114,7 @@ multiplierTabTree.DT_total[0].unshift("TP_total");
 
 // Additional data specification for dynamically-generated props
 const dimTypes = ["AD", "ID", "TD"];
-const singleRes = ["IP", "EP", "DT", "infinities", "replicanti"];
+const singleRes = ["IP", "EP", "DT", "infinities", "replicanti", "eternities"];
 const targetedEffects = {
   achievement: {
     checkFn: MultiplierTabHelper.achievementDimCheck,
@@ -123,6 +123,7 @@ const targetedEffects = {
     IP: [47, 85, 93, 116, 125, 141],
     DT: [132, 137],
     infinities: [87, 131, 164],
+    eternities: [96, 113],
   },
   timeStudy: {
     checkFn: MultiplierTabHelper.timeStudyDimCheck,

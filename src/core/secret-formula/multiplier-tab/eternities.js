@@ -1,4 +1,5 @@
 import { MultiplierTabIcons } from "./icons";
+import { DC } from "@/core/constants";
 
 // See index.js for documentation
 export const eternities = {
@@ -6,13 +7,16 @@ export const eternities = {
     name: "Eternities gained per Eternity",
     isBase: true,
     multValue: () => gainedEternities(),
-    isActive: () => (PlayerProgress.realityUnlocked() || Achievement(113).isUnlocked) && !Pelle.isDoomed,
+    isActive: () => (PlayerProgress.realityUnlocked() || Achievement(96).isUnlocked) && !Pelle.isDoomed,
     overlay: ["Δ", "<i class='fa-solid fa-arrows-rotate' />"],
   },
   achievement: {
-    name: "Achievement 113",
-    multValue: () => Achievement(113).effectOrDefault(1),
-    isActive: () => Achievement(113).canBeApplied,
+    name: "Achievements",
+    multValue: () => DC.D1.timesEffectsOf(
+      Achievement(96),
+      Achievement(113)
+    ),
+    isActive: () => Achievement(96).canBeApplied,
     icon: MultiplierTabIcons.ACHIEVEMENT,
   },
   amplifierEter: {

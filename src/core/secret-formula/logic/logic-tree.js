@@ -15,6 +15,10 @@ const nodeColors = {
     baseColor: "var(--color-eternity)",
     bgColor: "#c896d9"
   },
+  dilation: {
+    baseColor: "var(--color-dilation)",
+    bgColor: "#a2d465"
+  }
 }
 
 export const logicTree = {
@@ -130,5 +134,17 @@ export const logicTree = {
     color: nodeColors.eternity,
     effect: () => player.records.bestEternity.bestEPminReality.times(0.001),
     formatEffect: value => `${format(value, 2, 2)} EP/min`
+  },
+  unlockDilation: {
+    id: 34,
+    reqNodes: [33],
+    name: "Temporal Paradox",
+    description: "Unlock Dilation",
+    requirement: "Locked",
+    symbol: "Ψ",
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    checkRequirement: () => false,
+    position: [0, 1],
+    color: nodeColors.dilation,
   }
 };

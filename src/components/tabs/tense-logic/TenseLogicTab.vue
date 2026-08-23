@@ -178,7 +178,6 @@ export default {
   font-weight: bold;
   margin: 0 0.8rem;
 }
-
 .c-tense-boosts-title {
   color: var(--color-tense);
   font-size: 1.6rem;
