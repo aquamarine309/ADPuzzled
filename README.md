@@ -1,3 +1,4 @@
+
 # Antimatter Dimensions
 
 ## Run
@@ -12,14 +13,35 @@ inside the checked out repository:
 npm ci
 ```
 
-After all the packages are installed, start up the game:
+> If you encounter peer dependency errors, ensure `.npmrc` exists with
+> `legacy-peer-deps=true` (already included in the repository) or run
+> `npm ci --legacy-peer-deps`.
+
+After all the packages are installed, start up the game in development mode:
 
 ```
-npm run serve
+npm run dev
 ```
 
 This will make the game served via your localhost, and the playable link will
-be displayed in your terminal. The server **doesn't** need to be restarted
-after you've made changes - just reload the page. The server **can**
-occasionally crash, so check your terminal from time to time and run `serve`
-again if needed.
+be displayed in your terminal (default: `http://localhost:8080`).  
+The development server supports **Hot Module Replacement (HMR)** – changes to
+source files are instantly reflected in the browser without a full reload.
+
+To build for production (output in `dist/`), use:
+
+```
+npm run build:release
+```
+
+To build for Steam (output in `../AppFiles`), use:
+
+```
+npm run build:steam-release
+```
+
+For a preview of the built production version, run:
+
+```
+npm run preview
+```
