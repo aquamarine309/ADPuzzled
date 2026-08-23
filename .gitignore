@@ -1,8 +1,20 @@
-dist
-.tmp
+dist/
+../AppFiles/
+.tmp/
 
-.vscode
-.idea
-node_modules
-.eslintrc.js
+node_modules/
+package-lock.json
+yarn.lock
+
+.vscode/
+.idea/
+
 .DS_Store
+
+.vite/
+
+.env.local
+.env.*.local
+
+*.log
+npm-debug.log*
