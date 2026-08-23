@@ -1,11 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "serve": "node build/check-npm.js && vue-cli-service serve",
-    "build:master": "node build/pre-build.js && vue-cli-service build --mode master && node build/post-build.js",
-    "build:release": "node build/pre-build.js && vue-cli-service build && node build/post-build.js",
-    "build:steam-development": "node build/pre-build.js && vue-cli-service build --mode steam-development",
-    "build:steam-release": "node build/pre-build.js && vue-cli-service build --mode steam-release",
+    "dev": "vite",
+    "build:master": "node build/pre-build.js && vite build --mode master && node build/post-build.js",
+    "build:release": "node build/pre-build.js && vite build --mode production && node build/post-build.js",
+    "build:steam-development": "node build/pre-build.js && vite build --mode steam-development",
+    "build:steam-release": "node build/pre-build.js && vite build --mode steam-release",
+    "preview": "vite preview",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -37,9 +38,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
-    "@vue/cli-plugin-babel": "^5.0.0-rc.0",
-    "@vue/cli-plugin-eslint": "^5.0.0-rc.0",
-    "@vue/cli-service": "~5.0.0",
+    "@vitejs/plugin-vue2": "^2.3.4",
     "browserslist-useragent-regexp": "^3.0.2",
     "eruda": "^3.3.0",
     "eslint": "^7.20.0",
@@ -51,7 +50,7 @@
     "stylelint-config-recommended-vue": "^1.4.0",
     "stylelint-config-standard": "^25.0.0",
     "stylelint-order": "^5.0.0",
-    "vue-template-compiler": "^2.6.11",
-    "webpack": "^5.64.0"
+    "vite": "^8.2.2",
+    "vue-template-compiler": "^2.6.11"
   }
 }
