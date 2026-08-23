@@ -7,7 +7,6 @@ import { ElectronRuntime, SteamRuntime } from "@/steam";
 import { DC } from "./core/constants";
 import { deepmergeAll } from "@/utility/deepmerge";
 import { DEV } from "@/env";
-import { isDevEnvironment } from "./core/devtools";
 import { SpeedrunMilestones } from "./core/speedrun";
 import { Cloud } from "./core/storage";
 import { supportedBrowsers } from "./supported-browsers";
@@ -1109,14 +1108,14 @@ export function browserCheck() {
 }
 
 export function init() {
+  if (DEV) {
+    eruda.init();
+  }
   // eslint-disable-next-line no-console
   console.log("🌌 Antimatter Dimensions: Reality Update 🌌");
   if (DEV) {
     // eslint-disable-next-line no-console
     console.log("👨‍💻 Development Mode 👩‍💻");
-  }
-  if (isDevEnvironment()) {
-    eruda.init();
   }
   ElectronRuntime.initialize();
   SteamRuntime.initialize();
