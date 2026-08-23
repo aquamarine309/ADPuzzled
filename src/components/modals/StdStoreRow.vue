@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     purchase() {
-      GameUI.notify.error("Uncaught TypeError: Cannot read properties of undefined (reading 'purchase') at StdStoreRow.vue");
+      GameUI.notify.error("The entrance to purchase STD has been closed.");
     }
   }
 };

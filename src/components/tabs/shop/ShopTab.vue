@@ -124,7 +124,7 @@ export default {
     <div class="c-shop-header">
       <span>You have {{ gotSTD && !hasDLC ? "1" : "0" }}</span>
       <img
-        src="images/std_coin.png"
+        src="/images/std_coin.png"
         class="c-shop-header__img"
       >
       <button
