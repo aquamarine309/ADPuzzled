@@ -12,7 +12,7 @@ export const score = {
   infinityPoint: {
     name: "Score From Infinity Points",
     multValue: () => TenseLogic.scoreFromIP,
-    isActive: () => gainedInfinityPoints().gt(0),
+    isActive: () => Currency.infinityPoints.gt(0),
     icon: MultiplierTabIcons.CONVERT_FROM("IP"),
   },
   time: {

@@ -80,4 +80,10 @@ export const replicanti = {
     isActive: () => ShopPurchaseData.totalSTD > 0 && ShopPurchase.replicantiPurchases.currentMult > 1,
     icon: MultiplierTabIcons.IAP,
   },
+  boost: {
+    name: "Replicanti Boost",
+    multValue: () => ReplicantiBoost.boost,
+    isActive: () => ReplicantiBoost.amount > 0,
+    icon: MultiplierTabIcons.SPECIFIC_GLYPH("replication")
+  }
 };

@@ -24,6 +24,9 @@ export default {
       realityUpgrades: false,
       perks: false,
       alchemy: false,
+      
+      logicUpgrades: false,
+      exchange: false
     };
   },
   computed: {
@@ -59,6 +62,12 @@ export default {
     alchemy(newValue) {
       player.options.showHintText.alchemy = newValue;
     },
+    exchange(newValue) {
+      player.options.showHintText.resourceExchange = newValue;
+    },
+    logicUpgrades(newValue) {
+      player.options.showHintText.logicUpgrades = newValue;
+    }
   },
   methods: {
     update() {
@@ -78,6 +87,9 @@ export default {
       this.realityUpgrades = options.realityUpgrades;
       this.perks = options.perks;
       this.alchemy = options.alchemy;
+      
+      this.exchange = options.resourceExchange;
+      this.logicUpgrades = options.logicUpgrades;
     }
   },
 };
@@ -100,6 +112,17 @@ export default {
       <ModalOptionsToggleButton
         v-model="achievementUnlockStates"
         text="Achievement unlock state indicators:"
+      />
+      
+      <ModalOptionsToggleButton
+        v-if="infinityUnlocked"
+        v-model="logicUpgrades"
+        text="Logic Upgrade names:"
+      />
+      <ModalOptionsToggleButton
+        v-if="infinityUnlocked"
+        v-model="exchange"
+        text="Exchange Resources:"
       />
       <ModalOptionsToggleButton
         v-if="infinityUnlocked"
