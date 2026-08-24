@@ -8,19 +8,31 @@ export const TenseLogic = {
   },
   
   get score() {
-    const maxTime = Effects.min(
-      Infinity,
-      LogicNode.maxTime1
-    );
     return Math.floor(
-      Currency.infinityPoints.value.add(1).log10() * 0.1
-      * 3e3 / Math.sqrt(Math.min(player.records.thisEternity.time, maxTime) || 1)
-      * Math.pow(10, Math.pow(1.5, 5 - GameCache.maxTier.value) - 1)
+      this.scoreFromIP
+      * this.scoreFromTime
+      * this.scoreFromTier
       * Effects.product(
         TenseBoost.tenseBoost,
         LogicNode.start
       )
     );
+  },
+  
+  get scoreFromIP() {
+    return Currency.infinityPoints.value.add(1).log10() * 0.1;
+  },
+  
+  get scoreFromTime() {
+    const maxTime = Effects.min(
+      Infinity,
+      LogicNode.maxTime1
+    );
+    return 3e3 / Math.sqrt(Math.min(player.records.thisEternity.time, maxTime) || 1);
+  },
+  
+  get scoreFromTier() {
+    return Math.pow(10, Math.pow(1.5, 5 - GameCache.maxTier.value) - 1);
   },
   
   totalWeight: new Lazy(() => player.tense.boostWeights.sum()),

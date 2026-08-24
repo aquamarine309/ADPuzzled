@@ -226,5 +226,9 @@ export const MultiplierTabIcons = {
   TENSE: {
     symbol: '<i class="fas fa-hourglass-half" />',
     color: "var(--color-tense)"
+  },
+  LOGIC_ACHIEVEMENT: {
+    symbol: '<i class="fas fa-flask" />',
+    color: "var(--color-logic)"
   }
 };

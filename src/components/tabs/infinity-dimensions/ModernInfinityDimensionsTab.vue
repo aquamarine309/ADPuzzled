@@ -39,7 +39,7 @@ export default {
     },
     formula() {
       if (this.isEC9Running) return `log2(x)${formatPow(4)}`;
-      if (this.isLC4Running) return `lg(x)${formatPow(this.conversionRate, 1, 1)}`;
+      if (this.isLC4Running) return `log10(x)${formatPow(this.conversionRate, 1, 1)}`;
       return `x${formatPow(this.conversionRate, 2, 3)}`;
     }
   },

@@ -10,11 +10,12 @@ const MULT_TAB_OPTIONS = [
   { id: 4, key: "ID", text: "Infinity Dimensions" },
   { id: 5, key: "infinities", text: "Infinities" },
   { id: 6, key: "replicanti", text: "Replicanti Speed" },
-  { id: 7, key: "EP", text: "Eternity Points" },
-  { id: 8, key: "TD", text: "Time Dimensions" },
-  { id: 9, key: "eternities", text: "Eternities" },
-  { id: 10, key: "DT", text: "Dilated Time" },
-  { id: 11, key: "gamespeed", text: "Game Speed" },
+  { id: 7, key: "score", text: "Tense Score" },
+  { id: 8, key: "EP", text: "Eternity Points" },
+  { id: 9, key: "TD", text: "Time Dimensions" },
+  { id: 10, key: "eternities", text: "Eternities" },
+  { id: 11, key: "DT", text: "Dilated Time" },
+  { id: 12, key: "gamespeed", text: "Game Speed" },
 ];
 
 export default {

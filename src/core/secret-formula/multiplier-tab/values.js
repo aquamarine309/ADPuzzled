@@ -10,6 +10,7 @@ import { infinities } from "./infinities";
 import { ID } from "./infinity-dimensions";
 import { IP } from "./infinity-points";
 import { replicanti } from "./replicanti";
+import { score } from "./tense-score";
 import { TP } from "./tachyon-particles";
 import { tickspeed, tickspeedUpgrades } from "./tickspeed";
 import { TD } from "./time-dimensions";
@@ -30,5 +31,6 @@ export const multiplierTabValues = {
   infinities,
   eternities,
   gamespeed,
-  replicanti
+  replicanti,
+  score
 };

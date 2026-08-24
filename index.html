@@ -55,5 +55,13 @@
     document.getElementById("loading").style.display = "none";
     document.getElementById("browser-warning").style.display = "flex";
   }
+  
+  window.errorMessages = [];
+  window.addEventListener("error", function(e) {
+    if (window.GameUI) return;
+    const errorMessage = `${e.message}\n(at: ${e.filename}:${e.lineno}:${e.colno})`;
+    alert(errorMessage);
+    window.errorMessages.push(errorMessage);
+  });
 </script>
 </html>

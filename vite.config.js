@@ -22,7 +22,7 @@ module.exports = defineConfig(({ mode }) => {
     },
     server: {
       port: 8080,
-      hmr: { overlay: false }
+      hmr: { overlay: true }
     }
   }
 })

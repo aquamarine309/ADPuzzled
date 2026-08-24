@@ -3,7 +3,7 @@
 import { MultiplierTabHelper } from "./helper-functions";
 import { multiplierTabValues } from "./values";
 
-const dynamicGenProps = ["TP", "DT", "infinities", "eternities", "gamespeed", "replicanti"];
+const dynamicGenProps = ["TP", "DT", "infinities", "eternities", "gamespeed", "replicanti", "score"];
 const propList = {
   AD: ["purchase", "dimboost", "sacrifice", "achievementMult", "achievement", "infinityUpgrade",
     "breakInfinityUpgrade", "infinityPower", "infinityChallenge", "timeStudy", "eternityChallenge", "glyph", "v",
@@ -100,6 +100,9 @@ export const multiplierTabTree = {
   ],
   replicanti_total: [
     getProps("replicanti")
+  ],
+  score_total: [
+    getProps("score")
   ],
 };
 
