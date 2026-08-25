@@ -129,8 +129,8 @@ export const AD = {
         Achievement(92)
       );
 
-      const dimMults = Array.repeat(DC.D1, 9);
-      for (let tier = 1; tier <= 8; tier++) {
+      const dimMults = Array.repeat(DC.D1, 10);
+      for (let tier = 1; tier <= 9; tier++) {
         if (tier === 1) {
           dimMults[tier] = dimMults[tier].timesEffectsOf(
             Achievement(28),
@@ -168,8 +168,8 @@ export const AD = {
         InfinityUpgrade.thisInfinityTimeMult,
       );
 
-      const dimMults = Array.repeat(DC.D1, 9);
-      for (let tier = 1; tier <= 8; tier++) {
+      const dimMults = Array.repeat(DC.D1, 10);
+      for (let tier = 1; tier <= 9; tier++) {
         if (tier === 1) {
           dimMults[tier] = dimMults[tier].timesEffectsOf(
             InfinityUpgrade.unspentIPMult,
@@ -240,8 +240,8 @@ export const AD = {
         InfinityChallenge(3).reward,
       );
 
-      const dimMults = Array.repeat(DC.D1, 9);
-      for (let tier = 1; tier <= 8; tier++) {
+      const dimMults = Array.repeat(DC.D1, 10);
+      for (let tier = 1; tier <= 9; tier++) {
         dimMults[tier] = dimMults[tier].timesEffectsOf(
           tier > 1 && tier < 8 ? InfinityChallenge(8).reward : null
         );
@@ -268,8 +268,8 @@ export const AD = {
         TimeStudy(193),
       );
 
-      const dimMults = Array.repeat(DC.D1, 9);
-      for (let tier = 1; tier <= 8; tier++) {
+      const dimMults = Array.repeat(DC.D1, 10);
+      for (let tier = 1; tier <= 9; tier++) {
         // We don't want to double-count the base effect that TS31 boosts
         const infinitiedMult = DC.D1.timesEffectsOf(
           AntimatterDimension(tier).infinityUpgrade,
@@ -368,7 +368,7 @@ export const AD = {
     displayOverride: dim => {
       const formatFn = num => (num.gte(1) ? formatX(num, 2, 2) : `/${format(num.reciprocal(), 2, 2)}`);
 
-      let dimMults = Array.repeat(DC.D1, 9);
+      let dimMults = Array.repeat(DC.D1, 10);
       if (NormalChallenge(2).isRunning) {
         dimMults = Array.repeat(new Decimal(player.chall2Pow), 9);
       }
@@ -431,17 +431,17 @@ export const AD = {
   nerfIC: {
     name: dim => (dim ? `Infinity Challenge Nerf (AD ${dim})` : "Infinity Challenge Nerf"),
     multValue: dim => {
-      let dimMults = Array.repeat(DC.D1, 9);
+      let dimMults = Array.repeat(DC.D1, 10);
       if (InfinityChallenge(4).isRunning) {
-        for (let tier = 1; tier <= 8; tier++) {
+        for (let tier = 1; tier <= 9; tier++) {
           if (player.postC4Tier !== tier) {
             dimMults[tier] = dimMults[tier].pow(1 - InfinityChallenge(4).effectValue).reciprocal();
           }
         }
       } else if (InfinityChallenge(6).isRunning) {
-        dimMults = Array.repeat(DC.D1.dividedByEffectOf(InfinityChallenge(6)), 9);
+        dimMults = Array.repeat(DC.D1.dividedByEffectOf(InfinityChallenge(6)), 10);
       } else if (InfinityChallenge(8).isRunning) {
-        dimMults = Array.repeat(DC.D1.timesEffectsOf(InfinityChallenge(8)), 9);
+        dimMults = Array.repeat(DC.D1.timesEffectsOf(InfinityChallenge(8)), 10);
       }
 
       if (dim) return dimMults[dim];

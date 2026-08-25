@@ -94,7 +94,7 @@ export const GameCache = {
   antimatterDimensionCommonMultiplier: new Lazy(() => antimatterDimensionCommonMultiplier()),
 
   // 0 will cause a crash if invoked; this way the tier can be used as an index
-  antimatterDimensionFinalMultipliers: Array.range(0, 9)
+  antimatterDimensionFinalMultipliers: Array.range(0, 10)
     .map(tier => new Lazy(() => getDimensionFinalMultiplierUncached(tier))),
 
   infinityDimensionCommonMultiplier: new Lazy(() => infinityDimensionCommonMultiplier()),

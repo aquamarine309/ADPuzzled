@@ -9,7 +9,7 @@ export class Sacrifice {
 
   static get requiredDimensionTier() {
     if (PlayerProgress.infinityUnlocked() && LogicChallenge(8).isCompleted) return Math.max(Puzzles.maxTier, 2);
-    return 8;
+    return AntimatterDimensions.showAD9 ? 9 : 8;
   }
 
   static get requiredDimension() {

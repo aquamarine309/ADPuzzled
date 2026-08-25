@@ -86,7 +86,7 @@ export class Galaxy {
   }
 
   static get requiredTier() {
-    const tier = NormalChallenge(10).isRunning ? 6 : 8;
+    const tier = NormalChallenge(10).isRunning ? 6 : (AntimatterDimensions.showAD9 ? 9 : 8);
     if (LogicChallenge(1).isCompleted) {
       return Math.clampMax(Puzzles.maxTier, tier);
     }

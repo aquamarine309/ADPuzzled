@@ -30,6 +30,8 @@ export default {
       hasContinuum: false,
       displayADAutobuyersIndividually: false,
       hasInstant: false,
+      maxTier: 0,
+      showAD9: false
     };
   },
   computed: {
@@ -58,7 +60,8 @@ export default {
         return;
       }
       this.hasInstant = ad.hasInstant;
-      this.displayADAutobuyersIndividually = !ad.collapseDisplay;
+      this.showAD9 = AntimatterDimensions.showAD9;
+      this.displayADAutobuyersIndividually = !ad.zeroIndexed.every(x => x.hasUnlimitedBulk);
     },
   }
 };
@@ -91,7 +94,7 @@ export default {
     <TickspeedAutobuyerBox v-if="!hasContinuum" />
     <template v-if="displayADAutobuyersIndividually">
       <DimensionAutobuyerBox
-        v-for="tier in 8"
+        v-for="tier in showAD9 ? 9 : 8"
         :key="tier"
         :tier="tier"
       />

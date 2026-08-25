@@ -83,7 +83,11 @@ export const tabNotifications = {
       {
         parent: "eternity",
         tab: "upgrades"
-      }
+      },
+      {
+        parent: "logic",
+        tab: "tense-logic"
+      },
     ],
     condition: () => !PlayerProgress.realityUnlocked() &&
       !PlayerProgress.eternityUnlocked(),

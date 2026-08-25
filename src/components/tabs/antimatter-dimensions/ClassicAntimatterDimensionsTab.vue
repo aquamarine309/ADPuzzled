@@ -26,12 +26,13 @@ export default {
       buy10Mult: new Decimal(0),
       currentSacrifice: new Decimal(0),
       hasRealityButton: false,
-      multiplierText: ""
+      multiplierText: "",
+      showAD9: false
     };
   },
   computed: {
     tierRange() {
-      const base = Array.range(1, 8);
+      const base = Array.range(1, this.showAD9 ? 9 : 8);
       if (this.randomDimOrder) return base.sort(() => Math.random() - 0.5);
       return base;
     }
@@ -52,6 +53,7 @@ export default {
         : "";
       this.multiplierText = `Buy 10 Dimension purchase multiplier: ${formatX(this.buy10Mult, 2, 2)}${sacText}`;
       this.randomDimOrder = player.dimensionBoosts === 4 && player.galaxies === 0 && !PlayerProgress.infinityUnlocked();
+      this.showAD9 = AntimatterDimensions.showAD9;
     },
     quickReset() {
       softReset(-1, true, true);

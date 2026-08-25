@@ -60,7 +60,7 @@ export function antimatterDimensionCommonMultiplier() {
 }
 
 export function getDimensionFinalMultiplierUncached(tier) {
-  if (tier < 1 || tier > 8) throw new Error(`Invalid Antimatter Dimension tier ${tier}`);
+  if (tier < 1 || tier > 9) throw new Error(`Invalid Antimatter Dimension tier ${tier}`);
   if (NormalChallenge(10).isRunning && tier > 6) return DC.D1;
   if (EternityChallenge(11).isRunning) {
     return Currency.infinityPower.value.pow(
@@ -190,7 +190,7 @@ function applyNDPowers(mult, tier) {
 function onBuyDimension(tier) {
   if (tier === 1) Tutorial.turnOffEffect(TUTORIAL_STATE.DIM1);
   if (tier === 2) Tutorial.turnOffEffect(TUTORIAL_STATE.DIM2);
-  Achievement(10 + tier).unlock();
+  if (tier !== 9) Achievement(10 + tier).unlock();
   Achievement(23).tryUnlock();
 
   if (player.speedrun.isActive && !player.speedrun.hasStarted) Speedrun.startTimer();
@@ -344,13 +344,13 @@ export function buyMaxDimension(tier, bulk = Infinity) {
 class AntimatterDimensionState extends DimensionState {
   constructor(tier) {
     super(() => player.dimensions.antimatter, tier);
-    const BASE_COSTS = [null, 10, 100, 1e4, 1e6, 1e9, 1e13, 1e18, 1e24];
+    const BASE_COSTS = [null, 10, 100, 1e4, 1e6, 1e9, 1e13, 1e18, 1e24, 1e30];
     this._baseCost = BASE_COSTS[tier];
-    const BASE_COST_MULTIPLIERS = [null, 1e3, 1e4, 1e5, 1e6, 1e8, 1e10, 1e12, 1e15];
+    const BASE_COST_MULTIPLIERS = [null, 1e3, 1e4, 1e5, 1e6, 1e8, 1e10, 1e12, 1e15, 1e20];
     this._baseCostMultiplier = BASE_COST_MULTIPLIERS[tier];
-    const C6_BASE_COSTS = [null, 10, 100, 100, 500, 2500, 2e4, 2e5, 4e6];
+    const C6_BASE_COSTS = [null, 10, 100, 100, 500, 2500, 2e4, 2e5, 4e6, 1e10];
     this._c6BaseCost = C6_BASE_COSTS[tier];
-    const C6_BASE_COST_MULTIPLIERS = [null, 1e3, 5e3, 1e4, 1.2e4, 1.8e4, 2.6e4, 3.2e4, 4.2e4];
+    const C6_BASE_COST_MULTIPLIERS = [null, 1e3, 5e3, 1e4, 1.2e4, 1.8e4, 2.6e4, 3.2e4, 4.2e4, 2e5];
     this._c6BaseCostMultiplier = C6_BASE_COST_MULTIPLIERS[tier];
   }
 
@@ -430,7 +430,7 @@ class AntimatterDimensionState extends DimensionState {
       case 5:
         return InfinityUpgrade.dim45mult;
     }
-    return false;
+    return InfinityUpgrade.dim18mult;
   }
 
   /**
@@ -640,6 +640,8 @@ class AntimatterDimensionState extends DimensionState {
     production = production.min(this.cappedProductionInNormalChallenges);
     return production;
   }
+  
+  static get dimensionCount() { return 9; }
 }
 
 /**
@@ -709,7 +711,7 @@ export const AntimatterDimensions = {
         AntimatterDimension(tier).produceCurrency(Currency.antimatter, diff);
       }
     } else {
-      let maxTierProduced = EternityChallenge(3).isRunning ? 3 : 7;
+      let maxTierProduced = EternityChallenge(3).isRunning ? 3 : (AntimatterDimensions.showAD9 ? 8 : 7);
       let nextTierOffset = 1;
       if (NormalChallenge(12).isRunning) {
         maxTierProduced--;
@@ -729,5 +731,9 @@ export const AntimatterDimensions = {
     // Production may overshoot the goal on the final tick of the challenge
     if (Currency.antimatter.gt(Player.infinityLimit)) Currency.antimatter.dropTo(Player.infinityLimit);
     if (hasBigCrunchGoal) Currency.antimatter.dropTo(Player.infinityGoal);
+  },
+  
+  get showAD9() {
+    return Puzzles.maxTier === 9;
   }
 };

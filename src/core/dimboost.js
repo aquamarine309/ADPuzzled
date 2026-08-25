@@ -49,7 +49,7 @@ export class DimBoost {
   }
 
   static get maxDimensionsUnlockable() {
-    const tier = NormalChallenge(10).isRunning ? 6 : 8;
+    const tier = NormalChallenge(10).isRunning ? 6 : (AntimatterDimensions.showAD9 ? 9 : 8);
     if (PlayerProgress.infinityUnlocked()) return Math.min(Puzzles.maxTier, tier);
     return tier;
   }

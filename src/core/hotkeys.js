@@ -22,7 +22,7 @@ import { GameKeyboard } from "./keyboard";
 // for the other modifier keys (#3093).
 
 // Free keys:
-// i, j, k, l, n, o, p, q, v, w
+// i, j, k, l, n, o, p, q, v
 
 
 export const shortcuts = [
@@ -312,7 +312,7 @@ export const shortcuts = [
     visible: false
   }, {
     name: "Doesn't exist",
-    keys: ["9"],
+    keys: ["w"],
     type: "bind",
     function: () => SecretAchievement(41).unlock(),
     visible: false
@@ -400,7 +400,7 @@ GameKeyboard.bindHotkey("alt+y", () => toggleAutobuyer(Autobuyer.reality));
     GameKeyboard.bindHotkey(`shift+alt+${tier}`, () => toggleBuySingles(Autobuyer.antimatterDimension(tier)));
     GameKeyboard.bindHotkey(`shift+alt+num${tier}`, () => toggleBuySingles(Autobuyer.antimatterDimension(tier)));
   }
-  for (let i = 1; i < 9; i++) bindDimensionHotkeys(i);
+  for (let i = 1; i < 10; i++) bindDimensionHotkeys(i);
 }());
 
 // A few special GameKeyboards

@@ -11,7 +11,7 @@ import { GlyphTypes } from "./glyph-effects";
 window.player = {
   antimatter: DC.E1,
   dimensions: {
-    antimatter: Array.range(0, 8).map(() => ({
+    antimatter: Array.range(0, 9).map(() => ({
       bought: 0,
       costBumps: 0,
       amount: DC.D0
@@ -148,11 +148,11 @@ window.player = {
       isActive: true
     },
     antimatterDims: {
-      all: Array.range(0, 8).map(tier => ({
-        isUnlocked: false,
+      all: Array.range(0, 9).map(tier => ({
+        isUnlocked: tier === 9,
         cost: 1,
-        interval: [500, 600, 700, 800, 900, 1000, 1100, 1200][tier],
-        bulk: 1,
+        interval: [500, 600, 700, 800, 900, 1000, 1100, 1200, 100][tier],
+        bulk: 512,
         mode: AUTOBUYER_MODE.BUY_10,
         isActive: true,
         lastTick: 0,
@@ -397,7 +397,7 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: 0,
-  version: 36,
+  version: 40,
   testVersion: false,
   infinityPower: DC.D1,
   postC4Tier: 0,

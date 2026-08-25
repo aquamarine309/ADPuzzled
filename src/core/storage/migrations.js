@@ -437,6 +437,25 @@ export const migrations = {
           player.records.recentEternities[i].push(0);
         }
       }
+    },
+    40: player => {
+      const dim = player.dimensions.antimatter;
+      dim.push({
+        bought: 0,
+        costBumps: 0,
+        amount: new Decimal(0)
+      });
+      const auto = player.auto.antimatterDims.all;
+      auto.push({
+        isUnlocked: true,
+        cost: 1,
+        interval: 100,
+        bulk: 512,
+        mode: AUTOBUYER_MODE.BUY_10,
+        isActive: true,
+        lastTick: 0,
+        isBought: false
+      });
     }
   },
 

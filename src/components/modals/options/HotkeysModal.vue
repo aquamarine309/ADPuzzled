@@ -12,7 +12,8 @@ export default {
       visible: [],
       timeStudyUnlocked: false,
       glyphSacUnlocked: false,
-      isElectron: false
+      isElectron: false,
+      maxTier: 0
     };
   },
   computed: {
@@ -58,6 +59,7 @@ export default {
       const progress = PlayerProgress.current;
       this.timeStudyUnlocked = progress.isEternityUnlocked;
       this.glyphSacUnlocked = RealityUpgrade(19).isBought;
+      this.maxTier = AntimatterDimensions.showAD9 ? 9 : 8;
 
       // ElectronRuntime is a global which only exists on Steam (throws a ReferenceError on web)
       try {
@@ -87,11 +89,11 @@ export default {
       <div class="l-modal-hotkeys__column">
         <div class="l-modal-hotkeys-row">
           <span class="c-modal-hotkeys-row__name l-modal-hotkeys-row__name">Buy 1 Dimension</span>
-          <kbd>SHIFT</kbd><kbd>1</kbd>-<kbd>SHIFT</kbd><kbd>8</kbd>
+          <kbd>SHIFT</kbd><kbd>1</kbd>-<kbd>SHIFT</kbd><kbd>{{ maxTier }}</kbd>
         </div>
         <div class="l-modal-hotkeys-row">
           <span class="c-modal-hotkeys-row__name l-modal-hotkeys-row__name">Buy 10 Dimensions</span>
-          <kbd>1</kbd>-<kbd>8</kbd>
+          <kbd>1</kbd>-<kbd>{{ maxTier }}</kbd>
         </div>
         <div
           v-for="index in hotkeyCount"

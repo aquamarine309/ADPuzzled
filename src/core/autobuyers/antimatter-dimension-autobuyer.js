@@ -150,7 +150,7 @@ export class AntimatterDimensionAutobuyerState extends UpgradeableAutobuyerState
     TabNotification.newAutobuyer.clearTrigger();
   }
 
-  static get entryCount() { return 8; }
+  static get entryCount() { return 9; }
   static get autobuyerGroupName() { return "Antimatter Dimension"; }
 
   // These are toggled on and off from the group autobuyer checkbox
@@ -160,7 +160,7 @@ export class AntimatterDimensionAutobuyerState extends UpgradeableAutobuyerState
   static createAccessor() {
     const accessor = super.createAccessor();
     Object.defineProperties(accessor, {
-      allBought: { get: () => accessor.zeroIndexed.every(x => x.isBought) },
+      allBought: { get: () => accessor.zeroIndexed.every(x => x.tier > Puzzles.maxTier || x.isBought) },
       // We can get away with this since allUnlimitedBulk is the same for all AD autos
       allUnlimitedBulk: { get: () => accessor.zeroIndexed[0].hasUnlimitedBulk },
       bulkCap: { get: () => accessor.zeroIndexed[0].bulkCap },

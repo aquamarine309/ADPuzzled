@@ -24,6 +24,7 @@ export default {
       anyUnlocked: false,
       displayLabelAsGroup: false,
       parentActive: false,
+      showAD9: false
     };
   },
   computed: {
@@ -37,7 +38,7 @@ export default {
       return this.type.entryCount;
     },
     rowCount() {
-      return Math.ceil(this.entryCount / 8);
+      return this.isADBox ? 1 : Math.ceil(this.entryCount / 8);
     },
     entryCountPerRow() {
       return this.rowCount === 1 ? this.entryCount : 5;
@@ -62,6 +63,7 @@ export default {
       this.anyUnlocked = type.anyUnlocked;
       this.displayLabelAsGroup = (type.allMaxedInterval ?? true) && (type.allUnlimitedBulk ?? true);
       this.parentActive = type.isActive;
+      this.showAD9 = AntimatterDimensions.showAD9;
     },
     toggleGroup() {
       this.type.toggle();

@@ -8,7 +8,7 @@ export const MultiplierTabHelper = {
         // Technically not 100% correct, but within EC7 any AD8 production is going to be irrelevant compared to AD7
         // and making the UI behave as if it's inactive produces a better look overall
         return Math.clamp(AntimatterDimensions.all.filter(ad => ad.isProducing).length,
-          1, EternityChallenge(7).isRunning ? 7 : 8);
+          1, (AntimatterDimensions.showAD9 ? 1 : 0) + (EternityChallenge(7).isRunning ? 7 : 8));
       case "ID":
         return InfinityDimensions.all.filter(id => id.isProducing).length;
       case "TD":
@@ -159,7 +159,7 @@ export const MultiplierTabHelper = {
       case 4:
         return dimStr.substr(0, 2) === "AD";
       case 8:
-        return dimStr.substr(0, 2) === "AD" && Number(dimStr.charAt(2)) > 1 && Number(dimStr.charAt(2)) < 8;
+        return dimStr.substr(0, 2) === "AD" && Number(dimStr.charAt(2)) > 1 && Number(dimStr.charAt(2)) < 10;
       default:
         return false;
     }
@@ -209,7 +209,7 @@ export const MultiplierTabHelper = {
   // which set of Dimensions are actually producing within NC12 - in nearly every case, one of the odd/even sets will
   // produce significantly more than the other, so we simply assume the larger one is active and the other isn't
   evenDimNC12Production() {
-    const nc12Pow = tier => ([2, 4, 6].includes(tier) ? 1.25 * (8 - tier) - 1 : 0);
+    const nc12Pow = tier => ([2, 4, 6].includes(tier) ? 9 - tier * 1.25 : 0);
     const maxTier = Math.clampMin(2 * Math.floor(MultiplierTabHelper.activeDimCount("AD") / 2), 2);
     return AntimatterDimensions.all
       .filter(ad => ad.isProducing && ad.tier % 2 === 0)
@@ -232,7 +232,7 @@ export const MultiplierTabHelper = {
   },
 
   multInNC12(dim) {
-    const nc12Pow = tier => ([2, 4, 6].includes(tier) ? 1.25 * (8 - tier) - 1 : 0);
+    const nc12Pow = tier => ([2, 4, 6].includes(tier) ? 9 - tier * 1.25 : 0);
     const ad = AntimatterDimension(dim);
     return ad.isProducing ? ad.multiplier.times(ad.totalAmount.pow(nc12Pow(dim))) : DC.D1;
   },

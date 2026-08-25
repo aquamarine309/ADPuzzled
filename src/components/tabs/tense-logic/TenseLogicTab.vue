@@ -59,6 +59,7 @@ export default {
         // TODO: Remove the "return" below
         if (!player.testVersion) return;
         player.tense.logicAchievementUnlocked = true;
+        Tab.logic.subtabs[2].show(true);
         GameUI.update();
       }
     },
@@ -120,7 +121,7 @@ export default {
         :enabled="canUnlockAch"
         @click="unlockAchievement"
       >
-        Reach {{ format(requirement) }} Logic Points (Available in Test Version)
+        Reach {{ format(requirement) }} Logic Points (Input Test Code to Play)
       </PrimaryButton>
     </div>
 

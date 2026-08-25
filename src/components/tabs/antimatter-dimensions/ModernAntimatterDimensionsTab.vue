@@ -30,16 +30,17 @@ export default {
       hasContinuum: false,
       isContinuumActive: false,
       multiplierText: "",
-      randomDimOrder: false
+      randomDimOrder: false,
+      showAD9: false
     };
   },
   computed: {
     sacrificeTooltip() {
       if (Puzzles.maxTier < Sacrifice.requiredDimensionTier) return `Maybe you had ${Sacrifice.requiredDimension.shortDisplayName} Antimatter Dimension before.`;
-      return `Boosts 8th Antimatter Dimension by ${formatX(this.sacrificeBoost, 2, 2)}`;
+      return `Boosts ${Sacrifice.requiredDimension.shortDisplayName} Antimatter Dimension by ${formatX(this.sacrificeBoost, 2, 2)}`;
     },
     tierRange() {
-      const range = Array.range(1, 8);
+      const range = Array.range(1, this.showAD9 ? 9 : 8);
       if (this.randomDimOrder) return range.sort(() => Math.random() - 0.5);
       return range;
     }
@@ -92,6 +93,7 @@ export default {
 
       this.multiplierText = `Buy 10 Dimension purchase multiplier: ${formatX(this.buy10Mult, 2, 2)}`;
       this.randomDimOrder = player.dimensionBoosts === 4 && player.galaxies === 0 && !PlayerProgress.infinityUnlocked();
+      this.showAD9 = AntimatterDimensions.showAD9;
       if (!isSacrificeUnlocked) return;
       this.isSacrificeAffordable = Sacrifice.canSacrifice;
       this.currentSacrifice.copyFrom(Sacrifice.totalBoost);
