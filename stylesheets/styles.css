@@ -9842,13 +9842,31 @@ input.o-automator-block-input {
 }
 
 .c-logic-tree-layout {
-  width: 80rem;
-  height: 80rem;
-  border: 0.3rem solid var(--color-logic);
+  width: 100%;
+  max-width: 80rem;
+  aspect-ratio: 1 / 1;
+  border: 0.2rem solid var(--color-logic);
   border-radius: var(--var-border-radius, 1rem);
   position: relative;
-  margin: auto;
+  margin: 0 auto;
   overflow: hidden;
+  box-sizing: border-box;
+  --color-node--base: var(--color-text);
+  --color-node--bg: var(--color-base);
+  --color-connection: #5CC793;
+  --color-connection-locked: #37805C;
+  --color-logic-tree-bg: #dfdfef;
+}
+
+.s-base--dark .c-logic-tree-layout {
+  --color-logic-tree-bg: #2a2a3a;
+  --color-connection: #66bb6a;
+  --color-connection-locked: #2e7d32;
+}
+
+.c-logic-tree-svg {
+  background-color: var(--color-logic-tree-bg);
+  box-shadow: inset 0 0 1.5rem 0.2rem rgba(0,0,0,0.15);
 }
 
 .c-logic-node {
@@ -9864,6 +9882,13 @@ input.o-automator-block-input {
   color: #181818;
   -webkit-background-size: 100%;
   background-size: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.c-logic-node:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 1.5rem var(--color-node--bg);
+  z-index: 10;
 }
 
 .c-logic-node--locked {
@@ -9872,10 +9897,13 @@ input.o-automator-block-input {
 }
 
 .c-logic-tree-connection {
-  stroke: #5CC793;
-  /* This one should be px, because it rem svg behaves weirdly under scale */
+  stroke: var(--color-connection);
   stroke-width: 8px;
   transition: stroke 0.3s;
+}
+
+.c-logic-tree-connection--locked {
+  stroke: var(--color-connection-locked);
 }
 
 .c-logic-tree-svg, .c-logic-node-container {
@@ -9885,11 +9913,6 @@ input.o-automator-block-input {
   top: 0;
   left: 0;
   border-radius: var(--var-border-radius, 1rem);
-}
-
-.c-logic-tree-svg {
-  background-color: #252338;
-  box-sizing: 0 0 1.5rem 0.2rem #252338 inset;
 }
 
 .c-logic-node-container {
@@ -9908,10 +9931,6 @@ input.o-automator-block-input {
 
 .c-logic-node-symbol--blob {
   font-size: 3rem;
-}
-
-.c-logic-tree-connection--locked {
-  stroke: #37805C;
 }
 
 .c-logic-tree-bg-text {
@@ -9941,21 +9960,26 @@ input.o-automator-block-input {
   position: absolute;
   color: var(--color-eternity);
   font-size: 15rem;
-  opacity: 50%;
+  opacity: 0.4;
   width: 22.5rem;
   height: 22.5rem;
+  animation: a-spin-float 8s linear infinite;
+}
+
+@keyframes a-spin-float {
+  0% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(180deg) translateY(-2rem); }
+  100% { transform: rotate(360deg) translateY(0); }
 }
 
 .c-logic-tree-bg__gear--top-left {
   top: 15%;
   left: 10%;
-  animation: a-logic-tree-bg__gearing 2.5s ease-in-out forwards;
 }
 
 .c-logic-tree-bg__gear--bottom-right {
   bottom: 15%;
   right: 10%;
-  animation: a-logic-tree-bg__gearing 2.5s ease-in-out forwards;
 }
 
 @keyframes a-logic-tree-bg__gearing {
