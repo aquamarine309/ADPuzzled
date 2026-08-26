@@ -17,7 +17,7 @@ const nodeColors = {
   },
   dilation: {
     baseColor: "var(--color-dilation)",
-    bgColor: "#a2d465"
+    bgColor: "#a0ee65"
   }
 }
 
@@ -140,10 +140,10 @@ export const logicTree = {
     reqNodes: [33],
     name: "Temporal Paradox",
     description: "Unlock Dilation",
-    requirement: "Locked",
+    requirement: () => `Buy ${formatInt(12900)} 1st Dimensions.`,
     symbol: "Ψ",
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    checkRequirement: () => false,
+    checkRequirement: () => AntimatterDimension(1).bought >= 12900,
     position: [0, 1],
     color: nodeColors.dilation,
   }

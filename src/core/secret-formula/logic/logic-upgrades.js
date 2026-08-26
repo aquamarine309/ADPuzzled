@@ -55,8 +55,9 @@ export const logicUpgrades = [
     id: 5,
     description: "Unlock a new Antimatter Dimension.",
     requirement: () => `Enter Time Dilation.`,
+    checkRequirement: () => true,
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
-    hasFailed: () => !TimeStudy.dilation.isBought && !TimeStudy.dilation.canBeBought,
+    hasFailed: () => !LogicNode.unlockDilation.isUnlocked && !LogicNode.unlockDilation.isAvailable,
     effect: 1
   },
   {

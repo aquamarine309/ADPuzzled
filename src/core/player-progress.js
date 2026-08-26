@@ -49,7 +49,8 @@ export class PlayerProgress {
   }
 
   static dilationUnlocked() {
-    return TimeStudy.dilation.isBought;
+    return false;
+    return LogicNode.unlockDilation.isUnlocked;
   }
 
   static realityUnlocked() {

@@ -28,7 +28,7 @@ export const TenseLogic = {
       Infinity,
       LogicNode.maxTime1
     );
-    return 3e3 / Math.sqrt(Math.min(player.records.thisEternity.time, maxTime) || 1);
+    return 3e3 / Math.sqrt(Math.clamp(player.records.thisEternity.time, 3e3, maxTime) || 1);
   },
   
   get scoreFromTier() {

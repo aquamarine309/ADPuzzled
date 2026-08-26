@@ -1,7 +1,7 @@
 export const dilationTimeStudies = [
   {
     id: 1,
-    description: "Time Dilation is removed",
+    description: "Unlock Pure Dilation",
     cost: 1,
     requirement: () => {
       const ttRequirement = Currency.timeTheorems.max.gte(TimeStudy.dilation.totalTimeTheoremRequirement);
