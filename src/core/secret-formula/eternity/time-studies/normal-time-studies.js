@@ -415,16 +415,16 @@ export const normalTimeStudies = [
   },
   {
     id: 171,
-    cost: 15,
+    cost: 25,
     requirement: [161, 162],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Time Shard requirement for the next Tickspeed upgrade goes up slower
-      ${formatX(1.33, 0, 2)} ➜ ${formatX(1.25, 0, 2)}`,
+      ${formatX(1.33, 0, 2)} ➜ ${formatX(1.3, 0, 2)}`,
     effect: () => TS171_MULTIPLIER
   },
   {
     id: 181,
-    cost: 200,
+    cost: 300,
     requirement: [171,
       () => EternityChallenge(1).completions > 0 || Perk.bypassEC1Lock.isBought,
       () => EternityChallenge(2).completions > 0 || Perk.bypassEC2Lock.isBought,

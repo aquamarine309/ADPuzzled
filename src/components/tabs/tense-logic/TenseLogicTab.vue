@@ -56,8 +56,10 @@ export default {
     },
     unlockAchievement() {
       if (this.canUnlockAch) {
-        // TODO: Remove the "return" below
-        if (!player.testVersion) return;
+        // TODO: Remove the next row
+        if (!player.testVersion) {
+          Modal.message.show("<b>No updates for now.</b><br>Stuck fixing the 6th Dimension's balance — will resume around mid-September.");
+        };
         player.tense.logicAchievementUnlocked = true;
         Tab.logic.subtabs[2].show(true);
         GameUI.update();

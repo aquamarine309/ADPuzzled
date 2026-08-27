@@ -146,5 +146,17 @@ export const logicTree = {
     checkRequirement: () => AntimatterDimension(1).bought >= 12900,
     position: [0, 1],
     color: nodeColors.dilation,
+  },
+  extraDimension: {
+    id: 25,
+    reqNodes: [34],
+    name: "My Timewalls Will Make You Suffer",
+    description: "Unlock an extra Antimatter Dimension while Dilation (Hardcap at 9th Dimension)",
+    requirement: "Complete your first Dilation",
+    symbol: "α",
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    checkRequirement: () => false,
+    position: [-1, 2],
+    color: nodeColors.dilation
   }
 };

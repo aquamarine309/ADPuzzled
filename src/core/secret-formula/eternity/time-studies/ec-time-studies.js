@@ -3,7 +3,7 @@ import { DC } from "../../../constants";
 export const ecTimeStudies = [
   {
     id: 1,
-    cost: 30,
+    cost: 100,
     requirement: [171],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
@@ -15,19 +15,19 @@ export const ecTimeStudies = [
   },
   {
     id: 2,
-    cost: 35,
+    cost: 120,
     requirement: [171],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
       resource: "Tickspeed upgrades from Time Dimensions",
       current: () => player.totalTickGained,
-      required: completions => 2000 + Math.min(completions, 4) * 300,
+      required: completions => 3000 + Math.min(completions, 4) * 1000,
       formatValue: formatInt
     }
   },
   {
     id: 3,
-    cost: 40,
+    cost: 150,
     requirement: [171],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {

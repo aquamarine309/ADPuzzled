@@ -80,7 +80,8 @@ LogicTree.connections = (function() {
     [23, 12],
     [43, 52],
     [43, 54],
-    [33, 34]
+    [33, 34],
+    [34, 25]
   ].map(c => c.map(x => LogicTree.getNodeById(x)))
 })();
 
