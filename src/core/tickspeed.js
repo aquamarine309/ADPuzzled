@@ -39,7 +39,8 @@ export function getTickSpeedMultiplier() {
     LogicChallenge(7).effects.galMul,
     InfinityChallenge(9),
     InfinityChallenge(11),
-    LogicNode.galaxyMult
+    LogicNode.galaxyMult,
+    LogicNode.galaxyNerf
   );
   if (galaxies < 3) {
     // Magic numbers are to retain balancing from before while displaying
@@ -202,9 +203,9 @@ export const Tickspeed = {
 
 
 export const FreeTickspeed = {
-  BASE_SOFTCAP: 2000,
-  GROWTH_RATE: 6e-6,
-  GROWTH_EXP: 2,
+  BASE_SOFTCAP: 300000,
+  GROWTH_RATE: 6e-5,
+  GROWTH_EXP: 3,
   multToNext: 1.33,
 
   get amount() {

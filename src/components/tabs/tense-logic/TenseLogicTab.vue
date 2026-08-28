@@ -58,7 +58,7 @@ export default {
       if (this.canUnlockAch) {
         // TODO: Remove the next row
         if (!player.testVersion) {
-          Modal.message.show("<b>No updates for now.</b><br>Stuck fixing the 6th Dimension's balance — will resume around mid-September.");
+          Modal.message.show("<b>No updates for now.</b><br>Stuck fixing the 6th Dimension's balance — will resume around early-September.<br><i>You can also type \"zhong guo ren neng fei\" to play new test content.");
         };
         player.tense.logicAchievementUnlocked = true;
         Tab.logic.subtabs[2].show(true);
