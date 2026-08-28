@@ -32,7 +32,12 @@ export const MultiplierTabHelper = {
       PelleUpgrade.galaxyPower,
       PelleRifts.decay.milestones[1],
       LogicChallenge(6),
-      LogicChallenge(7).effects.galMul
+      LogicChallenge(7).effects.galMul,
+      LogicChallenge(6).reward,
+      InfinityChallenge(9),
+      InfinityChallenge(11),
+      LogicNode.galaxyMult,
+      LogicNode.galaxyNerf
     ) * Pelle.specialGlyphEffect.power;
   },
 

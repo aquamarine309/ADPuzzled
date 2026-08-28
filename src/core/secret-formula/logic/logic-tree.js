@@ -1,6 +1,4 @@
-import {
-  DC
-} from "../../constants.js";
+import { DC } from "../../constants.js";
 
 const nodeColors = {
   normal: {
