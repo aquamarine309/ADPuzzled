@@ -39,8 +39,7 @@ export function getTickSpeedMultiplier() {
     LogicChallenge(7).effects.galMul,
     InfinityChallenge(9),
     InfinityChallenge(11),
-    LogicNode.galaxyMult,
-    LogicNode.galaxyNerf
+    LogicNode.galaxyMult
   );
   if (galaxies < 3) {
     // Magic numbers are to retain balancing from before while displaying

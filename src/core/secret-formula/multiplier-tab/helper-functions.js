@@ -36,8 +36,7 @@ export const MultiplierTabHelper = {
       LogicChallenge(6).reward,
       InfinityChallenge(9),
       InfinityChallenge(11),
-      LogicNode.galaxyMult,
-      LogicNode.galaxyNerf
+      LogicNode.galaxyMult
     ) * Pelle.specialGlyphEffect.power;
   },
 

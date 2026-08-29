@@ -22,7 +22,11 @@ export class Galaxy {
   }
 
   static get remoteStart() {
-    return RealityUpgrade(21).effectOrDefault(800);
+    return Effects.max(
+      800,
+      RealityUpgrade(21),
+      LogicNode.earlyRemote
+    );
   }
 
   static get requirement() {

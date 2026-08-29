@@ -157,18 +157,17 @@ export const logicTree = {
     position: [-1, 2],
     color: nodeColors.dilation
   },
-  galaxyNerf: {
+  earlyRemote: {
     id: 45,
     reqNodes: [34],
     name: "Ni Wan Le",
-    description: () => `Transfers ${formatPercents(0.2)} of galaxy strength from outside Dilation to inside when you have 6th Dimensions`,
+    description: () => `Remote Galaxy starts at ${formatInt(200)}`,
     requirement: () => "Buy the 6th Dimension",
     symbol: ">▽<",
     checkEvent: GAME_EVENT.ACHIEVEMENT_OTHER,
     checkRequirement: () => true,
     position: [1, 2],
     color: nodeColors.dilation,
-    effect: () => player.dilation.active ? 1.2 : 0.8,
-    effectCondition: () => AntimatterDimension(6).amount.gt(0)
+    effect: 200
   },
 };
