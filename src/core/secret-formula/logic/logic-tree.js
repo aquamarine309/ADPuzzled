@@ -132,7 +132,7 @@ export const logicTree = {
     reqNodes: [43],
     name: "First Sacrifice?",
     description: "Eternity Milestone 6 can work online",
-    requirement: () => `Reach ${format(DC.E150000)} antimatter with ${formatX(1)} scarifice miltiplier and ${formatInt(2)} galaxies this infinity`,
+    requirement: () => `Reach ${format(DC.E150000)} antimatter with ${formatX(1)} sacrifice miltiplier and ${formatInt(2)} galaxies this infinity`,
     symbol: "<i class='fas fa-skull'></i>",
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     checkRequirement: () => (
