@@ -9888,7 +9888,7 @@ input.o-automator-block-input {
 .c-logic-node:hover {
   transform: scale(1.08);
   box-shadow: 0 0 1.5rem var(--color-node--bg);
-  z-index: 10;
+  z-index: 4;
 }
 
 .c-logic-node--locked {
@@ -9948,8 +9948,8 @@ input.o-automator-block-input {
   transform: scale(0);
   transform-origin: bottom left;
   transition-duration: 0.2s;
-  z-index: 2;
   color: var(--color-node--base);
+  font-size: 1rem;
 }
 
 .c-logic-node:hover .c-logic-node-tooltip {
@@ -10005,7 +10005,7 @@ input.o-automator-block-input {
 }
 
 .c-logic-node-tooltip__name {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
