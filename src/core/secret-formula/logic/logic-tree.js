@@ -48,7 +48,7 @@ export const logicTree = {
   },
   eternityScore: {
     id: 41,
-    reNodes: [32],
+    reqNodes: [32],
     name: "Yo dawg, I heard you like scores.",
     description: "Unlock score-based reset option in Eternity Autobuyer",
     requirement: () => `Have all your Eternities in your past ${formatInt(10)} Eternities be at least ${formatInt(1000)} higher score than the previous one`,
