@@ -176,8 +176,8 @@ class ResourceExchangeUpgradeState extends GameMechanicState {
 
   purchase() {
     if (!this.isAffordable) return;
-    this.currency.subtract(this.cost);
     ++this.boughtAmount;
+    GameCache.spentLogicPoints.invalidate();
     EventHub.dispatch(GAME_EVENT.EXCHANGE_LEVEL_UP);
   }
 
