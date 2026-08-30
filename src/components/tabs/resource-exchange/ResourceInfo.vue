@@ -15,7 +15,8 @@ export default {
       value: new Decimal(0),
       newValue: new Decimal(0),
       isAffordable: false,
-      hasUnlocked: false
+      hasUnlocked: false,
+      isPower: false
     };
   },
   computed: {
@@ -35,9 +36,14 @@ export default {
       if (!this.isUnlocked) return;
       this.exchanged.copyFrom(this.resource.data.value);
       this.newExchanged.copyFrom(this.resource.newExchanged);
-      this.value.copyFrom(this.resource.value);
-      this.newValue.copyFrom(this.resource.afterExchangeValue);
+      this.isPower = this.resource.isPower;
+      this.value = this.resource.value;
+      this.newValue = this.resource.afterExchangeValue;
       this.isAffordable = this.resource.isAffordable;
+    },
+    formatEffect(value) {
+      if (this.isPower) return formatPow(value, 2, 3);
+      return formatX(value, 2, 2);
     }
   }
 };
@@ -54,7 +60,7 @@ export default {
       class="c-resource-info-values"
     >
       <span>Exchanged Amount: {{ format(exchanged, 2, 1) }} ➜ {{ format(newExchanged, 2, 1) }}</span>
-      <span>Point Multiplier: {{ formatX(value, 2, 2) }} ➜ {{ formatX(newValue, 2, 2) }}</span>
+      <span>Point {{ isPower ? "Power" : "Multiplier" }}: {{ formatEffect(value, 2, 2) }} ➜ {{ formatEffect(newValue, 2, 2) }}</span>
     </div>
     <div v-else>
       (Unlock at Exchange Level {{ formatInt(requiredLevel) }})

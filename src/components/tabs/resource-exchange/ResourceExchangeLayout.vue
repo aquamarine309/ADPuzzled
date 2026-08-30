@@ -33,11 +33,14 @@ export default {
   },
   data() {
     return {
-      offset: 0
+      offset: 0,
+      unlockedCount: 0
     };
   },
   computed: {
-    resources: () => ResourceExchange.all,
+    resources() {
+      return ResourceExchange.all;
+    },
     amount() {
       return this.resources.length;
     },
@@ -49,12 +52,21 @@ export default {
     centerStyle() {
       return getPositionStyle(this.center, this.center);
     },
+    orbitClass() {
+      return {
+        "c-resource-exchange-line": true,
+        "c-resource-exchange-line--unlocked": this.unlockedCount === 6
+      };
+    }
   },
   created() {
-    // Just update line style
-    this.on$(GAME_EVENT.EXCHANGE_LEVEL_UP, () => this.$recompute("circleRadius"));
+    this.on$(GAME_EVENT.EXCHANGE_LEVEL_UP, () => this.init());
+    this.init();
   },
   methods: {
+    init() {
+      this.unlockedCount = this.resources.countWhere(x => x.isUnlocked);
+    },
     getPosition(index) {
       const pos = resourceExchangeLayout.getPosition(index, this.amount);
       return getPositionStyle(pos.x, pos.y);
@@ -86,7 +98,7 @@ export default {
   <div class="l-resource-exchange-layout">
     <svg class="l-resource-exchange-orbit-canvas">
       <circle
-        class="c-resource-exchange-line"
+        :class="orbitClass"
         cx="50%"
         cy="50%"
         :r="circleRadius"
@@ -98,6 +110,7 @@ export default {
         y1="50%"
         :x2="getPositionPercents(resource.id + offset).x"
         :y2="getPositionPercents(resource.id + offset).y"
+        :key="unlockedCount + '/' + resource.id"
       />
     </svg>
     <ResourceCircleNode

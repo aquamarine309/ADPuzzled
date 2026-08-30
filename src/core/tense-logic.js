@@ -58,7 +58,6 @@ class TenseBoostState extends GameMechanicState {
   set weight(value) {
     player.tense.boostWeights[this.id] = Math.clampMin(value, 0);
     TenseLogic.totalWeight.invalidate();
-    GameCache.logicPoints.invalidate();
   }
   
   scoreAt(totalScore) {

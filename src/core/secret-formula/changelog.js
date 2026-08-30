@@ -8,6 +8,20 @@ export const changelog = [
    *  @property {function: @return String} info  Text body of information for the entry.
    * }
    */
+   {
+    date: [2026,8, 2],
+    name: "Tense Logic Update",
+    info: `
+      Update Tense Logic.
+      <br>
+      Current Endgame: About TS111
+    `
+   },
+   {
+    date: [2024, 7, 3],
+    name: "Pre-Eternity Update",
+    info: `Current Endgame: >1.79e308 IP`
+  },
   {
     date: [2024, 5, 2],
     name: "Celebrate Android Reality Update",

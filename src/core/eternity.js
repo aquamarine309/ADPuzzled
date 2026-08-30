@@ -136,8 +136,10 @@ export function eternity(force, auto, specialConditions = {}) {
   resetTickspeed();
   playerInfinityUpgradesOnReset();
   AchievementTimers.marathon2.reset();
-  ResourceExchangeUpgrade.reset();
-  resetAllResourceExchange();
+  if (!LogicNode.keepExchange.isUnlocked) {
+    ResourceExchangeUpgrade.reset();
+    resetAllResourceExchange();
+  }
   LogicChallenges.clearCompletions();
   player.challenge.logic.current = 0;
   LogicUpgrades.reset(!LogicNode.logicUpgradeAutobuyer.isUnlocked);

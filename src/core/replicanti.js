@@ -186,7 +186,7 @@ export function replicantiLoop(diff, auto = true) {
   if (!auto && canReplicate) {
     Replicanti.cooldown = interval.toNumber();
   }
-  if (auto && !Replicanti.autoReplicateUnlocked) return;
+  if (auto !== Replicanti.autoReplicateUnlocked) return;
   const replicantiBeforeLoop = Replicanti.amount;
   PerformanceStats.start("Replicanti");
   EventHub.dispatch(GAME_EVENT.REPLICANTI_TICK_BEFORE);
@@ -594,7 +594,7 @@ export const Replicanti = {
     },
   },
   get isUncapped() {
-    return TimeStudy(192).isBought || PelleRifts.vacuum.milestones[1].canBeApplied;
+    return TimeStudy(192).isBought || PelleRifts.vacuum.milestones[1].canBeApplied || (LogicNode.extraDimension.isUnlocked && player.dilation.active);
   },
   get autoReplicateUnlocked() {
     return LogicChallenge(7).isCompleted;

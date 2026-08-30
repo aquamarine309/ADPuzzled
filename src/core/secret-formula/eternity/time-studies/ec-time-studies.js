@@ -45,31 +45,31 @@ export const ecTimeStudies = [
     secondary: {
       resource: "Infinities",
       current: () => Currency.infinitiesTotal.value,
-      required: completions => new Decimal(1e8 + Math.min(completions, 4) * 2.5e7),
+      required: completions => new Decimal(1e80 + Math.min(completions, 4) * 2.5e70),
       formatValue: value => formatInt(Math.floor(value.toNumber()))
     }
   },
   {
     id: 5,
-    cost: 130,
+    cost: 150,
     requirement: [42],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
       resource: "Antimatter Galaxies",
       current: () => player.galaxies,
-      required: completions => 160 + Math.min(completions, 4) * 14,
+      required: completions => 1600 + Math.min(completions, 4) * 14,
       formatValue: formatInt
     }
   },
   {
     id: 6,
-    cost: 85,
+    cost: 90,
     requirement: [121],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
       resource: "Replicanti Galaxies",
       current: () => player.replicanti.galaxies,
-      required: completions => 40 + Math.min(completions, 4) * 5,
+      required: completions => 400 + Math.min(completions, 4) * 5,
       formatValue: formatInt
     }
   },
@@ -81,7 +81,7 @@ export const ecTimeStudies = [
     secondary: {
       resource: "antimatter",
       current: () => Currency.antimatter.value,
-      required: completions => DC.E300000.pow(Math.min(completions, 4)).times(DC.E500000),
+      required: completions => Decimal.MAX_VALUE.pow(Math.min(completions, 4)).times(Decimal.MAX_VALUE),
       formatValue: value => format(value)
     }
   },
@@ -93,7 +93,7 @@ export const ecTimeStudies = [
     secondary: {
       resource: "Infinity Points",
       current: () => Currency.infinityPoints.value,
-      required: completions => DC.E1000.pow(Math.min(completions, 4)).times(DC.E4000),
+      required: completions => DC.E10000.pow(Math.min(completions, 4)).times(DC.E10000),
       formatValue: value => format(value)
     }
   },
@@ -105,7 +105,7 @@ export const ecTimeStudies = [
     secondary: {
       resource: "Infinity Power",
       current: () => Currency.infinityPower.value,
-      required: completions => DC.E2000.pow(Math.min(completions, 4)).times(DC.E17500),
+      required: completions => DC.E10000.pow(Math.min(completions, 4)).times(DC.E17500),
       formatValue: value => format(value)
     }
   },

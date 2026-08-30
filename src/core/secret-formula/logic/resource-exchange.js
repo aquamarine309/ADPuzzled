@@ -61,6 +61,7 @@ export const resourceExchange = {
     shortName: "EP",
     symbol: "Δ",
     currency: () => Currency.eternityPoints,
-    value: value => value.pow(5).times(100).add(1)
+    // That's a power effect
+    value: value => Math.pow(value.add(1).log10(), 0.2) * 0.05 + 1
   }
 };

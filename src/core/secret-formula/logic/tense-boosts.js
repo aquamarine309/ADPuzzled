@@ -44,7 +44,13 @@ export const tenseBoosts = {
     symbol: "<i class='fas fa-hourglass-half'></i>",
     color: "var(--color-tense)",
     description: "Tense Score multiplier.",
-    effect: score => Math.sqrt(score) * 0.02 + 1,
+    effect: score => {
+      const value = Math.sqrt(score) * 0.02 + 1;
+      if (value >= 100) {
+        return 100 + Math.pow(value - 100, 0.2);
+      }
+      return value;
+    },
     formatEffect: value => formatX(value, 2, 3)
   }
 };

@@ -85,8 +85,20 @@ export const logicTree = {
     requirement: () => `Reach ${format(DC.E180000)} antimatter with ${formatInt(1)} total Logic Point`,
     symbol: "<i class='fas fa-gears'></i>",
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    checkRequirement: () => Currency.antimatter.gte(DC.E180000) && GameCache.logicPoints.value.eq(1),
+    checkRequirement: () => Currency.antimatter.gte(DC.E180000) && getLogicPoints().eq(1),
     position: [-2, -1],
+    color: nodeColors.logic
+  },
+  keepExchange: {
+    id: 14,
+    reqNodes: [32],
+    name: "Equivalent Exchange 2",
+    description: "Eternity no longer reset Exchange Resource",
+    requirement: () => `Reach ${format(DC.E5000)} Logic Points with less than ${format(Decimal.NUMBER_MAX_VALUE, 2)} Infinity Points`,
+    symbol: "E<i class='fas fa-atom'></i>",
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    checkRequirement: () => Currency.infinityPoints.lt(Decimal.NUMBER_MAX_VALUE) && Currency.logicPoints.gte(DC.E5000),
+    position: [-2, 1],
     color: nodeColors.logic
   },
   galaxyMult: {
@@ -138,7 +150,7 @@ export const logicTree = {
     reqNodes: [33],
     name: "Temporal Paradox",
     description: "Unlock Dilation",
-    requirement: () => `Buy ${formatInt(12900)} 1st Dimensions.`,
+    requirement: () => `Buy ${formatInt(12900)} 1st Dimensions`,
     symbol: "Ψ",
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     checkRequirement: () => AntimatterDimension(1).bought >= 12900,
@@ -149,13 +161,15 @@ export const logicTree = {
     id: 25,
     reqNodes: [34],
     name: "My Timewalls Will Make You Suffer",
-    description: "Unlock an extra Antimatter Dimension while Dilation (Hardcap at 9th Dimension)",
-    requirement: "Complete your first Dilation",
+    description: "Unlock an extra Antimatter Dimension and remove some hardcaps while Dilation",
+    requirement: () => `Have exactly ${formatInt(240)} Dimension Boosts in Time Dilation`,
     symbol: "α",
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    checkRequirement: () => false,
+    checkRequirement: () => player.dimensionBoosts === 240 && player.dilation.active,
     position: [-1, 2],
-    color: nodeColors.dilation
+    color: nodeColors.dilation,
+    effect: 1,
+    effectCondition: () => player.dilation.active
   },
   earlyRemote: {
     id: 45,

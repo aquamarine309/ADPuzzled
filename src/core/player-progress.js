@@ -49,7 +49,6 @@ export class PlayerProgress {
   }
 
   static dilationUnlocked() {
-    return;
     return LogicNode.unlockDilation.isUnlocked;
   }
 

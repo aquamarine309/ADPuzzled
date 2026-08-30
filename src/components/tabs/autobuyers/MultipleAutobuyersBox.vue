@@ -29,7 +29,9 @@ export default {
   },
   computed: {
     autobuyers() {
-      return this.type.zeroIndexed;
+      const autobuyers = this.type.zeroIndexed;
+      if (this.isADBox && !AntimatterDimensions.showAD9) return autobuyers.slice(0, 8);
+      return autobuyers;
     },
     name() {
       return this.type.groupName;

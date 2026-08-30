@@ -51,14 +51,15 @@ export const logicUpgrades = [
     cost: DC.E340
   },
   {
-    name: "Could Afford Six",
+    name: "Could Afford Six…?",
     id: 5,
     description: "Unlock a new Antimatter Dimension.",
     requirement: () => `Enter Time Dilation.`,
     checkRequirement: () => true,
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
     hasFailed: () => !LogicNode.unlockDilation.isUnlocked && !LogicNode.unlockDilation.isAvailable,
-    effect: 1
+    effect: 1,
+    cost: DC.E520
   },
   {
     name: "Lucky Upgrade",

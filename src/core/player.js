@@ -1024,9 +1024,11 @@ export const Player = {
   },
 
   get eternityGoal() {
-    return EternityChallenge.isRunning
+    const goal = EternityChallenge.isRunning
       ? EternityChallenge.current.currentGoal
       : requiredIPForEP(1);
+    if (player.dilation.active) return goal.max(DC.E1000);
+    return goal;
   },
 
   get automatorUnlocked() {
