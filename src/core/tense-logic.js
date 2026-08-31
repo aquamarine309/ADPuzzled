@@ -4,7 +4,7 @@ import { DC } from "./constants";
 
 export const TenseLogic = {
   get isUnlocked() {
-    return player.records.bestEternity.time < 6e4;
+    return player.records.bestEternity.time < 3e5;
   },
   
   get score() {

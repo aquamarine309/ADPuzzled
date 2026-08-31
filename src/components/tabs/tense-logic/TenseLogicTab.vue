@@ -129,7 +129,7 @@ export default {
 
     <div v-else class="c-tense-locked-container">
       <i class="fas fa-lock" />
-      Achieve Eternity in {{ formatInt(1) }} minute to unlock Tense Logic.
+      Achieve Eternity in {{ formatInt(5) }} minutes (game-time) to unlock Tense Logic.
     </div>
   </div>
 </template>
