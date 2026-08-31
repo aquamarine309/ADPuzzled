@@ -61,7 +61,7 @@ export const LogicTree = {
   getNodeById: null,
 
   connections: null
-}
+};
 
 LogicTree.getNodeById = (function() {
   const idMap = {};

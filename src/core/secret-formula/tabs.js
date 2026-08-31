@@ -533,7 +533,7 @@ export const tabs = [
       },
       {
         key: "logic-achievement",
-        name: "Logic Achievement",
+        name: "Logic Achievements",
         symbol: "<i class='fas fa-flask'></i>",
         component: "LogicTreeTab",
         condition: () => player.tense.logicAchievementUnlocked,

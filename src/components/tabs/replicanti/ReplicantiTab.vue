@@ -314,7 +314,7 @@ export default {
         </div>
       </div>
       <div v-if="!autoReplicateUnlocked">
-        Hold the button (Mobile) or the O key (PC) for continuous Replication.
+        Hold the button (Mobile) or the N key (PC) for continuous Replication.
       </div>
     </template>
   </div>
