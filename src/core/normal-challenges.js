@@ -11,7 +11,7 @@ export function updateNormalAndInfinityChallenges(diff) {
         Math.clampMax(player.galaxies, 100)) / 80);
       const antimatter = Currency.antimatter.value;
       if (antimatter.gte(Decimal.NUMBER_MAX_VALUE)) {
-        cappedBase = cappedBase.mul(antimatter.log10());
+        cappedBase = cappedBase.mul(Math.pow(antimatter.log10(), 2));
       }
       cappedBase = cappedBase.timesEffectOf(TenseBoost.challengeBoost);
       Currency.matter.multiply(Decimal.pow(cappedBase, diff / 20));

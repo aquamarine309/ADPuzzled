@@ -34,7 +34,8 @@ export default {
   data() {
     return {
       offset: 0,
-      unlockedCount: 0
+      unlockedCount: 0,
+      ecRunning: false
     };
   },
   computed: {
@@ -55,7 +56,8 @@ export default {
     orbitClass() {
       return {
         "c-resource-exchange-line": true,
-        "c-resource-exchange-line--unlocked": this.unlockedCount === 6
+        "c-resource-exchange-line--unlocked": this.unlockedCount === 6,
+        "c-resource-exchange-line--ec": this.unlockedCount === 6 && this.ecRunning
       };
     }
   },
@@ -64,6 +66,9 @@ export default {
     this.init();
   },
   methods: {
+    update() {
+      this.ecRunning = EternityChallenge.isRunning;
+    },
     init() {
       this.unlockedCount = this.resources.countWhere(x => x.isUnlocked);
     },
@@ -84,7 +89,8 @@ export default {
     lineClass(resource) {
       return {
         "c-resource-exchange-line": true,
-        "c-resource-exchange-line--unlocked": resource.isUnlocked
+        "c-resource-exchange-line--unlocked": resource.isUnlocked,
+        "c-resource-exchange-line--ec": resource.isUnlocked && this.ecRunning
       };
     },
     startRotate() {

@@ -55,7 +55,16 @@ class ResourceExchangeState extends GameMechanicState {
   }
 
   get exchangedAmount() {
+    if (EternityChallenge.isRunning) return this.data.ecValue;
     return this.data.value;
+  }
+  
+  set exchangedAmount(value) {
+    if (EternityChallenge.isRunning) {
+      this.data.ecValue = value;
+      return;
+    }
+    this.data.value = value;
   }
 
   get value() {

@@ -41,6 +41,7 @@ window.player = {
     resourceExchange: {
       all: Array.range(0, 6).map(() => ({
         value: DC.D0,
+        ecValue: DC.D0,
         rate: 1
       })),
       level: 0,

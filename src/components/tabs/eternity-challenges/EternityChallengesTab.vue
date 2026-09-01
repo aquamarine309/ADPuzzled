@@ -101,6 +101,7 @@ export default {
       </div>
     </div>
     <div>
+      You will enter a parallel universe when you start an Eternity Challenge. Resource exchange is not shared.<br>
       Complete Eternity Challenges again for a bigger reward, maximum of {{ formatInt(5) }} times.<br>
       The rewards are applied permanently with no need to have the respective Eternity Challenge Time Study purchased.
     </div>
