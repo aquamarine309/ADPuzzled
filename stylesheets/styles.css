@@ -9568,6 +9568,18 @@ input.o-automator-block-input {
   height: 6rem;
 }
 
+.c-resource-info--ec {
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(
+    var(--color-eternity),
+    var(--color-logic)
+  );
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  height: 6rem;
+}
+
 .c-resource-info--disabled {
   color: #999999;
 }
