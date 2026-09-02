@@ -15,7 +15,8 @@ export default {
   data() {
     return {
       isUnlocked: false,
-      isOpen: false
+      isOpen: false,
+      ecRunning: false
     };
   },
   computed: {
@@ -23,8 +24,10 @@ export default {
       return {
         "o-resource-circle-node": true,
         "o-resource-circle-node--locked": !this.isUnlocked,
-        "o-resource-circle-node--open": this.isOpen,
-        "o-resource-circle-node--locked-open": !this.isUnlocked && !this.hasUnlocked && this.isOpen
+        "o-resource-circle-node--open": this.isUnlocked && this.isOpen,
+        "o-resource-circle-node--locked-open": !this.isUnlocked && this.isOpen,
+        "o-resource-circle-node--ec": this.isUnlocked && this.ecRunning,
+        "o-resource-circle-node--open__ec": this.isUnlocked && this.isOpen && this.ecRunning
       };
     },
     displayName() {
@@ -35,6 +38,7 @@ export default {
     update() {
       this.isUnlocked = this.resource.isUnlocked;
       this.isOpen = this.resource.id === player.logic.resourceExchange.lastSelected;
+      this.ecRunning = EternityChallenge.isRunning;
     }
   }
 };

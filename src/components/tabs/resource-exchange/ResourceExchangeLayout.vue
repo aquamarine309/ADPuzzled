@@ -53,6 +53,12 @@ export default {
     centerStyle() {
       return getPositionStyle(this.center, this.center);
     },
+    centerClass() {
+      return {
+        "o-resource-circle-node": true,
+        "o-resource-circle-node--ec": this.ecRunning
+      };
+    },
     orbitClass() {
       return {
         "c-resource-exchange-line": true,
@@ -127,7 +133,7 @@ export default {
       @click.native="emitToggle(resource.id)"
     />
     <div
-      class="o-resource-circle-node"
+      :class="centerClass"
       :style="centerStyle"
       @click="startRotate"
     >

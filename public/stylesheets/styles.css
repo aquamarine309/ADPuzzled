@@ -9481,7 +9481,7 @@ input.o-automator-block-input {
   align-items: center;
   justify-content: center;
   color: black;
-  background-color: var(--color-base);
+  background: var(--color-base);
   border: 0.1rem solid var(--color-logic);
   border-radius: 50%;
   margin-top: -2rem;
@@ -9500,15 +9500,32 @@ input.o-automator-block-input {
   border-color: #999999;
 }
 
+.o-resource-circle-node--ec {
+  color: var(--color-eternity);
+  border-color: var(--color-eternity);
+}
+
 .o-resource-circle-node--open {
   color: #ffffff;
-  background-color: var(--color-logic);
+  background: var(--color-logic);
   border-color: var(--color-base);
   box-shadow: 0 0 1rem 0.3rem #2baba2 inset;
 }
 
+.o-resource-circle-node--open__ec {
+  color: #ffffff;
+  background: linear-gradient(
+    var(--color-eternity),
+    var(--color-logic)
+  );
+  border-color: var(--color-logic);
+  box-shadow: 0 0 1rem 0.3rem #B86FD2 inset;
+  transition-duration: 0;
+}
+
 .o-resource-circle-node--locked-open {
   background-color: #999999;
+  color: #ffffff;
   box-shadow: 0 0 1rem 0.2rem #666666 inset;
 }
 
