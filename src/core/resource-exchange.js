@@ -102,7 +102,7 @@ class ResourceExchangeState extends GameMechanicState {
   }
 
   reset() {
-    this.data.exchangedAmount = DC.D0;
+    this.exchangedAmount = DC.D0;
     player.logic.resourceExchange.lastSelected = 0;
     if (EternityMilestone.autobuyerID2.isReached) return;
     this.exchangeRate = 1;
