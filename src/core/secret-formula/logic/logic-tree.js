@@ -171,17 +171,18 @@ export const logicTree = {
     effect: 1,
     effectCondition: () => player.dilation.active
   },
-  earlyRemote: {
+  niwanle: {
     id: 45,
     reqNodes: [34],
     name: "Ni Wan Le",
-    description: () => `Remote Galaxies start at ${formatInt(200)}`,
+    description: () => `Logic Point gain ${formatPow(0.1, 0, 1)} when Eternity Challenge is running`,
     requirement: () => "Buy the 6th Dimension",
     symbol: ">▽<",
     checkEvent: GAME_EVENT.ACHIEVEMENT_OTHER,
     checkRequirement: () => true,
     position: [1, 2],
     color: nodeColors.dilation,
-    effect: 200
+    effect: 0.1,
+    effectCondition: () => EternityChallenge.isRunning
   },
 };

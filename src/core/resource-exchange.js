@@ -133,7 +133,7 @@ ResourceExchange.chachedPoints = new Lazy(() => {
 export function getLogicPoints() {
   let points = ResourceExchange.chachedPoints.value;
   points = points.timesEffectOf(TenseBoost.logicBoost);
-  return points;
+  return points.powEffectOf(LogicNode.niwanle);
 }
 
 export function getSpentLogicPoints() {

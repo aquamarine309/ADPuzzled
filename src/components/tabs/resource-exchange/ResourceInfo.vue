@@ -16,7 +16,8 @@ export default {
       newValue: new Decimal(0),
       isAffordable: false,
       hasUnlocked: false,
-      isPower: false
+      isPower: false,
+      ecRunning: false
     };
   },
   computed: {
@@ -26,7 +27,8 @@ export default {
     classObject() {
       return {
         "c-resource-info": true,
-        "c-resource-info--disabled": !this.isUnlocked
+        "c-resource-info--disabled": !this.isUnlocked,
+        "c-resource-info--ec": this.isUnlocked && this.ecRunning
       };
     }
   },
@@ -40,6 +42,7 @@ export default {
       this.value = this.resource.value;
       this.newValue = this.resource.afterExchangeValue;
       this.isAffordable = this.resource.isAffordable;
+      this.ecRunning = EternityChallenge.isRunning;
     },
     formatEffect(value) {
       if (this.isPower) return formatPow(value, 2, 3);
