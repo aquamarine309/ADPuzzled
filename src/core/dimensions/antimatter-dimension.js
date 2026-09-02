@@ -191,7 +191,7 @@ function onBuyDimension(tier) {
   if (tier === 1) Tutorial.turnOffEffect(TUTORIAL_STATE.DIM1);
   if (tier === 2) Tutorial.turnOffEffect(TUTORIAL_STATE.DIM2);
   if (tier !== 9) Achievement(10 + tier).unlock();
-  if (tier === 6) LogicNode.earlyRemote.tryUnlock();
+  if (tier === 6) LogicNode.niwanle.tryUnlock();
   Achievement(23).tryUnlock();
 
   if (player.speedrun.isActive && !player.speedrun.hasStarted) Speedrun.startTimer();
