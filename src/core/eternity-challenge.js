@@ -22,6 +22,16 @@ export function startEternityChallenge() {
   Currency.antimatter.reset();
   playerInfinityUpgradesOnReset();
   AchievementTimers.marathon2.reset();
+  if (!LogicNode.keepExchange.isUnlocked) {
+    ResourceExchangeUpgrade.reset();
+    resetAllResourceExchange();
+  }
+  LogicChallenges.clearCompletions();
+  player.challenge.logic.current = 0;
+  LogicUpgrades.reset(!LogicNode.logicUpgradeAutobuyer.isUnlocked);
+  ResourceExchange.chachedPoints.invalidate();
+  ResourceExchangeUpgrade.cachedCost.invalidate();
+  GameCache.spentLogicPoints.invalidate();
   ECTimeStudyState.invalidateCachedRequirements();
 }
 

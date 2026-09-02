@@ -45,9 +45,9 @@ window.player = {
         rate: 1
       })),
       level: 0,
+      ecLevel: 0,
       lastSelected: 0
     },
-    spentPoints: DC.D0,
     upgradeBits: 0,
     upgReqs: 0
   },

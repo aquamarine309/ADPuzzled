@@ -37,7 +37,7 @@ class ResourceExchangeState extends GameMechanicState {
   exchange() {
     if (!this.canExchange) return false;
     const leave = this.willLeave;
-    this.data.value = this.newExchanged;
+    this.exchangedAmount = this.newExchanged;
     if (!LogicNode.freeExchange.isUnlocked) {
       this.currency.value = leave;
     }
@@ -82,7 +82,7 @@ class ResourceExchangeState extends GameMechanicState {
   }
 
   get isUnlocked() {
-    return player.logic.resourceExchange.level >= this.id;
+    return ResourceExchangeUpgrade.boughtAmount >= this.id;
   }
 
   get symbol() {
@@ -98,11 +98,11 @@ class ResourceExchangeState extends GameMechanicState {
   }
   
   get isPower() {
-    return this.id === 5
+    return this.id === 5;
   }
 
   reset() {
-    this.data.value = DC.D0;
+    this.data.exchangedAmount = DC.D0;
     player.logic.resourceExchange.lastSelected = 0;
     if (EternityMilestone.autobuyerID2.isReached) return;
     this.exchangeRate = 1;
@@ -159,11 +159,18 @@ class ResourceExchangeUpgradeState extends GameMechanicState {
   }
 
   get boughtAmount() {
+    if (EternityChallenge.isRunning) {
+      return player.logic.resourceExchange.ecLevel;
+    }
     return player.logic.resourceExchange.level;
   }
 
   set boughtAmount(value) {
-    player.logic.resourceExchange.level = value;
+    if (EternityChallenge.isRunning) {
+      player.logic.resourceExchange.ecLevel = value;
+    } else {
+      player.logic.resourceExchange.level = value;
+    }
     this.cachedCost.invalidate();
   }
 

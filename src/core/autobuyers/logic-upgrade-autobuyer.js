@@ -20,6 +20,10 @@ export class LogicUpgradeAutobuyerState extends AutobuyerState {
   purchaseSelected(id) {
     return (this.data.selectedBits & (1 << id)) !== 0;
   }
+  
+  get resetTickOn() {
+    return PRESTIGE_EVENT.ETERNITY;
+  }
 
   tick() {
     for (const upgrade of LogicUpgrades.all) {

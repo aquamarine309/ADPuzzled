@@ -34,7 +34,7 @@ export default {
     update() {
       this.isUnlocked = this.resource.isUnlocked;
       if (!this.isUnlocked) return;
-      this.exchanged.copyFrom(this.resource.data.value);
+      this.exchanged.copyFrom(this.resource.exchangedAmount);
       this.newExchanged.copyFrom(this.resource.newExchanged);
       this.isPower = this.resource.isPower;
       this.value = this.resource.value;

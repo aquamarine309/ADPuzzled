@@ -9534,6 +9534,10 @@ input.o-automator-block-input {
   stroke: var(--color-logic);
 }
 
+.c-resource-exchange-line--ec {
+  stroke: var(--color-eternity);
+}
+
 .l-resource-exchange-orbit-canvas {
   overflow: visible;
   width: 100%;
