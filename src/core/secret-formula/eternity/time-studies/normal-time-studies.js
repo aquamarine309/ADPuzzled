@@ -158,7 +158,7 @@ export const normalTimeStudies = [
         (!EternityChallenge(11).isUnlocked && !EternityChallenge(12).isUnlocked)],
     reqType: TS_REQUIREMENT_TYPE.DIMENSION_PATH,
     description: "Dimensional Sacrifice affects 4th Infinity Dimension with greatly reduced effect",
-    effect: () => Sacrifice.totalBoost.pow(0.02).clampMin(1),
+    effect: () => Sacrifice.totalBoost.pow(0.025).clampMin(1),
     cap: DC.E30000,
     formatEffect: value => formatX(value, 2, 1)
   },
