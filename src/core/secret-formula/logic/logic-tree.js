@@ -79,7 +79,7 @@ export const logicTree = {
   },
   logicUpgradeAutobuyer: {
     id: 12,
-    reqNodes: [32],
+    reqNodes: [23],
     name: "The Loneliest Number",
     description: "Eternity no longer reset the unlocked Logic Upgrades. Unlock Logic Upgrade autobuyer",
     requirement: () => `Reach ${format(DC.E180000)} antimatter with ${formatInt(1)} total Logic Point`,
@@ -91,7 +91,7 @@ export const logicTree = {
   },
   keepExchange: {
     id: 14,
-    reqNodes: [32],
+    reqNodes: [23],
     name: "Equivalent Exchange 2",
     description: "Eternity no longer reset Exchange Resource",
     requirement: () => `Reach ${format(DC.E5000)} Logic Points with less than ${format(Decimal.NUMBER_MAX_VALUE, 2)} Infinity Points`,
