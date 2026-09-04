@@ -458,7 +458,7 @@ export const migrations = {
       });
     },
     41: player => {
-      player.logicNodes.remove(32);
+      player.logicNodes.delete(32);
     }
   },
 
