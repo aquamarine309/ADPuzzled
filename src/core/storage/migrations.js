@@ -456,6 +456,9 @@ export const migrations = {
         lastTick: 0,
         isBought: false
       });
+    },
+    41: player => {
+      player.logicNodes.remove(32);
     }
   },
 

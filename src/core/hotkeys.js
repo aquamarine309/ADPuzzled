@@ -96,6 +96,15 @@ export const shortcuts = [
     },
     visible: () => PlayerProgress.infinityUnlocked()
   }, {
+    name: "Exchange All",
+    keys: ["shift", "x"],
+    type: "bindRepeatableHotkey",
+    function: () => {
+      ResourceExchange.all.forEach(x => x.exchange());
+      player.requirementChecks.eternity.noLogicTab = false;
+    },
+    visible: () => PlayerProgress.infinityUnlocked()
+  }, {
     name: "Continuous Replicate",
     keys: ["n"],
     type: "bindRepeatableHotkey",

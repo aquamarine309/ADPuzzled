@@ -41,7 +41,7 @@ export const logicTree = {
     requirement: () => `Eternity with a score of less than ${formatInt(777)} in ${formatInt(1)} minute`,
     symbol: "<i class='fas fa-stopwatch'></i>1",
     checkEvent: GAME_EVENT.ETERNITY_RESET_BEFORE,
-    checkRequirement: () => TenseLogic.score < 777 && player.records.bestEternity.time < 60e3,
+    checkRequirement: () => TenseLogic.score < 777 && player.records.thisEternity.time < 60e3,
     position: [0, -1],
     color: nodeColors.normal,
     effect: 7 * 60e3
