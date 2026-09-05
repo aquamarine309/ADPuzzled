@@ -7,8 +7,8 @@ export const TenseLogic = {
     return player.records.bestEternity.time < 1.8e6;
   },
   
-  get score() {
-    return Math.floor(
+  get rawScore() {
+    return Math.max(Math.floor(
       this.scoreFromIP
       * this.scoreFromTime
       * this.scoreFromTier
@@ -16,7 +16,15 @@ export const TenseLogic = {
         TenseBoost.tenseBoost,
         LogicNode.start
       )
-    );
+    ), 1);
+  },
+  
+  get score() {
+    const score = this.rawScore;
+    if (LogicNode.eternityScore.isUnlocked && player.tense.pastScore > score) {
+      return player.tense.pastScore * 0.8 + score * 0.2;
+    }
+    return score;
   },
   
   get scoreFromIP() {

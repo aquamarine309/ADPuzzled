@@ -28,6 +28,10 @@ export default {
           return formatInt(100);
       }
       return "Unknown";
+    },
+    extraText() {
+      if (this.extra === 1) return "";
+      return `(${formatX(this.extra, 2, 2)})`;
     }
   },
   watch: {

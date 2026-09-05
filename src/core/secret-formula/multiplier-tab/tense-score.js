@@ -33,10 +33,16 @@ export const score = {
     isActive: () => TenseBoost.tenseBoost.score > 0,
     icon: MultiplierTabIcons.TENSE
   },
-  logicAch: {
+  goodLuck: {
     name: "Logic Achievement - Good Luck",
     multValue: () => LogicNode.start.effectValue,
     isActive: () => LogicNode.start.isUnlocked,
+    icon: MultiplierTabIcons.LOGIC_ACHIEVEMENT
+  },
+  yoDawg: {
+    name: "Logic Achievement - Yo Dawg",
+    multValue: () => Math.min(TenseLogic.score / TenseLogic.rawScore, 1),
+    isActive: () => LogicNode.eternityScore.isUnlocked,
     icon: MultiplierTabIcons.LOGIC_ACHIEVEMENT
   }
 };

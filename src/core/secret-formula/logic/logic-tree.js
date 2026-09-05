@@ -50,7 +50,7 @@ export const logicTree = {
     id: 41,
     reqNodes: [32],
     name: "Yo dawg, I heard you like scores.",
-    description: "Unlock score-based reset option in Eternity Autobuyer",
+    description: () => `Unlock score-based reset option in Eternity Autobuyer. Keep ${formatPercents(0.8)} of score if it will decrease`,
     requirement: () => `Have all your Eternities in your past ${formatInt(10)} Eternities be at least ${formatInt(1000)} higher score than the previous one`,
     symbol: "<i class='fas fa-chart-line'></i>",
     checkEvent: GAME_EVENT.ETERNITY_RESET_AFTER,
