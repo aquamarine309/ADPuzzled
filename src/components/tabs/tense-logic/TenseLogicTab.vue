@@ -13,14 +13,11 @@ export default {
       isUnlocked: false,
       past: 0,
       current: 0,
-      achUnlocked: false,
-      canUnlockAch: false,
       weightAdjustment: WEIGHT_ADJUSTMENT_TYPE.ONE
     }
   },
   computed: {
     boosts() { return TenseBoost.all; },
-    requirement() { return TenseLogic.achevementRequirement; },
     weightText() {
       switch (this.weightAdjustment) {
         case WEIGHT_ADJUSTMENT_TYPE.ONE:
@@ -46,20 +43,10 @@ export default {
       this.current = TenseLogic.score;
       this.achUnlocked = player.tense.logicAchievementUnlocked;
       this.weightAdjustment = player.tense.weightAdjustmentType;
-      if (!this.achUnlocked) {
-        this.canUnlockAch = Currency.logicPoints.value.gte(this.requirement);
-      }
     },
     formatScore(score) {
       if (score >= 1e6) return format(score, 3);
       return formatInt(score);
-    },
-    unlockAchievement() {
-      if (this.canUnlockAch) {
-        player.tense.logicAchievementUnlocked = true;
-        Tab.logic.subtabs[2].show(true);
-        GameUI.update();
-      }
     },
     toggleAdjustment() {
       switch (this.weightAdjustment) {
@@ -113,19 +100,11 @@ export default {
           :boost="boost"
         />
       </div>
-      <PrimaryButton
-        v-if="!achUnlocked"
-        class="o-unlock-logic-achievement-btn"
-        :enabled="canUnlockAch"
-        @click="unlockAchievement"
-      >
-        Reach {{ format(requirement) }} Logic Points (Input Test Code to Play)
-      </PrimaryButton>
     </div>
 
     <div v-else class="c-tense-locked-container">
       <i class="fas fa-lock" />
-      Achieve Eternity in {{ formatInt(5) }} minutes (game-time) to unlock Tense Logic.
+      Achieve Eternity in {{ formatInt(30) }} minutes (game-time) to unlock Tense Logic.
     </div>
   </div>
 </template>

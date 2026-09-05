@@ -536,7 +536,7 @@ export const tabs = [
         name: "Logic Achievements",
         symbol: "<i class='fas fa-flask'></i>",
         component: "LogicTreeTab",
-        condition: () => player.tense.logicAchievementUnlocked,
+        condition: () => PlayerProgress.eternityUnlocked(),
         id: 2,
         hiddable: true
       }

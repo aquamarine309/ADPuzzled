@@ -4,7 +4,7 @@ import { DC } from "./constants";
 
 export const TenseLogic = {
   get isUnlocked() {
-    return player.records.bestEternity.time < 3e5;
+    return player.records.bestEternity.time < 1.8e6;
   },
   
   get score() {
@@ -35,11 +35,7 @@ export const TenseLogic = {
     return Math.pow(10, Math.pow(1.5, 5 - GameCache.maxTier.value) - 1);
   },
   
-  totalWeight: new Lazy(() => player.tense.boostWeights.sum()),
-  
-  get achevementRequirement() {
-    return DC.E3000;
-  }
+  totalWeight: new Lazy(() => player.tense.boostWeights.sum())
 };
 
 class TenseBoostState extends GameMechanicState {

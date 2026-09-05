@@ -1,4 +1,5 @@
 import { GameMechanicState } from "./game-mechanics";
+import { DC } from "./constants";
 
 class LogicNodeState extends GameMechanicState {
   constructor(config) {
@@ -60,7 +61,11 @@ export const LogicTree = {
 
   getNodeById: null,
 
-  connections: null
+  connections: null,
+  
+  get requirement() {
+    return DC.E3000;
+  }
 };
 
 LogicTree.getNodeById = (function() {
