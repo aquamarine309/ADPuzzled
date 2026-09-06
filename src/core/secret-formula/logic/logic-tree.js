@@ -183,6 +183,9 @@ export const logicTree = {
     position: [1, 2],
     color: nodeColors.dilation,
     effect: 0.1,
-    effectCondition: () => EternityChallenge.isRunning
-  },
+    effectCondition: () => EternityChallenge.isRunning,
+    onUnlock() {
+      GameCache.maxTier.invalidate();
+    }
+  }
 };

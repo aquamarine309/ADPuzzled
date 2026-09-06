@@ -35,6 +35,7 @@ class LogicNodeState extends GameMechanicState {
   unlock() {
     player.logicNodes.add(this.id);
     GameUI.notify.logic(`You've unlocked Logic Achievement "${this.config.name}"`);
+    this.config.onUnlock?.();
     EventHub.dispatch(GAME_EVENT.LOGIC_NODE_UNLOCKED);
   }
 
