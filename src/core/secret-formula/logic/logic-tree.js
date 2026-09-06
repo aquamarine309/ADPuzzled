@@ -169,13 +169,16 @@ export const logicTree = {
     position: [-1, 2],
     color: nodeColors.dilation,
     effect: 1,
-    effectCondition: () => player.dilation.active
+    effectCondition: () => player.dilation.active,
+    onUnlock() {
+      GameCache.maxTier.invalidate();
+    }
   },
   niwanle: {
     id: 45,
     reqNodes: [34],
     name: "Ni Wan Le",
-    description: () => `Logic Point gain ${formatPow(0.1, 0, 1)} when Eternity Challenge is running`,
+    description: () => `Logic Point gain ${formatPow(0.1, 0, 1)} in Eternity Challenge`,
     requirement: () => "Buy the 6th Dimension",
     symbol: ">▽<",
     checkEvent: GAME_EVENT.ACHIEVEMENT_OTHER,
@@ -183,9 +186,6 @@ export const logicTree = {
     position: [1, 2],
     color: nodeColors.dilation,
     effect: 0.1,
-    effectCondition: () => EternityChallenge.isRunning,
-    onUnlock() {
-      GameCache.maxTier.invalidate();
-    }
+    effectCondition: () => EternityChallenge.isRunning
   }
 };
